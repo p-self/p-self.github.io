@@ -1,9 +1,8 @@
 ---
-title: ionic使用与开发流程记录
-tags:
-  - ionic
-  - javascript
-date: 2017-08-22 14:40:19
+layout: post
+title:  "ionic使用与开发流程记录"
+date:   2017-08-22 14:40:19 +0800
+categories: dev ionic
 ---
 
 ## 官网平台的编译流程
