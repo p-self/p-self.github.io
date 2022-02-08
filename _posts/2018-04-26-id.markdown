@@ -1,0 +1,245 @@
+---
+layout: post
+title:  "浏览器指纹与标识"
+date:   2018-04-26 14:34:12 +0800
+categories: dev theia
+---
+
+> IT 领域提到的“指纹”一词，其原理跟“刑侦”是类似的——“当你需要研究某个对象的类型/类别，但这个对象你又无法直接接触到。这时候你可以利用若干技术来获取该对象的某些特征，然后根据这些特征来猜测/判断该对象的类型/类别。”
+
+浏览器是用户访问web内容的窗口，其作为用户代理(`UserAgent`)向服务端（`HTTPServer`）放送内容请求(`Request`)，并接受HTTP服务器的内容响应(`Response`)，最终将此内容渲染解析在客户端．
+
+![](/images/DeepinScreenshot_select-area_20180427085415.png)
+
+出于业务实现的需要，`HTTPServer`可能需要追踪用户的访问路径；即便是用户清除了本地数据，重新安装了`UserAgent`，依然可以准确的判断任意`Request`是否有用户关联（访客或者注册用户），以响应差异化的内容或者记录追踪用户状态．此时，就需要**浏览器指纹技术**来获取任意`UserAgent`的唯一标识（浏览器指纹）．
+
+浏览器只是`UserAgent`的一种，但是除浏览器外其他的`UserAgent`（如爬虫）基本不具备追踪的价值，就不在考虑之列了；
+
+## 目的与意义
+
+接上文，在业务开发实现中有着对获取浏览器唯一标识的需要．但遗憾的是大部分浏览器，出于用户隐私和安全性的考虑，并没有提供获取其唯一标识的接口或者方法，使得这一获取的流程变得异常复杂和低效，同时还面临着重复率以及失效的问题．
+
+本文的主要目的就是：通过研究判断浏览器中可采集的信息，产生浏览器唯一标识，并提升获取浏览器唯一标识的效率，提高此唯一标识的准确度，降低失效概率和重复率，以方便为业务开发中对用户的追踪．
+
+## 检验标准
+
+由于并没有通用标准的方法来生成浏览器中的**唯一标识**，就使得＂生成＂的方法＂百花齐放，百家争鸣＂，各有说法，各有优劣．
+
+在正式开始内容之前，有必要规划几条检验最终方法是否有效的标准，以对比不同的方案的实际执行效果的差异．
+
+### 重复率
+
+受可采集内容的限制，最终生成的浏览器唯一标识不可避免的会出现重复的问题．此处的重复是浏览器**唯一标识**中可识别信息的重复，如下文中会涉及到的时区／版本等．另外，因最终生成位置的不同，实际产生的唯一标识也有可能重复．
+
+有效的唯一标识应该是零重复，或者将重复率控制在极低的水平，以避免用户标识结果的无效处理．
+
+同时,前端任意生成的数据都无法持久化存储,时刻面临着用户数据清理的情况；用户对数据的清理意味这上一次ID生成内容的丢失,可以认为丢失是无数据备份的,也就使得用户唯一标识重建的必要性.
+
+由于重建所依据的信息与前者被清理ID的信息一致,所以如果没有随机生成数的参与,重建后的信息是必然一致的,但这也必将带来重复率的问题,所以可以认为重建后的ID与原ID相似,是两个不同的端.
+
+### 准确度
+
+准确度和重复率有着相辅相承的关系，从浏览器中采集到的信息越丰富越精确，生成的唯一标识的重复率就会越低．
+
+但是，实际情况下从浏览器中可以采集到的信息是十分有限的，只能尽力完善和和覆盖所有的可采集信息的范围，以提高整体数据的准确性．
+
+## 方案一:客户端
+
+### 信息采集
+
+浏览器指纹的建立依赖与从设备中可采集的信.,受制于操作系统和浏览器设计的限制,这些可以获取到的信息是十分有限的,且不具备个体差异性.
+
+当前可从浏览器中读取到的信息如以下所列(摘抄自fingerprintjs2):
+
+* UserAgent
+* Language
+* Color Depth
+* Screen Resolution
+* Timezone
+* Has session storage or not
+* Has local storage or not
+* Has indexed DB
+* Has IE specific 'AddBehavior'
+* Has open DB
+* CPU class
+* Platform
+* DoNotTrack or not
+* Full list of installed fonts (maintaining their order, which increases the entropy), implemented with Flash.
+* A list of installed fonts, detected with JS/CSS (side-channel technique) - can detect up to 500 installed fonts without flash
+* Canvas fingerprinting
+* WebGL fingerprinting
+* Plugins (IE included)
+* Is AdBlock installed or not
+* Has the user tampered with its languages 1
+* Has the user tampered with its screen resolution 1
+* Has the user tampered with its OS 1
+* Has the user tampered with its browser 1
+* Touch screen detection and capabilities
+* Pixel Ratio
+* System's total number of logical processors available to the user agent.
+* Device memory
+
+以上所列的大部分指标都简单易懂,但其中的Canvas指纹需要着重说明.
+
+### Canvas指纹
+
+HTML5中的canvas元素允许脚本进行2D形状和文本的渲染。
+
+基于Canvas标签绘制特定内容的图片，使用canvas.toDataURL()方法可以获得图片内容的base64编码（对于PNG格式的图片，以块(chunk)划分，最后一块是32位CRC校验）作为唯一性标识；
+
+> 相同的HTML5 Canvas元素绘制操作，在不同操作系统、不同浏览器上，产生的图片内容不完全相同。在图片格式上，不同浏览器使用了不同的图形处理引擎、不同的图片导出选项、不同的默认压缩级别等。在像素级别来看，操作系统各自使用了不同的设置和算法来进行抗锯齿和子像素渲染操作。即使相同的绘图操作，产生的图片数据的CRC检验也不相同。
+
+其中具体的原理可以参考文献[Fingerprinting Canvas in HTML5](http://cseweb.ucsd.edu/~hovav/papers/ms12.html)
+
+canvas指纹具有很强的设备差异性,所以是制作浏览器指纹的最佳来源.canvas几乎已经被所有的主流浏览器所支持,所以有大量的浏览器指纹算法都是采用canvas来生成浏览器指纹,可以从[这里](https://www.browserleaks.com/canvas)查看当前浏览器中的canvas指纹信息.
+
+![](/images/DeepinScreenshot_select-area_20180427082249.png)
+
+除此之外还有AudioContext指纹,也是基于相同的原理.
+
+前端浏览器指纹的生成有很多成熟的方案,其中[fingerprintjs2](http://valve.github.io/fingerprintjs2/)是其中的佼佼者,可以作为推荐选型.
+
+最后,前端的浏览器指纹生成方案不可避免的面临这重复率的问题,尤其是如果引入了随机值来降低重复率还会导致此指纹的多根域下不一致的读取值,这个时候就需要服务端策略的配合.
+
+## 方案二:服务端
+
+单纯的前端计算生成的浏览器并不能在多域下保持一致,这也限制了"前端浏览器指纹生成获取技术"的使用的场景；更多的场景下,同一套产品可能具有不同的域名地址,我们更希望在不同的域名地址的访问下都可以读取到一致的浏览器指纹并产生标识一致的ID供不同域名地址下的程序使用. 在这种情况下,更应该采用后端产生的标识ID以保证在同一浏览器运行的不同域名下的程序的可靠读取.
+
+使用后端标识ID的生成也有多种不同的方案,包括使用cookie,iframe,javascript,下面一一说明不同的方案的逻辑原理和基本用法.
+
+### 前端不可获取:使用cookie标识浏览器
+
+使用cookie标识浏览器是当今比较通用的做法,比如百度统计等统计类站点都是使用cookie表标识用户,cookie会在用户首次访问时写入,此后在每一次访问时都会携带被写入的标识,后端系统借此在识别和区分不同的用户和设备,以达到追踪用户的目的.
+
+但是,由于cookie跨域策略的限制,不同域内容cookie内容是无法传递和共享的,也就产生了处理上的不同方法以达成cookie在不同域间的信息共享.
+
+#### 多域隶属与同一子域
+
+当访问时的多域请求隶属与同一子域时,是最方便处理的一种情况,浏览器天然支持子域间的cookie读取和提交,也就自动赋予了同一子域下数据的一致性保证.
+
+此种情况下,后端系统在内容响应时检查当前请求是否携带有唯一标识的cookie标志,如有则不处理,否则生成标识ID,并通过Set-Cookie的响应头来设置浏览器的cookie信息.伪代码如下:
+
+```javascript
+//request请求
+//response响应
+let cookies = request.cookies;
+if(cookies['_BID']){
+    //cookie中存在唯一标识,不需处理
+}else{
+    //首次访问,cookie中无此标识
+    response.setHeader({
+        "Set-Cookie":`_BID=${UUID.newUUID()};domain=.lightyy.com`
+    }}
+}
+```
+
+由上文中的伪代码可知,浏览器的唯一标识(\_BID)通过响应头中的设置cookie响应头设置,并在每次访问后端都携带此标识,这样我们就完成了使用cookie实现同子域下的唯一标识的生成和获取.
+
+然而,多数的场景下,唯一标识的设置需要在不同的主域下保持一致.
+
+#### 多域隶属不同子域
+
+当被请求的资源隶属与不同子域时,使用cookie就不能达到要求了,需要经过特殊的处理,前端的代码将不能透明处理,必须在代码中有相应的配置和变动才可做到不同子域间会话标识的一致.
+
+一般情况下,资源请求是可以携带并写入cookie信息的,可以利用这条特性来做到不同域名间同一浏览器下的标识ID的一致性.其中cookie读取和写入和上一章节的伪代码相同,不过次处理并不是响应页面的请求,而是资源的请求,如图片/音频/视频；通用的做法是,此处理最终相应的资源为长宽1px的空白图片,即保证了请求的正常处理,又保证了本次的处理过程不会产生冗余的流量.下面是前端中页面内容的代码实例:
+
+```html
+<body>
+	<!--正常的页面内容-->
+	<!--正常的页面内容:END-->
+	
+	<!--最后追加统一的资源地址-->
+	<img src="https://some-address.some-domain.com/some-images-1px.png" />
+</body>
+```
+
+通过上面的资源的配置后,后续的页面请求会自动继发对`some-images-1px.png`的请求,在此请求中会进行cookie信息的设置和读取,从而保证了不同域名下的`_BID`的统一和一致.
+
+除了图片资源之外,还可使用嵌入外部iframe来实现不同根域网站之前的ID共享,原理与图片资源相同.不同的是iframe等其他资源的方式相较于图片而言更加耗费资源,造成更大的客户端开销.
+
+使用cookie标识浏览器的方案也有几个致命性的缺陷:
+
+1. cookie可能被客户端禁用,也就代表Set-Cookie响应头无法获得客户端的正确处理
+2. 唯一ID的数据前端不可获取,一切都是隐式的运作,对于需要使用此标识参与逻辑处理的场景无法支持.
+
+下面的方案就是对上述方案的完善,同时巧妙的规避了两个致命的缺陷.
+
+### 前端可获取:使用javascript标识浏览器
+
+本方案依赖的原理是:浏览器缓存没有同源策略限制,从而使得javascript的执行可以在不同的站点都从相同的缓存资源中读取.
+
+用户首次加载远程的javascript资源时，服务端返回一段脚本,脚本中携带UUID作为全域唯一的标识，并设置强缓存：`Cache-Control: max-age=315360000`.
+
+用户后续加载该 URL所代表的javascript资源时，浏览器会优先从缓存中读取，因此获得的仍是之前的内容！只要用户不清空缓存，获取的内容始终是相同的。从而规避了问题一--cookie可能被客户端禁用.
+
+javascript在客户端的执行可以执行特殊的回调,并将后端生成的唯一标识输出到开发者的代码当中,从而使得开发者可以获取全域唯一的浏览器标识,以规避问题二--唯一ID的数据前端不可获取.
+
+以上流程可以使用伪代码来表示,如下:
+
+```javascript
+//后端
+//request请求
+//response响应
+let uuid = UUID.newUUID();
+
+response.setHeader({
+    "Cache-Control": "max-age=315360000"
+});
+response.write(`
+	_setBID&&_setBID(${uuid})
+`)
+```
+
+```javascript
+//前端
+var _setBID = function(id){
+    //id就是全域唯一的浏览器标识
+    console.log(id)
+}
+```
+
+当然,这里也有一个比较严重的问题,那就是:用户用可能使用强制无缓存刷新,会触发本地缓存的失效,也就会向后端索取新的唯一标识.
+
+此问题可以通过结合方案`使用cookie标识浏览器`来规避,后端响应资源时也追加同样的cookie数据,以避免用户强制的无缓存刷新；同时,后端响应时添加ETag响应头标识资源,ETag是HTTP协议提供的若干机制中的一种Web缓存验证机制，并且允许客户端进行缓存协商.调整后的伪代码如下所示:
+
+```javascript
+//后端
+//request请求
+//response响应
+let uuid = UUID.newUUID();
+
+let cookies = request.cookies;
+if(cookies['_BID']){
+    uuid = cookies['_BID'];
+    response.setHeader({
+        "Set-Cookie":`_BID=${uuid};domain=.lightyy.com`,
+    	"Cache-Control": "max-age=315360000"
+    }}
+}else{
+    response.setHeader({
+        "Set-Cookie":`_BID=${uuid};domain=.lightyy.com`,
+    	"Cache-Control": "max-age=315360000"
+    }}
+}
+response.write(`
+	_setBID&&_setBID(${uuid})
+`)
+```
+
+```javascript
+//前端
+var _setBID = function(id){
+    //id就是全域唯一的浏览器标识
+    console.log(id)
+}
+```
+
+## 总结
+
+本文中列举了分别使用前端和后端技术生成客户端唯一标识(浏览器指纹)的方法,对比了其中的差异；不同的技术方案所面对的场景各有差异,在不同的环境中运行是也各有优劣.
+
+简而言之,纯前端的浏览器指纹方案对后端零依赖,不需要借助任何通信机制,唯一标识的获取效率高,但同时也面临着重复率,计算复杂的问题,适宜使用在统计分析用户行为分析等场景；借助与后端的浏览器指纹方案唯一id的计算及生成方式简单,链路完整,效率高,重复率为零,但同时对后端的强依赖是无法摆脱的束缚,大量请求造成的服务端压力也是不容忽视的难点,使得后端方案更加适合多端异构,大型的平台和项目.
+
+另外,还有一种更加简单粗暴的处理方式,前端的浏览器指纹+来源IP来标识特定的用户,也可以以更小的成本获取比较好的区分效果.
+
+除了以上所列举的方案之外,还有一种更为先进的新一代浏览器指纹追踪技术,即通过大数据分析研究站在浏览器面前的人,分析其行为/习惯/喜好来对人进行归并,以达到识别个人的能力,但此项技术十分复杂,尚在进化和完善之中.
