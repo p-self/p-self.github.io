@@ -4,26 +4,334 @@ title:  "Welcome to Jekyll!"
 date:   2022-02-08 14:34:12 +0800
 categories: jekyll update
 ---
-You’ll find this post in your `_posts` directory. Go ahead and edit it and re-build the site to see your changes. You can rebuild the site in many different ways, but the most common way is to run `jekyll serve`, which launches a web server and auto-regenerates your site when a file is updated.
+2017年年底，微信小程序再次发力推出了风靡大江南北的有趣应用，其中又以“跳一跳”尤为引人瞩目。“跳一跳”以简单有趣的游戏玩法设计以及流畅的交互体验,借助微信宿主环境迅速的传播在中国N亿网民的手机中。
 
-Jekyll requires blog post files to be named according to the following format:
+受微信小程序潮流的刺激，作为和微信小程序有着60%相似度定位的Light平台也着力研究在H5端网页运行环境下、宿主为浏览器时如小程序这种3D界面效果的游戏程序的开发实现方式；“跳一跳”作为风口上的标杆型应用，自然而然成为Light为3D应用开发铺路所选用的标的。
 
-`YEAR-MONTH-DAY-title.MARKUP`
+## 从2D到3D
 
-Where `YEAR` is a four-digit number, `MONTH` and `DAY` are both two-digit numbers, and `MARKUP` is the file extension representing the format used in the file. After that, include the necessary front matter. Take a look at the source for this post to get an idea about how it works.
+> 三维计算机图形和二维计算机图形的不同之处在于计算机存储了几何数据的三维表示，其用于计算和绘制最终的二维图像。
 
-Jekyll also offers powerful support for code snippets:
+除了游戏开发者之外，可能大部分的开发者所接触的开发过程都是2D应用的开发过程。与2D应用开发相比，3D应用拥有更炫的运行效果，更加真实和沉浸式的交互体验；除了在游戏开发中广泛使用之外也可以使用在地图、VR等领域。
 
-{% highlight ruby %}
-def print_hi(name)
-  puts "Hi, #{name}"
-end
-print_hi('Tom')
-#=> prints 'Hi, Tom' to STDOUT.
-{% endhighlight %}
+在H5中开发3D应用需要借助于`canvas`提供的`webgl`上下文对象。
 
-Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+### canvas
 
-[jekyll-docs]: https://jekyllrb.com/docs/home
-[jekyll-gh]:   https://github.com/jekyll/jekyll
-[jekyll-talk]: https://talk.jekyllrb.com/
+`<canvas>`是一个可以使用JavaScript来绘制图形的HTML元素，它可以用于绘制图表、制作图片构图或者制作动画。`<canvas>`因运行环境而异提供了多个上下文供开发者使用，比如我们通常使用到的绘制图表如分时K线、柱状图、折线图都是使用其2D上下文。而本文中要实现的“跳一跳复刻版”将要使用其webgl上下文以绘制3D图形。
+
+```javascript
+canvas.getContext("2d");
+canvas.getContext("webgl");
+```
+
+### webGL
+
+> WebGL（Web Graphics Library）在 GPU 中运行。因此需要使用能够在 GPU 上运行的代码。这样的代码需要提供成对的方法（其中一个叫顶点着色器， 另一个叫片段着色器），并且使用一种类 C/C++ 的强类型语言 GLSL（OpenGL Shading Language)。 每一对方法组合起来称为一个 program（着色程序）。
+
+简而言之，WebGL是一种在任何可兼容的网页浏览器中渲染3D图形的JavaScript API，但是直接使用WebGL来绘制图形需要很多额外的知识以及大量的开发成本，由此`Three.js`这一3D应用的开发框架应运而生。
+
+WebGL在浏览器中的支持情况如下图所示：
+
+![](/images/DeepinScreenshot_select-area_20180308183813.png)
+
+### three.js
+
+`three.js`=`three`+`js`。
+
+也就是说，three.js是使用js来绘制3D程序的库。three.js将许多webgl中的概念封装为易于操作的类目，让开发者可以以面向对象的方法使用其开发3D应用。three.js的出现大大降低了开发基于WebGL的3D应用的门槛。
+
+本文中重点的内容就是基于three.js开发实现“跳一跳”的Light版。但在正式的进入开发之前我们需要先了解一下两组Three.js中的重要的概念，这是我们进入核心内容的关键知识储备。
+
+#### 场景（Scene）、渲染器（Renderer）、摄像机（Camera）
+
+此三大组件是创建3D图形的必备组件。其中：
+
+1. 场景用来容纳图形元素。场景是一切被渲染物体的容器，物体只有添加到场景中，才会被WebGL引擎渲染和处理。
+2. 相机的作用是定义可视域，即确定哪些物体是可见的。
+3. 渲染器则负责决定如何渲染出图像。
+
+#### 形状（Geometry）、材质（Material）、模型（Mesh）
+
+此三大组件是构建可供渲染的物体的关键组件。其中：
+
+1. 形状即是点的集合，代表在3D的坐标系下的各种几何形状，几何形状和具体的物体展示是无关的。常用的几何形状包好立方体、球体、圆柱体等。
+2. 材质与图形表示方法是相关的，比如我们下文中将要使用到的MeshLambertMaterial材质就是常用材质的一种，材质决定了最终模型对光照的反应，Lambert材质一般用来表示只有漫反射的物体，如塑料；而phong材质用来表示有镜面反射的物体，如镜子。
+3. 模型是指最终的网格模型，也就是最终可展示物体效果。模型=形状+材质。
+
+## 使用Light完成跳一跳复刻版
+
+在Light体系下实现“跳一跳”小游戏并不复杂，除了以上需要的对Three.js的了解之外，其余知识要求与普通的light程序并无二致，在这里也不再涉及light工程具体的创建和开发流程，如有需要可以参考[Light文档](https://document.lightyy.com)；由微信中“跳一跳”中的视图范围可以看出游戏界面可以由单个Light视图完成，具体的开发目录如下所展示：
+
+```
+light/
+├── app.js
+├── app.less
+├── css
+│   ├── reset.css
+│   └── style.less
+├── images
+├── index.html
+├── lib
+│   ├── package.json
+│   └── px2rem.js
+├── project.json
+├── ui
+│   └── ui.vue
+└── view
+    └── game.vue
+```
+
+其中`view/game.vue`为游戏界面，主要处理“挑一挑”工程初始化、计分、重置等关联功能，是本实例的核心代码的入口位置；如前所述，3D引擎初始化需要借助于`canvas`的3D渲染上下文，所以`view/game.vue`必须使用`<canvas ref="canvas"></canvas>`来初始化canvas的可操作对象，并通过对canvas当前dom节点引用的操作完成获取3D上下文的流程。
+
+完成上下文环境的初始化之后就可以进行游戏具体功能的实现了，整个“跳一跳”的实现分为多个相互关联的部分，既可以对应了前文描述各个要素，又可以划分为多个执行的阶段，下面就一一道来。
+
+小程序中的游戏场景如以下的截图所示：
+
+![](/images/Screenshot_微信_20180308-093241.png)
+
+当前游戏画面中的关键场景要素可以抽象为：地板、箱子、jumper以及辅助元素光照、阴影等几个方面，我们将从最基本的界面元素--地板开始一步步添加并完善游戏界面，并在最后实现跳跃动画等步骤。
+
+### 主场景
+
+场景（Scene）是一个简单但是不容忽视的概念。场景包含了展示、绘制的内容，同时有代表了其所包含的展示、绘制的内容。场景是一切内容的容器，要真正的运行产生可供观察的内容，父容器必不可少。
+
+以下所涉及的内容都被父容器所包含，可以通过`Three.js`的`Scene`构造其初始化一个父容器，不需要任何入参。
+
+```javascript
+const scene = new THREE.Scene();
+```
+
+### 渲染器
+
+作为游戏环节的关键实现步骤，`Three.js`的3D引擎（渲染器）初始化是至关重要的第一步。`Three.js`提供的`WebGLRenderer`是直接基于`WebGL`来展示内容，通过`canvas`的3D上下文来绘制内容。`WebGLRenderer`的构造器接受对象变量的入参，该对象支持多种参数。一般来说，我们实际使用到的参数主要有以下两个：
+
+1. `antialias`，是否启动防锯齿特性。通过此属性的配置可以提高内容展示的流畅度以及效果优化。开启防锯齿后会加重资源消耗。
+2. `canvas`，该参数制定当前内容绘制所使用的canvas对象，注意此参数的值为canvas节点的dom对象而非其context对象。在light框架中可以直接从this变量中的$refs取得针对dom节点中canvas的引用。
+
+另外，为了获得全屏展示的效果，还需要设置初始化后的渲染器--renderer的绘制区域。可以直接使用`WebGLRenderer`的实例方法`setSize`来设置绘制区域，一般来说，应该将绘图区域的宽度设置为屏幕的宽度--`window.innerWidth`，将绘图取悦的高度设置为屏幕的高度--`window.innerHeight`。
+
+最后，为了确保最终渲染效果中有对阴影的展示和处理，还需要打开渲染器的渲染阴影开关。主要是针对`WebGLRenderer`实例对象中的`shadowMap`属性的配置，`shadowMap`支持的可配置参数中可以通过`enabled`打开阴影的渲染开关，通过`type`属性配置阴影处理的类型（不同的阴影类型的最终展示效果有较大的不同，具体可以参考官方的文档）。
+
+```javascript
+const renderer = new THREE.WebGLRenderer({
+    antialias: true,
+    canvas:this.$refs.canvas
+});
+renderer.setSize(window.innerWidth, window.innerHeight);
+renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap
+```
+
+### 坐标系
+
+完成了渲染器的初始化之后，接下来就需要对我们当前的场景中添加地板了。但是在此之前我们需要先来熟悉一下`WebGL`中的3D坐标系。
+
+在`WebGL`坐标系中任何一个点的位置可以通过一个三维的向量来确认--如(1,2,-1)分别对应(x,y,z)三轴上的值。在WebGL中Z轴表示深度，z轴正值表示该点是在屏幕/观众近，而z的负值表示该点远离屏幕。同样地，x的正值表示该点是到屏幕右侧的和负值表示点在屏幕左侧；y轴的正值表示点在屏幕顶部，负值代表点在屏幕底部。
+
+简单来记忆就是:`WebGL`中的坐标系是个“右手坐标系”，伸出你的右手，除拇指外的四指并拢并和手臂垂直，拇指和四指也垂直。此时手臂所在的坐标系就是z轴，拇指是x轴，四指所在的坐标系就是y轴。
+
+**注意，这里的坐标系和我们在初中数学课本中所了解到的坐标系是不一样的**。中学学习的坐标系是“左手坐标系”，具体的区别可以参考下图。
+
+![](/images/coordinate-system1.jpg)
+
+### 地板
+
+完成坐标系确认后，“地板”这一关键游戏元素的位置也就可以确认了。原则来说，地板可以放置在任何的位置以任何的角度（为什么？想像一瓶矿泉水是不是可以以任何角度摆放），但是为了方便我们对元素的绘制和处理，最后将地板放置在与(x,z)平面平行的平面上（以下简称**零平面**），这样看起来更像“地板”，具体的位置为(x,-1,z)。
+
+也就是说，地板的位置在(x,z)平面的真正零平面的底部（屏幕底部），距离零平面1个标准距离。这里选择1个标准距离主要是因为我们最终绘制的箱子的高度是2，箱子的排布会从坐标远点开始排布(0,0,0)，所以这样保证后期放置的箱子可以保持一半在零平面以上一半在零平面以下，这个在我们设置箱子放置的时候会再次详细说明，现在不需要关心。
+
+确认地板所在的位置之后，使用`Three.js`的平面（PlaneGeometry）构建函数新建一个平面并放置到对应的位置即可。`PlaneGeometry`默认接收4个数字类型的入参，分别代表平面的宽度（x坐标）、长度（y坐标）、x向切分数（widthSegments）、y向切分数（heightSegments）。heightSegments和widthSegments的默认值都为1，一般来说并不需要设置，只需要设置长度和宽度即可。
+
+单纯的PlaneGeometry实例并不具有任何可以展示的效果，必须搭配材质（Material）才可以被展示和渲染以及针对不同的光照产生不同的反应，这里我们使用MeshLambertMaterial这个材质来生成对应的平面，MeshLambertMaterial可以针对特定的光照产生阴影的效果。关于Geometry、Material和Mesh的关系可以参考前文的内容。
+
+另外，为了在地板中可以渲染出箱子和jumper投射的影子，还需要针对平面设置其`receiveShadow`属性，打开接受阴影渲染的开关以产生合适的阴影。
+
+平面创建成功后可以通过父容器实例的add方法直接添加至父容器的场景中。只要添加至父容器的内容才可以被渲染和展示，否则将不会产生任何效果。
+
+这里需要注意的是，默认平面的位置是在（x,y,0）平面上，平面创建完成后还需要进行简单的角度转置才能正确的放置到（x,-1,z）的位置上。这里又要回到中学数学中学习到的角度的概念，两种表示角度的方法：角度和弧度。在JavaScript中只能使用弧度表示法来处理旋转问题，其中PI的值可以从`Math.PI`中读取。
+
+![](/images/DeepinScreenshot_select-area_20180308110714.png)
+
+因为默认平面的位置是在（x,y,0）平面，要旋转到（x,-1,z）需要先沿着X轴逆向旋转90度（`-0.5*Math.PI`），然后移动到Y轴的（0,-1,0）位置上。旋转角度可以通过设置平面实例的rotation属性中的对应的坐标轴的弧度数来完成，移动位置可以通过设置平面实例的position属性的对应坐标轴的标准长度来完成。
+
+```javascript
+const planeGeometry = new THREE.PlaneGeometry(1000,1000,1,1);
+const planeMaterial =    new THREE.MeshLambertMaterial({color: config.background});
+const plane = new THREE.Mesh(planeGeometry,planeMaterial);
+plane.receiveShadow  = true;
+plane.rotation.x=-0.5*Math.PI;
+plane.position.x=0;
+plane.position.y=-1;
+plane.position.z=0;
+scene.add(plane);
+```
+
+### 放置箱子
+
+“地板”准备好了，接下来我们就放一个箱子在地板上。
+
+“箱子（CubeGeometry）”并不像平面一样没有高度，“箱子”是三维坐标下的立方体，有长、宽、高三个特征，包含8个定点和6个平面。我们可以使用`Three.js`中的`CubeGeometry`对象来实例化出不同长、宽、高的箱子，默认实例化出来的箱子的中心位置都是(0,0,0)。也就是说如果定义一个长宽高分别为4、4、2的箱子，那么其8个定点位置分别为：(2,2,1)、(2,-2,1)、(-2,-2,1)、(-2,2,1)以及(2,2,-1)、(2,-2,-1)、(-2,-2,-1)、(-2,2,-1)。
+
+`CubeGeometry`的构造函数默认接收三个数字类型的参数，分别代表“箱子”的长、宽、高。默认创建出来的“箱子”的位置为(0,0,0)，但是我们并不需要移动箱子的位置箱子就自然处于“地板”之上而且紧贴地板，这是因为我们在设置地板位置的时候沿着Y轴设置了-1的位置上，而箱子的下平面正好是(x,-1,z)和地板所在的平面是一致的。
+
+另外，箱子是应该在地板中投影出阴影的，所以设置箱子实例的`castShadow`开关是至关重要的一步。
+
+同上，为了让此“箱子”被WebGL引擎渲染，依然需要将此“箱子”添加到父容器的场景中。
+
+```javascript
+let geometryCube = new THREE.CubeGeometry(4, 4, 2);
+let material = new THREE.MeshLambertMaterial({color: "#ddd"});
+let box =  THREE.Mesh(geometryCube, material);
+box.castShadow=true;
+scene.add(box);
+```
+
+### 放置jumper
+
+“箱子”有了，接下来是“jumper”登场了。
+
+微信“跳一跳”中的jumper是一个十分简单的形象，生搬硬套从来不是light的风格。我们需要对jumper进行本地化处理，使其具备恒生特色，那就是“COOSS”宝。“COOSS”将作为一个恒生版本的“jumper”在游戏中迎风跳跃。
+
+当然，这并不是一个简单的过程，在Three.js中并没有“COOSS”这个模型，也就无从创建，好在Three.js引擎支持渲染加载各种3D建模工具如玛雅等工具的导出对象（JSON），可以通过此导入对象来实例化模型。关于如何使用3D建模工具来制作模型可以参考对应的资料，在这里也就不详细展开了。本文中使用的“COOSS”模型来源于“BOSS谢”半天的设计成果，不计版权，大家可以自由使用。
+
+接下来就是需要导入外部工具创建的模型并实例化成可供Three.js渲染的对象了。对此我们可以使用Three.js默认提供的JSONLoader来加载导出的JSON文件，加载成功后会产生一个Geometry对象，然后结合特定的材料就可以产生可供渲染的“jumper”了。
+
+另外，jumper也是是应该在地板中投影出阴影的，所以需要设置jumper实例的`castShadow`开关。
+
+同上，为了让此“jumper”被WebGL引擎渲染，依然需要将此“jumper”添加到父容器的场景中。
+
+```javascript
+const jumper=new THREE.Object3D();
+const loader=new THREE.JSONLoader();
+let head,foot,glass;
+loader.load("model/cooss_head_1x.json",function(geo){
+    const met=new THREE.MeshPhongMaterial();
+    head=new THREE.Mesh(geo,met);
+    head.name = "head";
+    jumper.add(head);
+});
+loader.load("model/cooss_foot_1x.json",function(geo){
+    const met=new THREE.MeshPhongMaterial();
+    foot=new THREE.Mesh(geo,met);
+    foot.name = "foot";
+    jumper.add(foot);
+});
+loader.load("model/cooss_glass_1x.json",function(geo){
+    const met=new THREE.MeshPhongMaterial();
+    glass=new THREE.Mesh(geo,met);
+    glass.name = "glass";
+    jumper.add(glass);
+});
+jumper.castShadow = true;
+scene.add(jumper);
+```
+
+`JSONLoader`处理导出模型的方式是异步的，但这并不会影响世界想过的展示，用户并不会察觉内容是一部分一部分的缓慢出现。这是因为内容是按帧渲染的，而短时间内如1s内会渲染几十次，这个帧数越高用户的使用会越流畅。帧数的数值受设备性能和程序代码的逻辑复杂度影响。一般来说30帧以上就不会感觉到明显的卡顿。
+
+jumper初始化完毕以后，还需要将jumper站立在第一个箱子上，有了前面的经验，这个就简单多了。只需要知道jumper的高度，然后调整jumper在Y轴上的坐标就可以了。
+
+### 点亮这个世界
+
+至此，游戏界面的场景装配工作就做完了。我们依次完成了地板、箱子、jumper的初始化和位置、角度设定。但是，如果现在去运行已有的代码，浏览器依然会是空空如也。我们还需要给这个“世界”内加上“光源（Light）”。
+
+“光源”也是WebGL的一个重要的概念，如前文所述，有种类繁多的光源类型。当前的游戏了我们主要使用了两种官员，一种散射光（AmbientLight），主要是用来给整个场景一个初始亮度添加出一种柔和的效果；另一种是直射光（DirectionalLight），主要使用来产生投影效果。光源的效果和现实中有这个很大的相似性，比如散射光是柔和的光线，各个角度都能覆盖和照射到；而直射光是平行光线，照射到物体上可以产生投影效果。
+
+散射光也叫环境光，可以通过Three.js的AmbientLight对象来实例化，其接收两个参数来设置光源的效果。其一为光源的色值，也就是整个环境的色调；其二为官员的亮度，最亮为1，可以设置为小于1的值。
+
+散射光的添加的实际效果调整最好是在运行中查看不断寻找合适的值，这也是最有效的方法。
+
+直射光可以通过Three.js的DirectionalLight的对象来实例化，其所接收的参数和AmbientLight一致，只不过可以设置光源的位置。直射光的光线是照向(0,0,0)远点位置。
+
+默认的直射光也是不能产生阴影效果的，需要配置DirectionalLight的实例属性中的shadow属性来调整阴影的参数，实际阴影的效果受这个阴影参数的应用比较大，使用过程中最好也是在运行中查看不断寻找合适的值。
+
+同上，为了让光源的设置产生效果，依然需要分别将散射光源和直射光源添加到父容器的场景中。
+
+```javascript
+const ambientLight = new THREE.AmbientLight(config.background,0.6);
+scene.add(ambientLight);
+
+const directionalLight = new THREE.DirectionalLight( 0xffffff, 1 );
+directionalLight.position.set(  25, 18, -15 );
+directionalLight.castShadow = true;
+directionalLight.shadow.mapSize.width = 1024;
+directionalLight.shadow.mapSize.height = 1024;
+scene.add( directionalLight );
+```
+
+这里需要注意的一点是：`directionalLight.shadow.mapSize.width`和`directionalLight.shadow.mapSize.height`必须是2的幂指数，如256/512/1024，这个数据的配置越大阴影的效果越精细，但是最好不要超过1024，否则将会造成消耗资源过大，游戏内容渲染的卡顿，以及较大的帧率缩水，。
+
+### 揭开这层幕布
+
+万事俱备，只欠东风。初始的内容的展示和配置都已经处理完毕，接下来才是见证奇迹的时刻。
+
+Three.js的内容如需正常的渲染与运行，至少需要三个关键的元素：场景（Scene）、渲染器（Renderer）、摄像机（Camera）。有关场景和渲染器的东西我们上文中都已经讲解完毕，下面来说一说摄像机（Camera）。
+
+理解上，摄像机就是观察者眼镜所在的位置，想象一下从不同的角度看同样一个物体的场景，当眼镜（摄像机）所处的角度不同的时候，所看（渲染）到的景象（投影-场景）也是不一样的。Three.js所使用到的摄像机的概念也是基于同样的类比。
+
+在Three.js中提供了两种主要的摄像机类型：透视投影摄像机（PerspectiveCamera）和正交投影摄像机（OrthographicCamera）。抛开其具体的指标、特性不谈就单单从字面上理解透视投影摄像机应该是基于透视的原理，而正交投影摄像机应该和正交有关（正交依然是中学数学里的概念，正交就是垂直）。正交这个似乎不好理解，我们先来解释透视摄像机。
+
+我所理解的“透视”就是“近大远小”，是符合人眼视物规律的一种说法。换言之，使用透视相机后，渲染出来的内容将会和人眼在实际世界中看到的景象很相符合。而正交相机则是“远近皆同”，物体大小不会受到距离远近的影响，所渲染出来的内容都是**物体在相机平面的正投影**。
+
+换个方法来解释，个人理解上西方的油画应该都是属于“透视相机”渲染的效果，很真实；而中国的国画应该就是属于“正交相机”渲染的效果，很不真实（抽象、写意）。又比如我们经常玩的游戏，王者荣耀这种显然是“正交投影”，而PC上的吃鸡游戏必然是“透视投影”。
+
+![](/images/4072096379-5a780070b4679_articlex.png)
+
+本游戏使用“正交投影摄像机”以保持观察效果的一致，这也符合原版“跳一跳”的效果。
+
+正交投影摄像机（OrthographicCamera）的初始化可以使用Three.js中的OrthographicCamera类型来实例化，OrthographicCamera的构造函数接受六个参数的入参，分别对应了立方体的左右上下前后六个平面。这六个值的计算非常复杂，具体可以参考下图（盗自Google）：
+
+![](/images/2202854938-5a77f96ec47b1_articlex.png)
+
+这里需要注意的一点是：**正交投影摄像机所处理的立方体的长宽比必须和渲染所在canvas的长宽比相等**。
+
+```javascript
+const camera = new THREE.OrthographicCamera(window.innerWidth / -80,window.innerWidth / 80, window.innerHeight / 80, window.innerHeight / -80, 0, 5000);
+camera.position.set(100, 100, 100);
+camera.lookAt(new THREE.Vector3(0, 0,0));
+```
+关于相机的说明就到这里，下面是时候解开画布上的这块幕布了，将我们的内容渲染在页面上。
+
+```javascript
+renderer.render(scene, camera);//scene就是上文中所提及的父容器
+```
+
+通过以上的代码内容会渲染在页面当中，至此就可以看到我们前文所设置的各项内容了。
+
+![](/images/DeepinScreenshot_select-area_20180309085337.png)
+
+### 让jumper动起来
+
+静止效果的游戏任谁都是不可能产生兴趣的，所以我们的最后一步也是本文的最后一部分内容，让镜头的内容动起来。
+
+离成功只差这最后一步。磨刀不误砍柴工，开工之前我们需要来了解一下WebGL中的动画的原理是什么？众所周知，“动画”其实就是“静画”的组合连续播放，当连续播放超过可人眼识别的频率（24赫兹）以后就是连续运动的效果。这个频率就是静画的每秒播放张数，就是上文提及的帧率。
+
+那在JavaScript中如何做到连续渲染?方法有二：
+
+1. setInterval
+2. requestAnimationFrame
+
+同样是循环触发函数，requestAnimationFrame有着更大的优势，其是专门为逐帧动画实现设计的API，可以按帧重绘，从而节省系统资源，提高系统性能，改善视觉效果。
+
+接下来的问题就简单了，只要设置改变场景内物体的角度、位置后重新调用`renderer.render(scene, camera)`就可以了。
+
+```javascript
+function jumperMove() {
+    jumper.rotation.y+=0.01;
+    renderer.render(scene, camera);
+    requestAnimationFrame(function () {
+        jumperMove();
+    })
+}
+jumperMove();
+```
+
+以上的代码通过不断的设置jumper在Y轴上的偏转角度，来达成一种COOSS缓慢旋转的效果。
+
+## 总结
+
+本文详细介绍了在Light中使用Three.js框架实现一个小游戏的方法，以一个复刻版的微信“跳一跳”小游戏的实现为例介绍了游戏开发中的关键要素流程。本文中设计的代码可以[点击这里](https://git01.hundsun.com/ruanzhen18683/light-demo/tree/dev/jump-one-jump)获取。本游戏中完整的游戏效果可以扫描如下的二维码体验。
+
+![](/images/qrcode.png)
+
+另外，游戏开发过程中还有一些关键的环节不容忽视，比如：碰撞处理、成功掉落、失败掉落、场景切换、计分体系等可以参考以上链接地址中的代码来了解。
