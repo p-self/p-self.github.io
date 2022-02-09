@@ -2,7 +2,7 @@
 layout: post
 title:  "一些关于HTML的基础知识（一）"
 date:   2022-02-28 14:34:12 +0800
-categories: dev html basic
+categories: dev html
 ---
 
 ## HTML标签的全局属性
