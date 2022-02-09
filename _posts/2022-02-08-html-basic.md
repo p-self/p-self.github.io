@@ -79,8 +79,8 @@ A cryptographic nonce ("number used once") which can be used by Content Security
 
 当存在页面锚点的情况，则点击后发起以base中定义的href的页面的锚点请求。
 
-1. Given <base href="https://example.com">
-2. ...and this link: <a href="#anchor">To anchor</a>
+1. Given `<base href="https://example.com">`
+2. ...and this link: `<a href="#anchor">`To anchor`</a>`
 3. ...the link points to https://example.com/#anchor.
 
 ## `<href>`
