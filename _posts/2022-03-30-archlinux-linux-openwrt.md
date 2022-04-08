@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "基于archlinux构建软路由的方法和过程"
-date:   2022-03-30 19:34:12 +0800
+date:   2022-03-30 19:34:13 +0800
 categories: archlinux router openwrt iptables
 ---
 
