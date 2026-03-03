@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>vue在v-for遍历的数组中存在重复值情况下执行出错的问题处理 | 三山半落1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="此问题由某部门同事开发中所发现，并提交给了lighting的开发团队跟进处理。 问题描述从一个console的截图开始：  lighting的开发框架是以vue为模型绑定的核心，根据错误可以进行一个简单的判断：  removeChild操作既然不是发生在开发者显示书写的代码中，就应该是模型销毁后vue引擎移除dom节点导致的 错误栈信息都在框架的代码之内，此操作不可能是有用户代码触发导致的  开发">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue在v-for遍历的数组中存在重复值情况下执行出错的问题处理">
+<meta property="og:url" content="https://pself.net/2017/05/20/2017-05-20-vue-error-v-for/index.html">
+<meta property="og:site_name" content="三山半落1">
+<meta property="og:description" content="此问题由某部门同事开发中所发现，并提交给了lighting的开发团队跟进处理。 问题描述从一个console的截图开始：  lighting的开发框架是以vue为模型绑定的核心，根据错误可以进行一个简单的判断：  removeChild操作既然不是发生在开发者显示书写的代码中，就应该是模型销毁后vue引擎移除dom节点导致的 错误栈信息都在框架的代码之内，此操作不可能是有用户代码触发导致的  开发">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pself.net/Screenshot_2017-05-12_08-43-29.png">
+<meta property="article:published_time" content="2017-05-20T06:34:12.000Z">
+<meta property="article:modified_time" content="2026-03-03T07:41:25.016Z">
+<meta property="article:author" content="abel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pself.net/Screenshot_2017-05-12_08-43-29.png">
+  
+    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">三山半落1</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://pself.net"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2017-05-20-vue-error-v-for" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2017/05/20/2017-05-20-vue-error-v-for/" class="article-date">
+  <time class="dt-published" datetime="2017-05-20T06:34:12.000Z" itemprop="datePublished">2017-05-20</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/dev-vue/">dev vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      vue在v-for遍历的数组中存在重复值情况下执行出错的问题处理
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>此问题由某部门同事开发中所发现，并提交给了lighting的开发团队跟进处理。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>从一个console的截图开始：</p>
+<p><img src="/./Screenshot_2017-05-12_08-43-29.png"></p>
+<p>lighting的开发框架是以<code>vue</code>为模型绑定的核心，根据错误可以进行一个简单的判断：</p>
+<ol>
+<li><code>removeChild</code>操作既然不是发生在开发者显示书写的代码中，就应该是<strong>模型销毁后vue引擎移除dom节点</strong>导致的</li>
+<li>错误栈信息都在框架的代码之内，此操作不可能是有用户代码触发导致的</li>
+</ol>
+<p>开发者某一流程的操作，会100%稳定的触发出这一错误，此错误导致js执行终端，整个程序陷入瘫痪无法工作，开发者的操作流程可以简化为如下的步骤：</p>
+<ol>
+<li>访问视图A</li>
+<li>访问视图B</li>
+<li>回退历史记录到A（<strong>错误发生在这里</strong>）</li>
+</ol>
+<p>以上的跳转关系都是视图跳转，也就是发生在lighting的路由系统之内的路由跳转，按照lighting的路由逻辑，第三步的时候会依次执行视图的声明周期函数，包括：</p>
+<ol>
+<li>B视图的unRender逻辑，包括beforeUnRender和afterUnRender</li>
+<li>A视图的Render，包括beforeRender和afterRender</li>
+</ol>
+<p>开发者只在beforeRender的阶段进行了模型重置的操作，几乎可以确定无疑报错就是由这几行模型重置和赋值的操作引起的。层层排除，我们得到了可以使用简单代码重新此问题的方式。</p>
+<h2 id="重现方式"><a href="#重现方式" class="headerlink" title="重现方式"></a>重现方式</h2><p>准备一个简单的空工程，新建视图<code>test</code>，一下的代码分别为<code>js/view/test.js</code>和<code>html/view/test.html</code>，<code>js/view/test.js</code>中视图对模型的操作可以完整反映重现此问题的流程。</p>
+<p>其中，<code>setTimeout</code>模拟的是<code>ajax</code>操作以让数据在多个<code>tick</code>之后设置到模型以观察vue对dom节点的创建和销毁。</p>
+<p><code>$nextTick</code>之后，将<code>test_arr</code>置空的操作是为了使<code>vue</code>将此数据对应的<code>dom</code>节点销毁，也就是对应与<code>html/view/test.html</code>中<code>&lt;div v-for=&quot;val in test_arr&quot;&gt;&#123;&#123;val&#125;&#125;&lt;/div&gt;</code>这一段代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="title class_">Light</span>.<span class="title function_">defineViewModel</span>(<span class="string">&quot;#test&quot;</span>,&#123;</span><br><span class="line">       <span class="attr">data</span>:&#123;</span><br><span class="line">        <span class="attr">test_arr</span>:[<span class="string">&quot;&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;2&quot;</span>,<span class="string">&quot;3&quot;</span>,<span class="string">&quot;&quot;</span>]</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;,</span><br><span class="line">     <span class="attr">afterRender</span>:<span class="keyword">function</span> (<span class="params">params</span>)&#123;</span><br><span class="line">      <span class="keyword">var</span> that =<span class="variable language_">this</span>;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">         that.<span class="property">model</span>.<span class="property">test_arr</span> = [<span class="string">&quot;&quot;</span>,<span class="string">&quot;4&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;5&quot;</span>,<span class="string">&quot;6&quot;</span>,<span class="string">&quot;&quot;</span>]</span><br><span class="line">         that.<span class="property">model</span>.$nextTick(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">          that.<span class="property">model</span>.<span class="property">test_arr</span> = <span class="literal">null</span>;</span><br><span class="line">         &#125;)</span><br><span class="line">      &#125;,<span class="number">1000</span>*<span class="number">10</span>)</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;val in test_arr&quot;</span>&gt;</span>&#123;&#123;val&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上的代码可以稳定重新问题，下面是我们的解题思路。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在不求甚解的状态下，这个问题是比较容易解决的，我们想到了几个临时的解决方案。</p>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>从报错信息<code>Uncaught TypeError: Cannot read property &#39;removeChild&#39; of null</code>可知，之所以发生这个问题是因为在<code>null</code>的对象上执行了<code>removeChild</code>，那么事情就简单了。</p>
+<p>修改vue框架代码，将这里的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">remove</span>(<span class="params">el</span>) &#123;</span><br><span class="line">   el.<span class="property">parentNode</span>.<span class="title function_">removeChild</span>(el);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">remove</span>(<span class="params">el</span>) &#123;</span><br><span class="line">   <span class="keyword">if</span>(el.<span class="property">parentNode</span>)el.<span class="property">parentNode</span>.<span class="title function_">removeChild</span>(el);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>我们深入的分析了一下为什么<code>el.parentNode</code>会是<code>null</code>，通过上面重现的步骤发现，当<code> that.model.test_arr = [&quot;&quot;,&quot;4&quot;,&quot;&quot;,&quot;5&quot;,&quot;6&quot;,&quot;&quot;]</code>这段代码设置发生后，<code>v-for</code>产生的dom节点之后3个，而不是5个，这种情况下<code>el.parentNode</code>就是不存在的，所以产生了第二种解决方案，强制不给空数据的元素生成dom节点。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;val in test_arr&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;val&quot;</span>&gt;</span>&#123;&#123;val&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h3><p>问题并不算是圆满解决，正常的情况下框架应该具有鲁棒性，适应不同的使用场景，不应该出现js报错的问题，所以还有深入研究下去的必要！</p>
+<p>在<code>vue</code>中针对<code>v-for</code>指令有一个<code>track-by</code>的可选配置</p>
+<pre><code>无track-by情况：数据修改时，无论值是否被修改，dom都被重新渲染
+有track-by属性：数据修改时，不变数据所在的dom不被重新渲染，已改变的数据所在dom才被重新渲染
+</code></pre>
+<p>因为 v-for 默认通过数据对象的特征来决定对已有作用域和 DOM 元素的复用程度，这可能导致重新渲染整个列表。但是，如果每个对象都有一个唯一 ID 的属性，便可以使用 track-by 特性给 Vue 一个提示，Vue因而能尽可能地复用已有实例。所以就有了第三种解决方案。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;val in test_arr&quot;</span> <span class="attr">track-by</span>=<span class="string">&quot;$index&quot;</span>&gt;</span>&#123;&#123;val&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p><code>v-for</code>遍历数组中存在空值导致页面报错，主要是遍历条件里对值的判断有问题。vue为了保证对dom节点的复用，内置了一份按照id存取的dom缓存，通过对数据分析出dom_id，然后根据此id从缓存中获取dom节点。由于不同的数据取到了相同的dom_id，所以没有创建dom节点出来。但是，在最终数组置空，模型变更之后dom节点移除的时候却为这些dom节点触发了remove操作，也就是方案一中兼容的那些代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id = <span class="title function_">getTrackByKey</span>(index, key, value, trackByKey);</span><br><span class="line"><span class="keyword">if</span> (!cache[id]) &#123;</span><br><span class="line">	cache[id] = frag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>所以问题必定出现在<code>getTrackByKey</code>这个函数的执行上，以下是<code>getTrackByKey</code>的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getTrackByKey</span>(<span class="params">index, key, value, trackByKey</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> trackByKey ? trackByKey === <span class="string">&#x27;$index&#x27;</span> ? index : trackByKey.<span class="title function_">charAt</span>(<span class="number">0</span>).<span class="title function_">match</span>(<span class="regexp">/\w/</span>) ? <span class="title function_">getPath</span>(value, trackByKey) : value[trackByKey] : key || value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><code>return</code>之后的判断条件导致了如果<code>v-for</code>的目标是一个数组，则最终就会按照<code>value</code>来存储你dom节点，<code>value</code>就会作为此dom节点的id标识，那就导致了如果一个<strong>非对象数组</strong>中的值有重复的则必然会发生此问题，我们验证后也确实如此，不仅仅是数组中有空值，数组中有重复值也会报错并中断js的执行。修复此问题可以通过下面的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getTrackByKey</span>(<span class="params">index, key, value, trackByKey</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> trackByKey ? trackByKey === <span class="string">&#x27;$index&#x27;</span> ? index : trackByKey.<span class="title function_">charAt</span>(<span class="number">0</span>).<span class="title function_">match</span>(<span class="regexp">/\w/</span>) ? <span class="title function_">getPath</span>(value, trackByKey) : value[trackByKey] : key || (<span class="keyword">typeof</span> value==<span class="string">&quot;object&quot;</span>?<span class="attr">value</span>:index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>vue</code>中对数据绑定的操作大大提高了开发者应用开发的效率，但与此同时也伴随着一些不易察觉的问题，尤其如本文中问题的重现条件比较复杂的情况下，测试不一定可以覆盖到问题的触发条件，这个时候就需要我们开发人员多一分警惕。</p>
+<p>本文中的修复方法在lighting中已经做了集成，将在下一个版本中包含此补丁。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pself.net/2017/05/20/2017-05-20-vue-error-v-for/" data-id="cmmaaymry0005jfqdgxmle11a" data-title="vue在v-for遍历的数组中存在重复值情况下执行出错的问题处理" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/08/20/2017-08-20-use-frp-to-expose-a-local-server/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          使用frp将内网端口暴露到外网以提供服务
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/20/2017-04-20%20-electron/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">electron集成开发者工具的探索</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/26/2022-03-26-ide/">构建IDE产品的方案和选型</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic4/">一些关于HTML的基础知识（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 abel<br>
+      Powered by <a href="https://pself.net/" target="_blank">wang</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+  </div>
+</body>
+</html>

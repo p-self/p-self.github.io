@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>一些关于HTML的基础知识（二） | 三山半落1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="&lt;body&gt;&lt;body&gt;标签除了通用属性之外，还支持一些全局的和文档相关的事件绑定：onafterprint、onbeforeprint、onbeforeunload、onblur、onerror、onfocus、onhashchange、onload、onmessage、onoffline、ononline、onpopstate、onredo、onresize、onsto">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些关于HTML的基础知识（二）">
+<meta property="og:url" content="https://pself.net/2022/02/09/2022-02-08-html-basic2/index.html">
+<meta property="og:site_name" content="三山半落1">
+<meta property="og:description" content="&lt;body&gt;&lt;body&gt;标签除了通用属性之外，还支持一些全局的和文档相关的事件绑定：onafterprint、onbeforeprint、onbeforeunload、onblur、onerror、onfocus、onhashchange、onload、onmessage、onoffline、ononline、onpopstate、onredo、onresize、onsto">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-09T06:34:12.000Z">
+<meta property="article:modified_time" content="2026-03-03T07:41:25.020Z">
+<meta property="article:author" content="abel">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">三山半落1</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://pself.net"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2022-02-08-html-basic2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/09/2022-02-08-html-basic2/" class="article-date">
+  <time class="dt-published" datetime="2022-02-09T06:34:12.000Z" itemprop="datePublished">2022-02-09</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/dev-html/">dev html</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      一些关于HTML的基础知识（二）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id=""><a href="#" class="headerlink" title="&lt;body&gt;"></a><code>&lt;body&gt;</code></h2><p><code>&lt;body&gt;</code>标签除了通用属性之外，还支持一些全局的和文档相关的事件绑定：onafterprint、onbeforeprint、onbeforeunload、onblur、onerror、onfocus、onhashchange、onload、onmessage、onoffline、ononline、onpopstate、onredo、onresize、onstorage、onundo、onunload。</p>
+<p><code>onblur/onfocus</code> 可以解决一些文档丢失焦点的问题；<code>onoffline/ononline</code>时对网路的监听；<code>onstorage</code>是对存储的监听；<code>onunload/onload</code>是对页面关闭事件的监听。</p>
+<h2 id="内容区域元素"><a href="#内容区域元素" class="headerlink" title="内容区域元素"></a>内容区域元素</h2><p><code>&lt;address&gt;</code>、<code>&lt;article&gt;</code>、<code>&lt;aside&gt;</code>、<code>&lt;footer&gt;</code>、<code>&lt;header&gt;</code>、<code>&lt;nav&gt;</code>、<code>&lt;section&gt;</code>、<code>&lt;main&gt;</code>均为此类型的元素标签。</p>
+<p><code>&lt;address&gt;</code>没有扩展属性，只用于展示联系信息如：邮件、电话、地址等。</p>
+<ol>
+<li><code>&lt;address&gt;</code>用于为<code>&lt;body&gt;</code>或者<code>&lt;article&gt;</code>增加联系人的署名</li>
+<li>除了联系信息之外不能包含任何其他信息；</li>
+<li><code>&lt;address&gt;</code>一般放置在<code>footer</code>之内；</li>
+</ol>
+<p><code>&lt;article&gt;</code>代表文档中独立的区域，可以嵌套使用<code>&lt;article&gt;</code>。</p>
+<p>页面和<code>&lt;article&gt;</code>都可以包含<code>&lt;aside&gt;</code>、<code>&lt;footer&gt;</code>、<code>&lt;header&gt;</code>。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span> <span class="attr">class</span>=<span class="string">&quot;film_review&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Jurassic Park<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;main_review&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Review<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Dinos were great!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;user_reviews&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>User reviews<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">article</span> <span class="attr">class</span>=<span class="string">&quot;user_review&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">h4</span>&gt;</span>Too scary!<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Way too scary for me.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">          Posted on</span><br><span class="line">          <span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2015-05-16 19:00&quot;</span>&gt;</span>May 16<span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br><span class="line">          by Lisa.</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">article</span> <span class="attr">class</span>=<span class="string">&quot;user_review&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">h4</span>&gt;</span>Love the dinos!<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>I agree, dinos are my favorite.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">          Posted on</span><br><span class="line">          <span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2015-05-17 19:00&quot;</span>&gt;</span>May 17<span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br><span class="line">          by Tom.</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      Posted on</span><br><span class="line">      <span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2015-05-15 19:00&quot;</span>&gt;</span>May 15<span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br><span class="line">      by Staff.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;aside&gt;</code>用于在文档中标识主要内容的关联或者索引，是内容的一部分，一般可以用来提示页面大纲或者唤出栏。</p>
+<p>页面内最多只能有一个<code>&lt;h1&gt;</code>;</p>
+<p>页面内对 <code>&lt;h1&gt;–&lt;h6&gt;</code>的使用必须依次进行，不可越级；</p>
+<h2 id="文本内容元素"><a href="#文本内容元素" class="headerlink" title="文本内容元素"></a>文本内容元素</h2><p><code>&lt;blockquote&gt;</code>用于标识引用，可以使用cite属性指示内容来源，或者<code>&lt;cite&gt;</code>指示内容来源。<code>&lt;blockquote&gt;</code>是块级元素，如果使用行内元素可以使用<code>&lt;q&gt;</code>。</p>
+<p><code>&lt;dl&gt;</code>、<code>&lt;dt&gt;</code>、<code>&lt;dd&gt;</code>分别代表描述列表（Description Lists）、描述项标题（Description Title）、描述项描述（Description Details）。 在实现术语表（glossary）或者描述元数据信息时比较常见。</p>
+<p><code>&lt;div&gt;</code>是通用的内容区域，应该仅在没有合适的语义化标签的情况下使用。</p>
+<p><code>&lt;figure&gt;</code>、<code>&lt;figcaption&gt;</code>用于处理独立信息的场景，一般被主文档引用，可以自由移动而不会影响主文档的展示；也可以和<code>&lt;blockquote&gt;</code>、<code>&lt;pre&gt;</code>一起使用。</p>
+<h2 id="行内文本元素"><a href="#行内文本元素" class="headerlink" title="行内文本元素"></a>行内文本元素</h2><p><code>&lt;abbr&gt;</code>用于定义缩写，<code>title</code>属性提示缩写的全写。</p>
+<p><code>&lt;b&gt;</code>用于引起读者注意（Bring Attention），而不是加粗。</p>
+<p><code>&lt;bdi&gt;</code>、<code>&lt;bdo&gt;</code>用于双向文本处理（Bidirectional Isolate）隔离、重写，对于同时存在两种书写方式的文本比较有用：ltr、rtl。</p>
+<p><code>&lt;br&gt;</code> 一般用于诗歌当中，实际在开发中涉及段落之间的间距应该使用p+margin的方式。</p>
+<p><code>&lt;cite&gt;</code> 用来处理引用当中的作者。</p>
+<p><code>&lt;code&gt;</code> 用来处理代码，是行内元素。</p>
+<p><code>&lt;data&gt;</code> 用来处理数据，而不是时间，其中value属性声明数据的具体数字，在样式中可以通过attr(value)来引用。</p>
+<p><code>&lt;em&gt;</code> 用来强调，而不是斜体，<code>&lt;em&gt;</code>可以嵌套，以进行逐级强调。</p>
+<pre><code>Use &lt;em&gt; to indicate stress emphasis.
+Use &lt;strong&gt; to indicate importance, seriousness, or urgency.
+Use &lt;mark&gt; to indicate relevance.
+Use &lt;cite&gt; to mark up the name of a work, such as a book, play, or song.
+Use &lt;dfn&gt; to mark up the defining instance of a term.
+</code></pre>
+<p><code>&lt;kbd&gt;</code> 用来提示内容为键盘的按键，比如<code>&lt;kbd&gt;Ctrl&lt;/kbd&gt;</code><kbd>Ctrl</kbd>。</p>
+<p><code>&lt;mark&gt;</code> 用于标记而不是高亮可以和引用的文本配合使用，如果高亮应该用span；</p>
+<p><code>&lt;ruby&gt;</code> 用于给东方语言注音。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ruby</span>&gt;</span></span><br><span class="line">  漢 <span class="tag">&lt;<span class="name">rp</span>&gt;</span>(<span class="tag">&lt;/<span class="name">rp</span>&gt;</span><span class="tag">&lt;<span class="name">rt</span>&gt;</span>Kan<span class="tag">&lt;/<span class="name">rt</span>&gt;</span><span class="tag">&lt;<span class="name">rp</span>&gt;</span>)<span class="tag">&lt;/<span class="name">rp</span>&gt;</span></span><br><span class="line">  字 <span class="tag">&lt;<span class="name">rp</span>&gt;</span>(<span class="tag">&lt;/<span class="name">rp</span>&gt;</span><span class="tag">&lt;<span class="name">rt</span>&gt;</span>ji<span class="tag">&lt;/<span class="name">rt</span>&gt;</span><span class="tag">&lt;<span class="name">rp</span>&gt;</span>)<span class="tag">&lt;/<span class="name">rp</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ruby</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ruby>
+  漢 <rp>(</rp><rt>Kan</rt><rp>)</rp>
+  字 <rp>(</rp><rt>ji</rt><rp>)</rp>
+</ruby>
+
+<p><code>&lt;s&gt;</code> 用于标识文本划除的效果，显示等同于<code>text-decoration:line-through;</code>。</p>
+<p><code>&lt;samp&gt;</code> 用于示例的输出，和code一样使用mono字体显示中间内容。这是输出。</p>
+<p><code>&lt;small&gt;</code> 用于制作脚注，其字体较小。</p>
+<p><code>&lt;strong&gt;</code> 用于标识内容的重要性，而<code>&lt;b&gt;</code>只用于引起读者注意，不一样定重要。</p>
+<p><code>&lt;sub&gt;</code> 用于下标，比如C<sub>8</sub>H<sub>10</sub>N<sub>4</sub>O<sub>2</sub>。</p>
+<p><code>&lt;sup&gt;</code> 用于上标，比如a<sup>2</sup> + <var>b<sup>2</sup></var> &#x3D; <var>c<sup>2</sup>。</p>
+<p><code>&lt;time&gt;</code>用于显示时间，datetime属性可以标识正确时间。</p>
+<p><code>&lt;u&gt;</code> 用于标识文本错误（Unarticulated Annotation），浏览器在渲染文本时，在其下显示红色波浪线。</p>
+<p><code>&lt;var&gt;</code> 用于定于变量，可以数学或者代码的变量。</p>
+<p><code>&lt;wbr&gt;</code> 用户声明在此处可以分词，当文本内容长过长时，此处可以分词。Line Break Opportunity </p>
+<p>通过<code>&lt;details&gt;</code>和<code>&lt;summary&gt;</code>可以产生可折叠的内容。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data<span class="selector-pseudo">:hover</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&#x27; (ID &#x27;</span> <span class="built_in">attr</span>(value) <span class="string">&#x27;)&#x27;</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: .<span class="number">7em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="-1"><a href="#-1" class="headerlink" title="&lt;a&gt;"></a><code>&lt;a&gt;</code></h3><p><code>&lt;a&gt;</code>代表Anchor，即锚点，可以指向到任意的url可以导航打开的资源。</p>
+<p><code>&lt;a&gt;</code>支持<code>download</code>属性，配置此属性后是以下载代替打开。属性的值就是下载的文件名称，如果不配置浏览器会根据<code>Content-Disposition </code>来确定文件名称；url中的文件名，content-type或者base64字符串中携带的文件类型。</p>
+<p><code>&lt;a&gt;</code>支持<code>ping</code>属性，支持配置多个url地址，当点击行为发生时不是导航打开，而是对url地址发起post请求，请求体的内容为ping。</p>
+<p><code>&lt;a&gt;</code>支持<code>referrerpolicy</code>属性，使用可以参考上一篇文章。</p>
+<p><code>&lt;del&gt;</code>和<code>&lt;ins&gt;</code>用于删除和插入文本的提示；</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pself.net/2022/02/09/2022-02-08-html-basic2/" data-id="cmmaayms8000vjfqdd856f6vv" data-title="一些关于HTML的基础知识（二）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/02/10/2022-02-09-html-basic3/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          一些关于HTML的基础知识（三）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/08/2022-02-08-html-basic/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">一些关于HTML的基础知识（一）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/26/2022-03-26-ide/">构建IDE产品的方案和选型</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic4/">一些关于HTML的基础知识（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 abel<br>
+      Powered by <a href="https://pself.net/" target="_blank">wang</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+  </div>
+</body>
+</html>

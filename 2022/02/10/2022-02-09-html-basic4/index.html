@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>一些关于HTML的基础知识（四） | 三山半落1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="表单元素&lt;button&gt; 严格意义上来讲是表单元素，在&lt;form&gt;当中使用，&lt;button&gt;可以通过form属性关联一个表单，任意的表单，如果不使用form属性关联，那么&lt;button&gt;会自动关联到最近的祖先表单当中；formaction、formenctype、formmethod、formnovalidate、formtarget可以重写其所关联">
+<meta property="og:type" content="article">
+<meta property="og:title" content="一些关于HTML的基础知识（四）">
+<meta property="og:url" content="https://pself.net/2022/02/10/2022-02-09-html-basic4/index.html">
+<meta property="og:site_name" content="三山半落1">
+<meta property="og:description" content="表单元素&lt;button&gt; 严格意义上来讲是表单元素，在&lt;form&gt;当中使用，&lt;button&gt;可以通过form属性关联一个表单，任意的表单，如果不使用form属性关联，那么&lt;button&gt;会自动关联到最近的祖先表单当中；formaction、formenctype、formmethod、formnovalidate、formtarget可以重写其所关联">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2022-02-10T03:34:12.000Z">
+<meta property="article:modified_time" content="2026-03-03T07:41:25.020Z">
+<meta property="article:author" content="abel">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">三山半落1</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://pself.net"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2022-02-09-html-basic4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2022/02/10/2022-02-09-html-basic4/" class="article-date">
+  <time class="dt-published" datetime="2022-02-10T03:34:12.000Z" itemprop="datePublished">2022-02-10</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/dev-html/">dev html</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      一些关于HTML的基础知识（四）
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="表单元素"><a href="#表单元素" class="headerlink" title="表单元素"></a>表单元素</h2><p><code>&lt;button&gt;</code> 严格意义上来讲是表单元素，在<code>&lt;form&gt;</code>当中使用，<code>&lt;button&gt;</code>可以通过<code>form</code>属性关联一个表单，任意的表单，如果不使用form属性关联，那么<code>&lt;button&gt;</code>会自动关联到最近的祖先表单当中；formaction、formenctype、formmethod、formnovalidate、formtarget可以重写其所关联表单的相关属性；</p>
+<p><code>&lt;button&gt;</code>可以使用<code>type</code>属性，有三个可选值，button、reset、submit。</p>
+<p><code>&lt;button&gt;</code>可以通过name、value来产生form提交的数据，如果点击此按钮来触发提交，那么按钮本身的name、value会作为提交数据传递到后台服务。</p>
+<p><code>&lt;datalist&gt;</code> 可以创造一个下来列表关联到input，在输入的时候作为字典补全项目展示；</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;ice-cream-choice&quot;</span>&gt;</span>Choose a flavor:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">list</span>=<span class="string">&quot;ice-cream-flavors&quot;</span> <span class="attr">id</span>=<span class="string">&quot;ice-cream-choice&quot;</span> <span class="attr">name</span>=<span class="string">&quot;ice-cream-choice&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">datalist</span> <span class="attr">id</span>=<span class="string">&quot;ice-cream-flavors&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Chocolate&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Coconut&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Mint&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Strawberry&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Vanilla&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">datalist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><code>&lt;fieldset&gt;</code> 用于产生字段组，用于表单内数据的分类。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Choose your favorite monster<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">id</span>=<span class="string">&quot;kraken&quot;</span> <span class="attr">name</span>=<span class="string">&quot;monster&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;kraken&quot;</span>&gt;</span>Kraken<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">id</span>=<span class="string">&quot;sasquatch&quot;</span> <span class="attr">name</span>=<span class="string">&quot;monster&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;sasquatch&quot;</span>&gt;</span>Sasquatch<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">id</span>=<span class="string">&quot;mothman&quot;</span> <span class="attr">name</span>=<span class="string">&quot;monster&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;mothman&quot;</span>&gt;</span>Mothman<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<form>
+  <fieldset>
+    <legend>Choose your favorite monster</legend>
+
+<pre><code>&lt;input type=&quot;radio&quot; id=&quot;kraken&quot; name=&quot;monster&quot;&gt;
+&lt;label for=&quot;kraken&quot;&gt;Kraken&lt;/label&gt;&lt;br/&gt;
+
+&lt;input type=&quot;radio&quot; id=&quot;sasquatch&quot; name=&quot;monster&quot;&gt;
+&lt;label for=&quot;sasquatch&quot;&gt;Sasquatch&lt;/label&gt;&lt;br/&gt;
+
+&lt;input type=&quot;radio&quot; id=&quot;mothman&quot; name=&quot;monster&quot;&gt;
+&lt;label for=&quot;mothman&quot;&gt;Mothman&lt;/label&gt;
+</code></pre>
+  </fieldset>
+</form>
+
+<p><code>&lt;form&gt;</code> 是表单的容器，可以使用<code>:valid</code> and <code>:invalid</code>伪类来设置两种状态的表单的样式；可以通过<code>enctype</code>来设置表单提交数据的请求头，默认是<code>application/x-www-form-urlencoded</code>，如果表单中包含文件，可以设置为<code>multipart/form-data</code>。</p>
+<p><code>&lt;input&gt;</code> 支持多种type属性配置，button&#x2F;checkbox&#x2F;color&#x2F;date&#x2F;datetime-local&#x2F;email&#x2F;file&#x2F;hidden&#x2F;image&#x2F;month&#x2F;number&#x2F;password&#x2F;radio&#x2F;range&#x2F;reset&#x2F;search&#x2F;submit&#x2F;tel&#x2F;text&#x2F;time&#x2F;url&#x2F;week</p>
+<table>
+<thead>
+<tr>
+<th>属性名称</th>
+<th>适用类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept">accept</a></td>
+<td>file</td>
+<td>Hint for expected file type in file upload controls</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-alt">alt</a></td>
+<td>image</td>
+<td>alt attribute for the image type. Required for accessibility</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete">autocomplete</a></td>
+<td>all</td>
+<td>Hint for form autofill feature</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autofocus">autofocus</a></td>
+<td>all</td>
+<td>Automatically focus the form control when the page is loaded</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-capture">capture</a></td>
+<td>file</td>
+<td>Media capture input method in file upload controls</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked">checked</a></td>
+<td>radio, checkbox</td>
+<td>Whether the command or control is checked</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-dirname">dirname</a></td>
+<td>text, search</td>
+<td>Name of form field to use for sending the element’s directionality in form submission</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled">disabled</a></td>
+<td>all</td>
+<td>Whether the form control is disabled</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-form">form</a></td>
+<td>all</td>
+<td>Associates the control with a form element</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formaction">formaction</a></td>
+<td>image, submit</td>
+<td>URL to use for form submission</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formenctype">formenctype</a></td>
+<td>image, submit</td>
+<td>Form data set encoding type to use for form submission</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formmethod">formmethod</a></td>
+<td>image, submit</td>
+<td>HTTP method to use for form submission</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formnovalidate">formnovalidate</a></td>
+<td>image, submit</td>
+<td>Bypass form control validation for form submission</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formtarget">formtarget</a></td>
+<td>image, submit</td>
+<td>Browsing context for form submission</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-height">height</a></td>
+<td>image</td>
+<td>Same as <code>height</code> attribute for <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"><code>&lt;img&gt;</code></a>; vertical dimension</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list">list</a></td>
+<td>almost all</td>
+<td>Value of the id attribute of the <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist"><code>&lt;datalist&gt;</code></a> of autocomplete options</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max">max</a></td>
+<td>numeric types</td>
+<td>Maximum value</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-maxlength">maxlength</a></td>
+<td>password, search, tel, text, url</td>
+<td>Maximum length (number of characters) of <code>value</code></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min">min</a></td>
+<td>numeric types</td>
+<td>Minimum value</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-minlength">minlength</a></td>
+<td>password, search, tel, text, url</td>
+<td>Minimum length (number of characters) of <code>value</code></td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple">multiple</a></td>
+<td>email, file</td>
+<td>Boolean. Whether to allow multiple values</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-name">name</a></td>
+<td>all</td>
+<td>Name of the form control. Submitted with the form as part of a name&#x2F;value pair.</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-pattern">pattern</a></td>
+<td>password, text, tel</td>
+<td>Pattern the <code>value</code> must match to be valid</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder">placeholder</a></td>
+<td>password, search, tel, text, url</td>
+<td>Text that appears in the form control when it has no value set</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly">readonly</a></td>
+<td>almost all</td>
+<td>Boolean. The value is not editable</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required">required</a></td>
+<td>almost all</td>
+<td>Boolean. A value is required or must be check for the form to be submittable</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-size">size</a></td>
+<td>email, password, tel, text, url</td>
+<td>Size of the control</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-src">src</a></td>
+<td>image</td>
+<td>Same as <code>src</code> attribute for <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"><code>&lt;img&gt;</code></a>; address of image resource</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-step">step</a></td>
+<td>numeric types</td>
+<td>Incremental values that are valid.</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type">type</a></td>
+<td>all</td>
+<td>Type of form control</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-value">value</a></td>
+<td>all</td>
+<td>The initial value of the control.</td>
+</tr>
+<tr>
+<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-width">width</a></td>
+<td>image</td>
+<td>Same as <code>width</code> attribute for <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"><code>&lt;img&gt;</code></a></td>
+</tr>
+</tbody></table>
+<p><code>&lt;textarea&gt;</code> 多行输入文本；可以通过<code>wrap</code>属性来配置文本换行，配置为hard时自动加入CR+LF来换行，配置为soft根据用户输入来换行。textarea默认都可以缩放，可以通过样式<code>resize: none;</code>来关闭缩放。</p>
+<p><code>&lt;select&gt;</code> 可以通过<code>multiple</code>来配置多选，当启用multiple时还可以通过size来展示多个条目。可以配合使用<code>&lt;optgroup&gt;</code>来为选项分组。</p>
+<p><code>&lt;progress&gt;</code> 进度条，通过max设置100%的数值，通过value设置进度条所在的位置。</p>
+<p><code>&lt;output&gt;</code> 可以计算多个input的和并且显示。</p>
+<p><code>&lt;meter&gt;</code> 通过指定最大值max和最小值min，来决定显示value的值所在的位置。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pself.net/2022/02/10/2022-02-09-html-basic4/" data-id="cmmaaymsa0010jfqd4pgx366m" data-title="一些关于HTML的基础知识（四）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/03/26/2022-03-26-ide/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          构建IDE产品的方案和选型
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2022/02/10/2022-02-09-html-basic3/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">一些关于HTML的基础知识（三）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/26/2022-03-26-ide/">构建IDE产品的方案和选型</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic4/">一些关于HTML的基础知识（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 abel<br>
+      Powered by <a href="https://pself.net/" target="_blank">wang</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+  </div>
+</body>
+</html>

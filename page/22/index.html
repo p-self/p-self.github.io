@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>三山半落1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="website">
+<meta property="og:title" content="三山半落1">
+<meta property="og:url" content="https://pself.net/page/22/index.html">
+<meta property="og:site_name" content="三山半落1">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="abel">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">三山半落1</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://pself.net"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main">
+  
+    <article id="post-2016-11-08-how-to-optimization-res" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2016/11/08/2016-11-08-how-to-optimization-res/" class="article-date">
+  <time class="dt-published" datetime="2016-11-08T06:34:12.000Z" itemprop="datePublished">2016-11-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/dev-opt/">dev opt</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="p-name article-title" href="/2016/11/08/2016-11-08-how-to-optimization-res/">如何优化前端工程当中的资源文件</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p>对前端工程当中的资源优化不外乎几个方面的原因：</p>
+<ol>
+<li>减少流量</li>
+<li>减少请求数</li>
+<li>控制缓存</li>
+</ol>
+<p>前端资源的类型包括js&#x2F;css&#x2F;html&#x2F;图片&#x2F;字体，针对不同的资源有着各自不同的优化方案。以下的内容将结合不同的资源类型提供几套针对性的方案供参考。同时为了方便使用，一些方案在lighting框架中进行了集成，我也将以lighting为例来说明如何在lighting工程中来使用对应的方案进行资源的优化。</p>
+<h2 id="针对js资源的优化措施"><a href="#针对js资源的优化措施" class="headerlink" title="针对js资源的优化措施"></a>针对js资源的优化措施</h2><p>JavaScript控制着页面的行为，一个功能完善交互友好的html5应用必然存在着大量的JavaScript代码，对JavaScript代码的优化是前端资源优化的重头戏。</p>
+<h3 id="代码压缩"><a href="#代码压缩" class="headerlink" title="代码压缩"></a>代码压缩</h3><p>代码压缩可以减少代码的行数，并且通过对变量的混淆命名&#x2F;移除注释等措施减少代码的整体的字节数。</p>
+<p>在lighting中通过对编译指令添加一个<code>-u</code>选项可以启用代码压缩的能力。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">light release -u</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码合并"><a href="#代码合并" class="headerlink" title="代码合并"></a>代码合并</h3><p>代码合并可以减少资源总体的请求数，尤其是在http&#x2F;1.1下对单域名下的总并发请求数有明确限制的情况下，通过对代码合并可以明显的提高代码的加载效率，提升页面的响应速度。</p>
+<p>在lighting项目当中使用JavaScript代码的合并策略只需要配置特定的注解就可以了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- build:js js/app.js --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;js/lib/promise-7.0.4.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;js/lib/light-1.1.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;text/javascript&quot;</span> <span class="attr">src</span>=<span class="string">&quot;js/api/api.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- inject:view --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- endinject --&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- endbuild --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中<code> build:js</code>的作用就是将注解所包含内容作为代码合并的输入源，并输出为<code>js/app.js</code>这个文件。</p>
+<p>添加完注解之后还需要在编译指令中添加执行参数<code>-c</code>或者<code>--concat</code>，则在资源编译处理阶段就会触发代码合并的操作。</p>
+<h3 id="小文件内联"><a href="#小文件内联" class="headerlink" title="小文件内联"></a>小文件内联</h3><p>小文件内联也是减少页面请求数的一个有效的手段，对于一些片段化的js代码应该通过script标签的方式使用以免占用多余的请求链接。</p>
+<h3 id="异步加载"><a href="#异步加载" class="headerlink" title="异步加载"></a>异步加载</h3><p>异步资源加载是减少页面首屏流量的一个相对有效的手段，通过对不是首屏无依赖的资源进行异步化的处理可以减少首屏的响应时间，获取更好的页面交互效果，流畅的交互体验。</p>
+<p>在lighting的开发项目中使用JavaScript资源的异步加载有两种不同的方法。</p>
+<h4 id="异步视图"><a href="#异步视图" class="headerlink" title="异步视图"></a>异步视图</h4><p>通过在视图定义的时候添加<code>async=true</code>属性，可以将此视图明确的辨识为异步视图。异步视图的js资源在视图第一次渲染的时候才会请求。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">view</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span> <span class="attr">async</span>=<span class="string">&quot;true&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="异步资源"><a href="#异步资源" class="headerlink" title="异步资源"></a>异步资源</h4><p>异步的js资源通过lighting框架的一个API来完成。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Light</span>.<span class="built_in">require</span>(<span class="string">&quot;./js/lib/jquery.js&quot;</span>,<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// console.log($)</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h2 id="针对css资源的优化措施"><a href="#针对css资源的优化措施" class="headerlink" title="针对css资源的优化措施"></a>针对css资源的优化措施</h2><h3 id="代码压缩-1"><a href="#代码压缩-1" class="headerlink" title="代码压缩"></a>代码压缩</h3><p>和对JavaScript进行代码压缩的方式一样，启用压缩选项也是通过一个<code>-u</code>参数完成的。</p>
+<p>css资源的压缩会去除所有无用的注释和空行空格，减少资源的整体体积。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">light release -u</span><br></pre></td></tr></table></figure>
+
+<h3 id="代码合并-1"><a href="#代码合并-1" class="headerlink" title="代码合并"></a>代码合并</h3><p>在lighting项目当中使用css代码的合并策略只需要配置特定的注解就可以了。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- build:css css/app.css --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;css/reset.css&quot;</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;css/style.css&quot;</span> /&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- endbuild --&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中<code> build:css</code>的作用就是将注解所包含内容作为代码合并的输入源，并输出为<code>css/app.css</code>这个文件。</p>
+<p>添加完注解之后还需要在编译指令中添加执行参数<code>-c</code>或者<code>--concat</code>，则在资源编译处理阶段就会触发代码合并的操作。</p>
+<h2 id="针对图片资源的优化方案"><a href="#针对图片资源的优化方案" class="headerlink" title="针对图片资源的优化方案"></a>针对图片资源的优化方案</h2><h3 id="图片压缩"><a href="#图片压缩" class="headerlink" title="图片压缩"></a>图片压缩</h3><p><code>lighting-plugin-imagemin</code>可以压缩页面图像，在不影响图片分辨率的情况下降低页面的访问流量，提升用户的使用体验。</p>
+<p>图片压缩插件支持jpg和png类型的图片。</p>
+<h3 id="图片内联"><a href="#图片内联" class="headerlink" title="图片内联"></a>图片内联</h3><p>对于一些通过<code>img</code>标签引入的小图片，虽然占用了极少的网络流量，但是依然需要占用浏览器对单域名限制下的并发连接数，会导致资源请求排队，从而影响页面的加载效率。</p>
+<p>所以对于一些零碎的小图，最好的方案是通过内联的方式将图片经过base64编码后的结果直接标识在<code>img</code>标签的<code>src</code>属性上，从而达到降低页面请求数的目的。</p>
+<h3 id="背景图生成雪碧图"><a href="#背景图生成雪碧图" class="headerlink" title="背景图生成雪碧图"></a>背景图生成雪碧图</h3><p>有时候为了保持h5应用的美观，会使用大量的细碎的背景图片以美化展示效果，这些背景图片在css文件加载完成后会立即排队到资源请求的队列里，从而影响页面分访问性能。</p>
+<p>雪碧图可以有效的解决这个问题，lighting提供了对css样式背景图进行雪碧图拼接的插件，通过安装并启用<code>lighting-plugin-postcss</code>插件可以自动的将css中的背景图片进行整合合并生成雪碧图，不需要手动进行任何的代码调整。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">light plugin -a sprites</span><br></pre></td></tr></table></figure>
+
+<h3 id="图片延迟加载"><a href="#图片延迟加载" class="headerlink" title="图片延迟加载"></a>图片延迟加载</h3><p>对于有些列表页面，可能渲染的时候有很多图片需要加载，如果全部加载所有的图片，将是对带宽和连接数的极大浪费，这个时候就需要使用图片延迟加载的技术。</p>
+<p>图片的延迟加载的原理是通过移除<code>src</code>属性来确保页面一开始加载不会有图片开始加载，而通过监听滚动条事件来触发对图片是否处于可是区域判断的结果来加载图片。</p>
+<p>这样一来，图片加载会分多个批次进行加载，从而减少了首屏资源的流量，提高了运行效率。</p>
+<h2 id="针对字体资源的优化方案"><a href="#针对字体资源的优化方案" class="headerlink" title="针对字体资源的优化方案"></a>针对字体资源的优化方案</h2><h3 id="资源内联"><a href="#资源内联" class="headerlink" title="资源内联"></a>资源内联</h3><p>和之前介绍的的各种资源一样，小字体文件依然可以通过base64编码的方式引入到css文件中，以减少页面的请求数。</p>
+<h3 id="减少字体文件中字符的数量"><a href="#减少字体文件中字符的数量" class="headerlink" title="减少字体文件中字符的数量"></a>减少字体文件中字符的数量</h3><p>尤其是对中文字符而言（中文有几万多个字符），每个字符都需要占用空间，但页面上不是每个字符都使用到了。应该仅仅对使用到的字符打包成字体。通过<code>font-spider</code>（<a target="_blank" rel="noopener" href="http://font-spider.org/#use">字体蜘蛛</a>）这一做到这一点。</p>
+<h2 id="其他优化方案"><a href="#其他优化方案" class="headerlink" title="其他优化方案"></a>其他优化方案</h2><h3 id="控制缓存"><a href="#控制缓存" class="headerlink" title="控制缓存"></a>控制缓存</h3><p>合理的缓存控制可以提升应用的加载和执行效率，缓存可以限制对相同资源发起的http请求，从而减少页面流量。一般请求下，我们都会在后台设置强力缓存，如<code>max-age</code>设置为30天。</p>
+<p>如果在缓存失效的30天内发生了应用的集成打包，那么需要为每一个资源添加hash后缀以强制刷新缓存。</p>
+<p>在lighting框架下，使用<code>-s</code>选项打包，可以为静态资源css&#x2F;js添加hash后缀。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">light release -s -p</span><br></pre></td></tr></table></figure>
+
+<h3 id="开启GZIP"><a href="#开启GZIP" class="headerlink" title="开启GZIP"></a>开启GZIP</h3><p>gzip可以有效的减少文本类资源的http请求流量，是减少页面整体流量十分有效的方式。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>资源优化后可以提高前端页面的加载效率，减少响应延时，使最终产品交付使用时获得更好的体验。<br>另外，有些优化方案也是因程序运行的上下文环境而定的，比如如果后端服务器开启了http&#x2F;2且浏览器支持http&#x2F;2的情况下，以减少请求数为目的的优化都是事倍功半的。在http&#x2F;2下反而对细碎的图片文件资源有更高的处理效率。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pself.net/2016/11/08/2016-11-08-how-to-optimization-res/" data-id="cmmaaymrq0000jfqdd0t6gtdx" data-title="如何优化前端工程当中的资源文件" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+
+
+  <nav id="page-nav">
+    
+    <a class="extend prev" rel="prev" href="/page/21/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="page-number current">22</span>
+  </nav>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/26/2022-03-26-ide/">构建IDE产品的方案和选型</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic4/">一些关于HTML的基础知识（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 abel<br>
+      Powered by <a href="https://pself.net/" target="_blank">wang</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+  </div>
+</body>
+</html>

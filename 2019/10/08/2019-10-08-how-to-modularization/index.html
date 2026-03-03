@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>如何组织组件的模块化开发 | 三山半落1</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="绪论前端模块化开发是前端工程化的一部分，是为实现应用功能相互独立的一组方法。 通过前端模块化可以实现几个明显的好处：  简化，模块之间相互独立与可追溯的关联关系给代码的阅读和管理提供了显而易见的方便，提高了代码的可读性和易维护性。 隔离，模块具有明确的功能，不同模块之间完全符合封装的原则，单个模块只对外暴露有限的接口与方法。 复用，模块的最大优势在于提高代码的复用程度，模块之间的引用关系就是代码复">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何组织组件的模块化开发">
+<meta property="og:url" content="https://pself.net/2019/10/08/2019-10-08-how-to-modularization/index.html">
+<meta property="og:site_name" content="三山半落1">
+<meta property="og:description" content="绪论前端模块化开发是前端工程化的一部分，是为实现应用功能相互独立的一组方法。 通过前端模块化可以实现几个明显的好处：  简化，模块之间相互独立与可追溯的关联关系给代码的阅读和管理提供了显而易见的方便，提高了代码的可读性和易维护性。 隔离，模块具有明确的功能，不同模块之间完全符合封装的原则，单个模块只对外暴露有限的接口与方法。 复用，模块的最大优势在于提高代码的复用程度，模块之间的引用关系就是代码复">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://pself.net/images/what-is-webpack.png">
+<meta property="og:image" content="https://pself.net/images/light-view.png">
+<meta property="article:published_time" content="2019-10-08T06:34:12.000Z">
+<meta property="article:modified_time" content="2026-03-03T07:41:25.020Z">
+<meta property="article:author" content="abel">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pself.net/images/what-is-webpack.png">
+  
+    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">三山半落1</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://pself.net"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2019-10-08-how-to-modularization" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/10/08/2019-10-08-how-to-modularization/" class="article-date">
+  <time class="dt-published" datetime="2019-10-08T06:34:12.000Z" itemprop="datePublished">2019-10-08</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/dev-vue/">dev vue</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      如何组织组件的模块化开发
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="绪论"><a href="#绪论" class="headerlink" title="绪论"></a>绪论</h2><p>前端模块化开发是前端工程化的一部分，是为实现应用<strong>功能相互独立</strong>的一组方法。</p>
+<p>通过前端模块化可以实现几个明显的好处：</p>
+<ol>
+<li>简化，模块之间相互独立与可追溯的关联关系给代码的阅读和管理提供了显而易见的方便，提高了代码的可读性和易维护性。</li>
+<li>隔离，模块具有明确的功能，不同模块之间完全符合封装的原则，单个模块只对外暴露有限的接口与方法。</li>
+<li>复用，模块的最大优势在于提高代码的复用程度，模块之间的引用关系就是代码复用的方式。</li>
+</ol>
+<p>模块化主要处理了前端资源，分别为代表页面行为的JavaScript，代表页面页面结构的html，代表页面样式的css。</p>
+<p>不同的资源类型有着各不相同的模块化拼装方案，应该因地制宜的解决对应资源的组织及使用问题。下面就在逐一的了解一下当今面对不同的资源类型所使用的模块化解决方案。</p>
+<h2 id="资源模块化"><a href="#资源模块化" class="headerlink" title="资源模块化"></a>资源模块化</h2><p>模块化规范是规范代码组织方式和模块接口的一组标准，通过这些标准的遵循可以提高组件间交互操作的便捷性和便利性。</p>
+<h3 id="JavaScript"><a href="#JavaScript" class="headerlink" title="JavaScript"></a>JavaScript</h3><p>当前共存这多种不同的模块化规范，每种模块化规范都有着众多的支持者和使用者，市面上大多数的js框架&#x2F;库都同时支持多种模块化规范的使用方式。</p>
+<h4 id="CMD-Common-Module-Definition"><a href="#CMD-Common-Module-Definition" class="headerlink" title="CMD,Common Module Definition"></a>CMD,Common Module Definition</h4><p>CMD是nodejs代码的通用写法，通过<code>module.exports</code>来暴露模块API，通过require来引入并使用模块。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模块定义</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Light</span> = <span class="built_in">require</span>(<span class="string">&quot;light&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> logger = <span class="keyword">new</span> <span class="title class_">Light</span>.<span class="title class_">Logger</span>(&#123;<span class="attr">level</span>:<span class="title class_">Light</span>.<span class="property">Logger</span>.<span class="property">LEVEL_INFO</span>&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> M = &#123;</span><br><span class="line">    logInfo : <span class="keyword">function</span>(<span class="params">msg</span>)&#123;</span><br><span class="line">        <span class="keyword">return</span> logger.<span class="title function_">info</span>(msg);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = M;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模块使用</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">Logger</span> = <span class="built_in">require</span>(<span class="string">&quot;logger&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="title class_">Logger</span>.<span class="title function_">logInfo</span>(<span class="string">&quot;hello,light&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="AMD-Asynchronous-Module-Definition"><a href="#AMD-Asynchronous-Module-Definition" class="headerlink" title="AMD,Asynchronous Module Definition"></a>AMD,Asynchronous Module Definition</h4><p>CMD来源于RequireJS，通过define来定义模块，通过require来引入并使用模块。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模块定义</span></span><br><span class="line"><span class="title function_">define</span>([<span class="string">&quot;light&quot;</span>], <span class="keyword">function</span>(<span class="params"> Light </span>)&#123;</span><br><span class="line">    <span class="keyword">var</span> logger = <span class="keyword">new</span> <span class="title class_">Light</span>.<span class="title class_">Logger</span>(&#123;<span class="attr">level</span>:<span class="title class_">Light</span>.<span class="property">Logger</span>.<span class="property">LEVEL_INFO</span>&#125;);</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">        logInfo : <span class="keyword">function</span>(<span class="params">msg</span>)&#123;</span><br><span class="line">            <span class="keyword">return</span> logger.<span class="title function_">info</span>(msg);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模块使用</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&quot;logger&quot;</span>,<span class="keyword">function</span>(<span class="params">Logger</span>) &#123;</span><br><span class="line">    <span class="title class_">Logger</span>.<span class="title function_">info</span>(<span class="string">&quot;hello，light&quot;</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h4 id="UMD-Universal-Module-Definition"><a href="#UMD-Universal-Module-Definition" class="headerlink" title="UMD,Universal Module Definition"></a>UMD,Universal Module Definition</h4><p>UMD出现的意义是兼容AMD和CMD的写法，成为一种统一的规范的前端模块化范式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//模块定义与使用</span></span><br><span class="line">(<span class="keyword">function</span> (<span class="params">root, factory</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> define === <span class="string">&#x27;function&#x27;</span> &amp;&amp; define.<span class="property">amd</span>) &#123;</span><br><span class="line">        <span class="comment">// AMD</span></span><br><span class="line">        <span class="title function_">define</span>([<span class="string">&#x27;light&#x27;</span>], factory);</span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">typeof</span> <span class="built_in">exports</span> === <span class="string">&#x27;object&#x27;</span>) &#123;</span><br><span class="line">        <span class="comment">// Node, CommonJS之类的</span></span><br><span class="line">        <span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">factory</span>(<span class="built_in">require</span>(<span class="string">&#x27;light&#x27;</span>));</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 浏览器全局变量(root 即 window)</span></span><br><span class="line">        root.<span class="property">returnExports</span> = <span class="title function_">factory</span>(<span class="title class_">Light</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;(<span class="variable language_">this</span>, <span class="keyword">function</span> (<span class="params">Light</span>) &#123;</span><br><span class="line">    <span class="keyword">var</span> logger = <span class="keyword">new</span> <span class="title class_">Light</span>.<span class="title class_">Logger</span>(&#123;<span class="attr">level</span>:<span class="title class_">Light</span>.<span class="property">Logger</span>.<span class="property">LEVEL_INFO</span>&#125;);</span><br><span class="line"> </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">function</span>(<span class="params">msg</span>)&#123;</span><br><span class="line">       <span class="keyword">return</span> logger.<span class="title function_">info</span>(msg);</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;));</span><br></pre></td></tr></table></figure>
+
+<h3 id="CSS"><a href="#CSS" class="headerlink" title="CSS"></a>CSS</h3><p>和JavaScript不同的是，浏览器原生的支持了小部分能力的样式模块化，那就是<code>@import</code>，通过<code>@import</code>可以实现简单的模块化处理。但是，通过原生的<code>@import</code>来引入资源会带来一些性能损耗，如：</p>
+<ol>
+<li>变相增加解析成本</li>
+<li>导致页面的http连接数增加</li>
+<li>不同浏览器的不同写法有可能带来不同的加载顺序</li>
+</ol>
+<p>所以，在性能要求严格的环境下原生支持的<code>@import</code>并不适用。</p>
+<p>由此，出现了大量的的各式各样的css预处理器，这些预处理器为css的模块化书写和使用提供了便利，比如less&#x2F;sass&#x2F;stylus。</p>
+<h4 id="less"><a href="#less" class="headerlink" title="less"></a>less</h4><p>在标准的css写法当中，<code>@import</code>必须存在于所有代码之前，但在less中<code>@import</code>可以存在于任何位置。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&quot;base.less&quot;</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;header.less&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="selector-tag">body</span>&#123;</span><br><span class="line"><span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@import</span> <span class="string">&quot;others.less&quot;</span>;</span><br></pre></td></tr></table></figure>
+
+<h4 id="sass"><a href="#sass" class="headerlink" title="sass"></a>sass</h4><p>在sass中<code>@import</code>，后缀名<code>.sass</code>都可以省略。</p>
+<p>基础的文件命名方法以<code>_</code>开头，如<code>_mixin.scss</code>，在使用<code>@import</code>的时候可以不携带<code>_</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@import &quot;mixin&quot;;</span><br><span class="line">@import &quot;base&quot;;</span><br><span class="line">@import &quot;header&quot;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="stylus"><a href="#stylus" class="headerlink" title="stylus"></a>stylus</h4><p>在stylus中提供了一种脚本化书写css样式的方案，在stylus中，任何不带<code>.css</code>的<code>@import</code>引入都会被认为是stylus片段。</p>
+<p>同时stylus的<code>@import</code>还支持与node类似的文件查找方案。例如当<code>@import light</code>，会先寻找<code>light.styl</code>，然后寻找<code>light/index.styl</code>.</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">&#x27;base&#x27;</span></span><br><span class="line"><span class="selector-tag">body</span></span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#fff</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="UI组件化"><a href="#UI组件化" class="headerlink" title="UI组件化"></a>UI组件化</h3><p>UI组件通常包含行为&#x2F;结构&#x2F;样式，相对于单纯资源和复杂业务而言，是最合适的复用单元。比如在前端开发经常碰到的轮播图&#x2F;弹出窗体等都适合作为UI组件来进行封装和复用。</p>
+<h2 id="通过工具实现代码模块化"><a href="#通过工具实现代码模块化" class="headerlink" title="通过工具实现代码模块化"></a>通过工具实现代码模块化</h2><p>前端模块化不能简单的理解为JavaScript资源的模块化，或者CSS资源的模块化，而应该是包含了前端所有相关资源的模块化拆分，其中包括但不限于表示页面结构的html，表示页面样式的css，和表示页面行为的JavaScript。</p>
+<p>如果纯手工的使用不同的模块化规范是非常耗时和不易维护的，一方面模块化规范所设计的代码大部分是程式化的，比较统一；另一方面模块化规范所引入的代码不应该进入源代码进行管理。</p>
+<p>所以，就出现了一些可以达成自动实现前端模块化打包（module bundler）的工具，其中比较通用常用的是webpack和browserify。这些前端模块化的工具库已经发展成为一站式的前端构建工具，通过引入不同的插件对不同类型的前端资源进行预处理和后处理。</p>
+<h3 id="webpack"><a href="#webpack" class="headerlink" title="webpack"></a>webpack</h3><p>webpack起源于React项目，随着react的广泛使用而逐渐流传起来。webpack天生支持CMD和AMD模块，可以无缝的使用使用现存的JS模块做功能开发。</p>
+<p>webpack视所有前端资源都为模块，包括css和图片等资源文件，这就更符合前端工程化的思想。</p>
+<p><img src="/images/what-is-webpack.png" alt="webpack"><br>from <a target="_blank" rel="noopener" href="http://webpack.github.io/">http://webpack.github.io</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//配置文件</span></span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">entry</span>: <span class="string">&#x27;./app/index.js&#x27;</span>,</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;bundle.js&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;dist&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//入口文件</span></span><br><span class="line"><span class="keyword">import</span> _ <span class="keyword">from</span> <span class="string">&#x27;lodash&#x27;</span>;</span><br><span class="line"></span><br><span class="line">_.<span class="title function_">each</span>([<span class="string">&#x27;light&#x27;</span>,<span class="string">&#x27;is&#x27;</span>,<span class="string">&#x27;awesome&#x27;</span>],<span class="keyword">function</span>(<span class="params">word</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(word);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h3 id="browserify"><a href="#browserify" class="headerlink" title="browserify"></a>browserify</h3><p>browserify和webpack的功能颇为相似，但browserify为了让前端也可以使用npm中数以万计的CMD的模块，提供了针对浏览器打包的nodejs中的大部分原生模块的特殊版本。所以browserify默认兼容CMD的写法使用exports&#x2F;require来组织模块之间的引用和依赖。</p>
+<p>同时，browserify也可以通过引入插件对所有干涉的前端资源分别进行处理，将模块化切割之后的前端资源整合打包，输出完整的可运行内容。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//入口文件</span></span><br><span class="line"><span class="keyword">var</span> styles = <span class="built_in">require</span>(<span class="string">&#x27;./styles.css&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> div = <span class="string">`&lt;div class=&quot;<span class="subst">$&#123;styles.inner&#125;</span>&quot;&gt;...&lt;/div&gt;`</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//执行打包</span></span><br><span class="line"><span class="keyword">var</span> b = <span class="built_in">require</span>(<span class="string">&#x27;browserify&#x27;</span>)();</span><br><span class="line"> </span><br><span class="line">b.<span class="title function_">add</span>(<span class="string">&#x27;./main.js&#x27;</span>);</span><br><span class="line">b.<span class="title function_">plugin</span>(<span class="built_in">require</span>(<span class="string">&#x27;css-modulesify&#x27;</span>), &#123;</span><br><span class="line">  <span class="attr">rootDir</span>: __dirname,</span><br><span class="line">  <span class="attr">output</span>: <span class="string">&#x27;./dist/styles.css&#x27;</span></span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">b.<span class="title function_">bundle</span>();</span><br></pre></td></tr></table></figure>
+
+<h2 id="Lighting下的模块化实践"><a href="#Lighting下的模块化实践" class="headerlink" title="Lighting下的模块化实践"></a>Lighting下的模块化实践</h2><p>lighting下的模块化方案有更多的考虑：</p>
+<ol>
+<li>提高开发协作的便利性</li>
+<li>模块层次化，面向单一业务</li>
+<li>分门别类管控前端资源</li>
+</ol>
+<p>在lighting的开发项目中，既可以使用UMD中的JS模块化的组织方式，又可以使用vue单文件组件中对前端资源统一模块化封装的方案，还可以使用lighting对业务间隔离和复用的模块化方案。通过多层次相互关联的模块化复用方案将应用的逻辑&#x2F;业务解耦，更大程度上满足应用开发的需要。</p>
+<h3 id="lighting项目下使用import-export"><a href="#lighting项目下使用import-export" class="headerlink" title="lighting项目下使用import&#x2F;export"></a>lighting项目下使用import&#x2F;export</h3><p><code>import/export</code>是es6提供的模块化方案，是一种同步的模块导出&#x2F;引入的使用方式，通过启用<code>lighting-plugin-es6</code>插件可以在所有的<code>es6</code>文件当中使用es6的语法。</p>
+<h3 id="lighting项目下使用vue进行UI组件化"><a href="#lighting项目下使用vue进行UI组件化" class="headerlink" title="lighting项目下使用vue进行UI组件化"></a>lighting项目下使用vue进行UI组件化</h3><p>vue框架下的单文件组件可以有效的组织UI组件的复用，一份vue文件就是一个合法的UI组件，可以通过html标签的方式引入进行使用。</p>
+<p>lighting框架下可以使用<code>lighting-plugin-vue</code>插件来启用工程对于vue单文件组件的支持。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!--src/vue/loading.vue--&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;loading&quot;</span> <span class="attr">v-show</span>=<span class="string">&quot;showLoading&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;loading-text&quot;</span>&gt;</span>数据加载中请稍等...<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="comment">&lt;!--&lt;img src=&quot;/images/loading.svg&quot; alt=&quot;&quot;&gt;--&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">export</span> <span class="keyword">default</span>&#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">props</span>:[<span class="string">&#x27;showLoading&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">	<span class="selector-class">.loading</span>&#123;</span></span><br><span class="line"><span class="language-css">      <span class="attribute">background-color</span>:<span class="number">#fff</span>;</span></span><br><span class="line"><span class="language-css">	&#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>定义完毕的vue单文件组件可以直接使用<code>&lt;目录名-标签名&gt;</code>的html标签进行使用。</p>
+<h3 id="lighting项目下使用view进行业务模块化"><a href="#lighting项目下使用view进行业务模块化" class="headerlink" title="lighting项目下使用view进行业务模块化"></a>lighting项目下使用view进行业务模块化</h3><p><img src="/images/light-view.png" alt="view"></p>
+<p>相对于其他的模块化方案，在lighting中引入了一种业务模块化的使用方式，在lighting框架的定义当中page代表了一份完整的业务流程，每一个view都是一个可以复用的业务环节，通过对业务环节（view）的串联&#x2F;组合实现业务流程的开发是lighting框架基本的方法论和理念。</p>
+<p>view是lighting框架中的最小业务复用单元，其包含可一份与之关联的js代码（控制行为）和一份html代码（控制结构），和UI组件不同的是，view的复用粒度更大，场景更加局限，只适合在同一应用内，或者相似业务间进行功能复用。</p>
+<p>通过view的引入可以在更高层次进行代码的组织和使用。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>前端模块化方案存在着不同的层次，从资源的模块化组织，到UI的组件化复用，再到业务逻辑的分离分割，都是模块化解决方案在面对不同层次问题的处理方法。综合运用，才能让前端工程的开发更便捷&#x2F;更高效&#x2F;更弹性。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pself.net/2019/10/08/2019-10-08-how-to-modularization/" data-id="cmmaayms5000mjfqd9ozafltq" data-title="如何组织组件的模块化开发" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/12/08/2019-12-08-muti-module/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">前一篇</strong>
+      <div class="article-nav-title">
+        
+          APP开发中的工程多模块组织
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/08/2018-11-08-hsts/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">通过HSTS策略让HTTPS更加安全</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/26/2022-03-26-ide/">构建IDE产品的方案和选型</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic4/">一些关于HTML的基础知识（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 abel<br>
+      Powered by <a href="https://pself.net/" target="_blank">wang</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+  </div>
+</body>
+</html>
