@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>三山半落1</title>
+  <title>三山半落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
-<meta property="og:title" content="三山半落1">
+<meta property="og:title" content="三山半落">
 <meta property="og:url" content="https://pself.net/page/5/index.html">
-<meta property="og:site_name" content="三山半落1">
+<meta property="og:site_name" content="三山半落">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="abel">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="三山半落" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -43,7 +43,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">三山半落1</a>
+        <a href="/" id="logo">三山半落</a>
       </h1>
       
     </div>
@@ -73,10 +73,10 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2022-02-08-html-basic2" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2022-02-09-html-basic3" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/02/09/2022-02-08-html-basic2/" class="article-date">
-  <time class="dt-published" datetime="2022-02-09T06:34:12.000Z" itemprop="datePublished">2022-02-09</time>
+    <a href="/2022/02/10/2022-02-09-html-basic3/" class="article-date">
+  <time class="dt-published" datetime="2022-02-10T00:34:12.000Z" itemprop="datePublished">2022-02-10</time>
 </a>
     
   <div class="article-category">
@@ -91,7 +91,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
+      <a class="p-name article-title" href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
     </h1>
   
 
@@ -99,73 +99,50 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id=""><a href="#" class="headerlink" title="&lt;body&gt;"></a><code>&lt;body&gt;</code></h2><p><code>&lt;body&gt;</code>标签除了通用属性之外，还支持一些全局的和文档相关的事件绑定：onafterprint、onbeforeprint、onbeforeunload、onblur、onerror、onfocus、onhashchange、onload、onmessage、onoffline、ononline、onpopstate、onredo、onresize、onstorage、onundo、onunload。</p>
-<p><code>onblur/onfocus</code> 可以解决一些文档丢失焦点的问题；<code>onoffline/ononline</code>时对网路的监听；<code>onstorage</code>是对存储的监听；<code>onunload/onload</code>是对页面关闭事件的监听。</p>
-<h2 id="内容区域元素"><a href="#内容区域元素" class="headerlink" title="内容区域元素"></a>内容区域元素</h2><p><code>&lt;address&gt;</code>、<code>&lt;article&gt;</code>、<code>&lt;aside&gt;</code>、<code>&lt;footer&gt;</code>、<code>&lt;header&gt;</code>、<code>&lt;nav&gt;</code>、<code>&lt;section&gt;</code>、<code>&lt;main&gt;</code>均为此类型的元素标签。</p>
-<p><code>&lt;address&gt;</code>没有扩展属性，只用于展示联系信息如：邮件、电话、地址等。</p>
-<ol>
-<li><code>&lt;address&gt;</code>用于为<code>&lt;body&gt;</code>或者<code>&lt;article&gt;</code>增加联系人的署名</li>
-<li>除了联系信息之外不能包含任何其他信息；</li>
-<li><code>&lt;address&gt;</code>一般放置在<code>footer</code>之内；</li>
-</ol>
-<p><code>&lt;article&gt;</code>代表文档中独立的区域，可以嵌套使用<code>&lt;article&gt;</code>。</p>
-<p>页面和<code>&lt;article&gt;</code>都可以包含<code>&lt;aside&gt;</code>、<code>&lt;footer&gt;</code>、<code>&lt;header&gt;</code>。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">article</span> <span class="attr">class</span>=<span class="string">&quot;film_review&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>Jurassic Park<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;main_review&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>Review<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Dinos were great!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">&quot;user_reviews&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h3</span>&gt;</span>User reviews<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">article</span> <span class="attr">class</span>=<span class="string">&quot;user_review&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">h4</span>&gt;</span>Too scary!<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>Way too scary for me.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">          Posted on</span><br><span class="line">          <span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2015-05-16 19:00&quot;</span>&gt;</span>May 16<span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br><span class="line">          by Lisa.</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">article</span> <span class="attr">class</span>=<span class="string">&quot;user_review&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">h4</span>&gt;</span>Love the dinos!<span class="tag">&lt;/<span class="name">h4</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">p</span>&gt;</span>I agree, dinos are my favorite.<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">          Posted on</span><br><span class="line">          <span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2015-05-17 19:00&quot;</span>&gt;</span>May 17<span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br><span class="line">          by Tom.</span><br><span class="line">        <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">footer</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">      Posted on</span><br><span class="line">      <span class="tag">&lt;<span class="name">time</span> <span class="attr">datetime</span>=<span class="string">&quot;2015-05-15 19:00&quot;</span>&gt;</span>May 15<span class="tag">&lt;/<span class="name">time</span>&gt;</span></span><br><span class="line">      by Staff.</span><br><span class="line">    <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">footer</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">article</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <h2 id="多媒体标签"><a href="#多媒体标签" class="headerlink" title="多媒体标签"></a>多媒体标签</h2><p><code>&lt;area&gt;</code>、<code>&lt;map&gt;</code>相互配合用于制作带点击区域的，可以跳转到外部链接地址的图片。</p>
+<p><code>&lt;audio&gt;</code>、<code>&lt;video&gt;</code> 用于音视频输出，可以使用audio api来使用js来制作音频输出；<code>&lt;audio&gt;</code>中可以包含多个<code>&lt;source&gt;</code>标签用于提示音频源，浏览器会依次选择可用的音频源；音频源也可以使用跨域策略，具体可以看系列文章的第一篇中的描述。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> elem = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&quot;audio&quot;</span>);</span><br><span class="line"></span><br><span class="line">elem.<span class="property">audioTrackList</span>.<span class="property">onaddtrack</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">  trackEditor.<span class="title function_">addTrack</span>(event.<span class="property">track</span>);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">elem.<span class="property">audioTrackList</span>.<span class="property">onremovetrack</span> = <span class="keyword">function</span>(<span class="params">event</span>) &#123;</span><br><span class="line">  trackEditor.<span class="title function_">removeTrack</span>(event.<span class="property">track</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
 
-<p><code>&lt;aside&gt;</code>用于在文档中标识主要内容的关联或者索引，是内容的一部分，一般可以用来提示页面大纲或者唤出栏。</p>
-<p>页面内最多只能有一个<code>&lt;h1&gt;</code>;</p>
-<p>页面内对 <code>&lt;h1&gt;–&lt;h6&gt;</code>的使用必须依次进行，不可越级；</p>
-<h2 id="文本内容元素"><a href="#文本内容元素" class="headerlink" title="文本内容元素"></a>文本内容元素</h2><p><code>&lt;blockquote&gt;</code>用于标识引用，可以使用cite属性指示内容来源，或者<code>&lt;cite&gt;</code>指示内容来源。<code>&lt;blockquote&gt;</code>是块级元素，如果使用行内元素可以使用<code>&lt;q&gt;</code>。</p>
-<p><code>&lt;dl&gt;</code>、<code>&lt;dt&gt;</code>、<code>&lt;dd&gt;</code>分别代表描述列表（Description Lists）、描述项标题（Description Title）、描述项描述（Description Details）。 在实现术语表（glossary）或者描述元数据信息时比较常见。</p>
-<p><code>&lt;div&gt;</code>是通用的内容区域，应该仅在没有合适的语义化标签的情况下使用。</p>
-<p><code>&lt;figure&gt;</code>、<code>&lt;figcaption&gt;</code>用于处理独立信息的场景，一般被主文档引用，可以自由移动而不会影响主文档的展示；也可以和<code>&lt;blockquote&gt;</code>、<code>&lt;pre&gt;</code>一起使用。</p>
-<h2 id="行内文本元素"><a href="#行内文本元素" class="headerlink" title="行内文本元素"></a>行内文本元素</h2><p><code>&lt;abbr&gt;</code>用于定义缩写，<code>title</code>属性提示缩写的全写。</p>
-<p><code>&lt;b&gt;</code>用于引起读者注意（Bring Attention），而不是加粗。</p>
-<p><code>&lt;bdi&gt;</code>、<code>&lt;bdo&gt;</code>用于双向文本处理（Bidirectional Isolate）隔离、重写，对于同时存在两种书写方式的文本比较有用：ltr、rtl。</p>
-<p><code>&lt;br&gt;</code> 一般用于诗歌当中，实际在开发中涉及段落之间的间距应该使用p+margin的方式。</p>
-<p><code>&lt;cite&gt;</code> 用来处理引用当中的作者。</p>
-<p><code>&lt;code&gt;</code> 用来处理代码，是行内元素。</p>
-<p><code>&lt;data&gt;</code> 用来处理数据，而不是时间，其中value属性声明数据的具体数字，在样式中可以通过attr(value)来引用。</p>
-<p><code>&lt;em&gt;</code> 用来强调，而不是斜体，<code>&lt;em&gt;</code>可以嵌套，以进行逐级强调。</p>
-<pre><code>Use &lt;em&gt; to indicate stress emphasis.
-Use &lt;strong&gt; to indicate importance, seriousness, or urgency.
-Use &lt;mark&gt; to indicate relevance.
-Use &lt;cite&gt; to mark up the name of a work, such as a book, play, or song.
-Use &lt;dfn&gt; to mark up the defining instance of a term.
-</code></pre>
-<p><code>&lt;kbd&gt;</code> 用来提示内容为键盘的按键，比如<code>&lt;kbd&gt;Ctrl&lt;/kbd&gt;</code><kbd>Ctrl</kbd>。</p>
-<p><code>&lt;mark&gt;</code> 用于标记而不是高亮可以和引用的文本配合使用，如果高亮应该用span；</p>
-<p><code>&lt;ruby&gt;</code> 用于给东方语言注音。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ruby</span>&gt;</span></span><br><span class="line">  漢 <span class="tag">&lt;<span class="name">rp</span>&gt;</span>(<span class="tag">&lt;/<span class="name">rp</span>&gt;</span><span class="tag">&lt;<span class="name">rt</span>&gt;</span>Kan<span class="tag">&lt;/<span class="name">rt</span>&gt;</span><span class="tag">&lt;<span class="name">rp</span>&gt;</span>)<span class="tag">&lt;/<span class="name">rp</span>&gt;</span></span><br><span class="line">  字 <span class="tag">&lt;<span class="name">rp</span>&gt;</span>(<span class="tag">&lt;/<span class="name">rp</span>&gt;</span><span class="tag">&lt;<span class="name">rt</span>&gt;</span>ji<span class="tag">&lt;/<span class="name">rt</span>&gt;</span><span class="tag">&lt;<span class="name">rp</span>&gt;</span>)<span class="tag">&lt;/<span class="name">rp</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ruby</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><code>&lt;img&gt;</code> 用于展示图片，<code>&lt;img&gt;</code>的alt属性既可以让视觉障碍用户获取图片展示的信息，也可以在图片无法加载的情况下显示文本信息。</p>
+<p><code>&lt;img&gt;</code>支持多种格式的图片，比如可以用<code>apng</code>(Animated Portable Network Graphics) 格式替代<code>gif</code>（性能较差）来展示动画图片，效果更好；AVIF (AV1 Image File Format) 既可以显示普通图片也可以显示动画图片；webp也可以显示动画图片；webp和avif是推荐格式，大部分情况下比gif、png、jpeg有更好的性能。</p>
+<p><code>&lt;img&gt;</code>图片加载错误会执行onerror回调，也会触发error事件，比如src为null或者“”时、图片格式不支持时、图片损坏、图片中不包含分辨率信息而又没有提供width和height属性时。</p>
+<p><code>&lt;img&gt;</code>可用于绘制在<code>&lt;canvas&gt;</code>画布上，但是当不满足跨域安全策略的情况下，绘制<code>&lt;img&gt;</code>在<code>&lt;canvas&gt;</code>画布将导致画布污染（”tainted”）而引起canvas无法导出或者下载。当不指定crossorigin是，浏览器的图片请求不携带<code>origin</code>头，即是污染的情况。当指定crossorigin时，后端的响应头<code>Access-Control-Allow-Origin</code>不包含origin域时则会在devtools中报错，crossorigin有两种取值：anonymous代表不携带cookie等信息，use-credentials代表携带cookie等信息，但是后端必须配合响应<code>Access-Control-Allow-Credentials</code>。referrerpolicy可以参考前面的文章。</p>
+<p><code>&lt;img&gt;</code>中的decoding属性，可以用于提示浏览器预期希望的图片解码方式：sync同步解码，async异步解码，auto默认值有浏览器自己决定。</p>
+<p><code>&lt;img&gt;</code>中的ismap属性，用于提示当前的图片是server-side-map，在被<code>&lt;a&gt;</code>包裹的情况会项服务端回送点击位置的座标信息。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;/imagemapper&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;image.png&quot;</span> <span class="attr">ismap</span> /&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<ruby>
-  漢 <rp>(</rp><rt>Kan</rt><rp>)</rp>
-  字 <rp>(</rp><rt>ji</rt><rp>)</rp>
-</ruby>
+<p><code>&lt;img&gt;</code>中的loading属性可以实现懒加载图片，配置为eager时立即加载，配置为lazy图片在viewport中显示位置时加载（此提醒仅在启用javascript的情况下可用，为了避免安全风险）。</p>
+<p><code>&lt;img&gt;</code>还支持多倍屏幕的自动适配，sizes配合srcset兼容使用多种尺寸的图片。Responsive images 对高分片屏幕的图片展示有很好的效果。可以参考：<a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images">https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images</a></p>
+<p><code>&lt;track&gt;</code>标签用于给<code>&lt;video&gt;</code>添加字幕。</p>
+<h2 id="嵌入内容标签"><a href="#嵌入内容标签" class="headerlink" title="嵌入内容标签"></a>嵌入内容标签</h2><p><code>&lt;embed&gt;</code> 嵌入外部内容，可能是借助浏览器的扩展插件或者浏览器实现来加载外部内容，而非标准；src用于指定来源，type用于指定类型，比如<code>&quot;video/quicktime&quot;</code></p>
+<p><code>&lt;iframe&gt;</code> 添加一个嵌套的浏览器上下文，其中allow属性用于定义iframe内容所能使用的功能，比如麦克风、摄像头；allowfullscreen用于定义是否允许iframe使用<code>requestFullscreen()</code>来使用全屏；loading参数可以指定iframe的懒加载；referrerpolicy加载外部资源可以指定并使用；sandbox参数可以指定一下沙箱配置，比如是否允许下载等；srcdoc可以让iframe跳过加载外部资源，使用srcdoc传入的字符串来显示和渲染内容；</p>
+<p><code>&lt;iframe&gt;</code> 在脚本编程时， window.frames可以遍历文档内的所有frame， iframe.contentWindow 可以获取iframe中的window对象，iframe.contentWindow.document即为document对象；在iframe中可以通过window.parent获取父亲的window对象；当跨域时，大部分信息都是无法获取的，父子的通信可以通过Window.postMessage()来完成。</p>
+<p><code>&lt;object&gt;</code>&#x2F;<code>&lt;param&gt;</code> 用于引用外部对象，可以是图片、嵌套的浏览上下文，或者受浏览器插件支持的其他格式；</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">object</span> <span class="attr">type</span>=<span class="string">&quot;application/pdf&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">data</span>=<span class="string">&quot;/media/examples/In-CC0.pdf&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">width</span>=<span class="string">&quot;250&quot;</span></span></span><br><span class="line"><span class="tag">    <span class="attr">height</span>=<span class="string">&quot;200&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">object</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><code>&lt;s&gt;</code> 用于标识文本划除的效果，显示等同于<code>text-decoration:line-through;</code>。</p>
-<p><code>&lt;samp&gt;</code> 用于示例的输出，和code一样使用mono字体显示中间内容。这是输出。</p>
-<p><code>&lt;small&gt;</code> 用于制作脚注，其字体较小。</p>
-<p><code>&lt;strong&gt;</code> 用于标识内容的重要性，而<code>&lt;b&gt;</code>只用于引起读者注意，不一样定重要。</p>
-<p><code>&lt;sub&gt;</code> 用于下标，比如C<sub>8</sub>H<sub>10</sub>N<sub>4</sub>O<sub>2</sub>。</p>
-<p><code>&lt;sup&gt;</code> 用于上标，比如a<sup>2</sup> + <var>b<sup>2</sup></var> &#x3D; <var>c<sup>2</sup>。</p>
-<p><code>&lt;time&gt;</code>用于显示时间，datetime属性可以标识正确时间。</p>
-<p><code>&lt;u&gt;</code> 用于标识文本错误（Unarticulated Annotation），浏览器在渲染文本时，在其下显示红色波浪线。</p>
-<p><code>&lt;var&gt;</code> 用于定于变量，可以数学或者代码的变量。</p>
-<p><code>&lt;wbr&gt;</code> 用户声明在此处可以分词，当文本内容长过长时，此处可以分词。Line Break Opportunity </p>
-<p>通过<code>&lt;details&gt;</code>和<code>&lt;summary&gt;</code>可以产生可折叠的内容。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">data<span class="selector-pseudo">:hover</span><span class="selector-pseudo">::after</span> &#123;</span><br><span class="line">    <span class="attribute">content</span>: <span class="string">&#x27; (ID &#x27;</span> <span class="built_in">attr</span>(value) <span class="string">&#x27;)&#x27;</span>;</span><br><span class="line">    <span class="attribute">font-size</span>: .<span class="number">7em</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>&lt;picture&gt;</code>用于显示图片，包含多个<code>&lt;source&gt;</code>以及一个<code>&lt;img&gt;</code>,浏览器会根据内容选择合适的图片资源显示，在不支持<code>&lt;picture&gt;</code>的情况下使用<code>&lt;img&gt;</code>来显示图片；<code>&lt;picture&gt;</code>的使用场景可以用于选择最优格式 、节省流量，支持高分辨率屏幕。</p>
+<p><code>&lt;portal&gt;</code>可以用来作为内容的预览，以实现无法的跳转，和iframe显示的内容一样但是使用上比iframe更加严格。</p>
+<h2 id="svg和math"><a href="#svg和math" class="headerlink" title="svg和math"></a>svg和math</h2><p><code>&lt;svg&gt;</code>用于绘制位图，内容复杂，后面要单独列文来展示；</p>
+<p><code>&lt;math&gt;</code> 用于书写公式，但是大部分浏览器还都没实现；</p>
+<h2 id="脚本类标签"><a href="#脚本类标签" class="headerlink" title="脚本类标签"></a>脚本类标签</h2><p><code>&lt;canvas&gt;</code> 绘图</p>
+<p>Browser 	Maximum height 	Maximum width 	Maximum area<br>Chrome 	32,767 pixels 	32,767 pixels 	268,435,456 pixels (i.e., 16,384 x 16,384)<br>Firefox 	32,767 pixels 	32,767 pixels 	472,907,776 pixels (i.e., 22,528 x 20,992)<br>Safari 	32,767 pixels 	32,767 pixels 	268,435,456 pixels (i.e., 16,384 x 16,384)</p>
+<p><code>&lt;noscript&gt;</code>用于当浏览器不支持或者禁用script时的提示信息展示；</p>
+<p><code>&lt;script&gt;</code>标签除了可以加载javascript语言，还支持其他语言，比如wwebgl或者json。</p>
+<p><code>&lt;script&gt;</code>的async属性如果配置，那么脚本会异步获取，脚本下载完成立马执行，如果是esm的资源，其所有的依赖也都是一样的处理策略；可以避免脚本加载阻塞页面渲染；</p>
+<p><code>&lt;script&gt;</code>的crossorigin和其他标签的策略一样；</p>
+<p><code>&lt;script&gt;</code>的defer属性如果配置，那么脚本会异步获取，在文档parse后、DOMContentLoaded之前执行脚本，defer的脚本在执行完毕之前，浏览器不会触发DOMContentLoaded事件；对于esm的资源，配置此属性无效，esm的资源就是默认defer的，也就是说type&#x3D;module的script一定是在DOMContentLoaded前触发的。defer的脚本是按照顺序执行的；</p>
+<p><code>&lt;script&gt;</code>的nomodule参数用于提示浏览器以非esm的模式执行；</p>
+<h2 id="表格元素"><a href="#表格元素" class="headerlink" title="表格元素"></a>表格元素</h2><p><code>&lt;caption&gt;</code>用于支持表格的表头，可以通过<code>caption-side: bottom;</code>来指定表头在表内的位置；<code>&lt;caption&gt;</code>必须是<code>&lt;table&gt;</code>的第一个直接子元素。</p>
+<p><code>&lt;col&gt;</code>和<code>&lt;colgroup&gt;</code>配合使用可以定义表格的样式，按列定义样式。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">colgroup</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">col</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">col</span> <span class="attr">span</span>=<span class="string">&quot;2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;batman&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">col</span> <span class="attr">span</span>=<span class="string">&quot;2&quot;</span> <span class="attr">class</span>=<span class="string">&quot;flash&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">colgroup</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<h3 id="-1"><a href="#-1" class="headerlink" title="&lt;a&gt;"></a><code>&lt;a&gt;</code></h3><p><code>&lt;a&gt;</code>代表Anchor，即锚点，可以指向到任意的url可以导航打开的资源。</p>
-<p><code>&lt;a&gt;</code>支持<code>download</code>属性，配置此属性后是以下载代替打开。属性的值就是下载的文件名称，如果不配置浏览器会根据<code>Content-Disposition </code>来确定文件名称；url中的文件名，content-type或者base64字符串中携带的文件类型。</p>
-<p><code>&lt;a&gt;</code>支持<code>ping</code>属性，支持配置多个url地址，当点击行为发生时不是导航打开，而是对url地址发起post请求，请求体的内容为ping。</p>
-<p><code>&lt;a&gt;</code>支持<code>referrerpolicy</code>属性，使用可以参考上一篇文章。</p>
-<p><code>&lt;del&gt;</code>和<code>&lt;ins&gt;</code>用于删除和插入文本的提示；</p>
+<p><code>&lt;thead&gt;</code>、<code>&lt;tbody&gt;</code>、<code>&lt;tfoot&gt;</code>、<code>&lt;th&gt;</code>、<code>&lt;td&gt;</code>、<code>&lt;tr&gt;</code></p>
+<p><code>&lt;th&gt;</code>用于指定表头单元格，colspan用于横向合并单元格，rowspan用于纵向合并单元格，scope用于说明是横向头还是纵向头；</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pself.net/2022/02/09/2022-02-08-html-basic2/" data-id="cmmaayms8000vjfqdd856f6vv" data-title="一些关于HTML的基础知识（二）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://pself.net/2022/02/10/2022-02-09-html-basic3/" data-id="cmmbpa6ym0017dlqd5od5c2xe" data-title="一些关于HTML的基础知识（三）" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -181,7 +158,7 @@ Use &lt;dfn&gt; to mark up the defining instance of a term.
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/4/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/6/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -192,22 +169,36 @@ Use &lt;dfn&gt; to mark up the defining instance of a term.
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></li></ul>
     </div>
   </div>
 
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">部署</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
     </div>
   </div>
 
@@ -218,6 +209,10 @@ Use &lt;dfn&gt; to mark up the defining instance of a term.
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/03/03/2026-03-03-hexo-deploy-to-github-pages/">Hexo 博客部署到 GitHub Pages 完整指南</a>
+          </li>
         
           <li>
             <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
@@ -233,10 +228,6 @@ Use &lt;dfn&gt; to mark up the defining instance of a term.
         
           <li>
             <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
-          </li>
-        
-          <li>
-            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
           </li>
         
       </ul>

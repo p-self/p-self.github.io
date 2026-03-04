@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>三山半落1</title>
+  <title>三山半落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
-<meta property="og:title" content="三山半落1">
+<meta property="og:title" content="三山半落">
 <meta property="og:url" content="https://pself.net/page/21/index.html">
-<meta property="og:site_name" content="三山半落1">
+<meta property="og:site_name" content="三山半落">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="abel">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="三山半落" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -43,7 +43,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">三山半落1</a>
+        <a href="/" id="logo">三山半落</a>
       </h1>
       
     </div>
@@ -73,14 +73,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2017-01-01-work-life-log" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2017-02-08-5-to-jsnative" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2017/01/01/2017-01-01-work-life-log/" class="article-date">
-  <time class="dt-published" datetime="2017-01-01T06:34:12.000Z" itemprop="datePublished">2017-01-01</time>
+    <a href="/2017/02/08/2017-02-08-5-to-jsnative/" class="article-date">
+  <time class="dt-published" datetime="2017-02-08T06:34:12.000Z" itemprop="datePublished">2017-02-08</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/dev-life/">dev life</a>
+    <a class="article-category-link" href="/categories/dev-jsnative/">dev jsnative</a>
   </div>
 
   </div>
@@ -91,7 +91,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2017/01/01/2017-01-01-work-life-log/">2017前端总结</a>
+      <a class="p-name article-title" href="/2017/02/08/2017-02-08-5-to-jsnative/">5分钟搞定JSNative应用开发</a>
     </h1>
   
 
@@ -99,38 +99,86 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>又一年到头了。</p>
-<p>这一年断断续续都做了些什么呢？自从不做java以后今年是第一年完全投入到JavaScript的开发当中，模模糊糊的做了很多的事情，写了很多的代码，最后都剩下了些什么？有哪些是以后可以复用的？有哪些做了无用功？</p>
-<p>要总结这一年的工作，脑子里至少是有几个关键词的，这些关键词代表了一个个事件，一个个项目，一个个工程，工作时间投入的80%都在这些关键词里了。</p>
-<h2 id="lighting"><a href="#lighting" class="headerlink" title="lighting"></a>lighting</h2><p>light从2015年就做了lighting开发工具，应该是说从2014年年末一个机缘巧合的机会做了第一个版本的jresplus工具也就是lighting的前身。这断断续续几年做下来lighting本身功能也丰富了很多，至少我在市面上没有发现过类似lighting的工具（不知道fis最近过得怎么样了？）。</p>
-<p>lighting本身的定位是开发者的编译构建工具，辅助开发者应用的开发生命周期的维护，从目前的功能来看这个角色已经完成了90%，除了易用性上还有很大的问题以外，其他的部门我看来也似乎无可挑剔了。作为开发了这么多项目的一名开发者，如果让我选择一个工具来开发任何一个新项目我毫不犹豫的会用lighting（包括和webpack以及各种构建的PK），因为lighting简化了一些通用的步骤，同时提高了应用的实现效率。</p>
-<p>今年对lighting的开发也投入了不少的工作量，主要的功能就是对webpack下的vue2.x的支持了，引入了webpack的编译构建机制，和lighting本身设计的编译构建流程成和在了一起，做出了新的type-vue插件，这个版本和之前的版本并不兼容（又不兼容！），确实也出过一些问题。这个功能的实现上，我完全参考了市面上通用的模块化的应用开发方式，整个依赖的建立和处理都基于webpack的体系来完成的，包括各种核心和非核心的构件！</p>
-<p>lighting今年的第二个主要的功能应该就是最近才完成的jsnative的集成支持了。jsnative这项技术，让我看到了JavaScript实现高性能APP的希望，尤其是weex对jsnative技术的封装支持，大大降低了jsnative应用开发的成本，比起reactnative技术可以省却不少的学习成本，再加上lighting本身的技术体系就是建立在vue的框架之上的，让这一切来的理所当然，所以lighting对jsnative（严格来说应该是weex技术）的支持就顺利成章了。对weex的支持最大的难点是对web和native编译的差异化处理，这是工具集成时面临的一个最大的问题，好在weex-loader也是webpack下的一个loader插件，代码看下也并不难处理。jsnative技术需要工具和框架的相互配合，框架要自动识别当前的运行环境和编译环境，所以处理起来有大量的差异化代码要处理，毕竟是框架的底层的东西这个处理起来也是应该的，好在都解决了。</p>
-<p>lighting今年的更新不可谓不大，各种变化都让它可以功能上更加完备，对开发的支持可以更加实际，但是同样lighting上本身有一些很明显的问题急需处理：</p>
+        <h2 id="H5应用开发的三种流派"><a href="#H5应用开发的三种流派" class="headerlink" title="H5应用开发的三种流派"></a>H5应用开发的三种流派</h2><p>app开发有几种不同的流派，分别为：</p>
 <ol>
-<li>功能性并不能满足开发者（用户），开发者（用户）要的是易用性</li>
-<li>编辑器、设计器才是解决开发过程的根本问题</li>
-<li>lighting本身的臃肿必将是一个致命的问题（插件化只能解决一部分问题）</li>
+<li><strong>原生开发</strong>，ios使用ObjectC，Android使用Java来开发应用程序</li>
+<li><strong>混搭开发</strong>，使用webview来承载内容，页面使用浏览器引擎来渲染；比较有代表性的是PhoneGap&#x2F;cordova</li>
+<li><strong>JSNative</strong>，使用JavaScript作为开发方式，但是程序是原生应用；比较有代表性的是ReactNative</li>
 </ol>
-<h2 id="股游记"><a href="#股游记" class="headerlink" title="股游记"></a>股游记</h2><p>今年的第二个关键字非股游记莫属了，这本是晶哥突发奇想的一个念头，具体化之后竟然成了一个十分完备功能完善的游戏（十分佩服晶哥天马行空的想法，做产品就是需要这样的意念和能力）。股游记本身的开发基本上1周就做完了，再加上设计和UI，本身总耗时应该在一个月以内。第一次做成一个这么完备的游戏应用还是很有成就感的，这个产品的完成也让我对一些问题有了新的认识，包括产品、设计、交互、样式等等，各种角度都刷新了我以前的一些观点和看法，比如：</p>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>优势</th>
+<th>劣势</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原生开发</td>
+<td>性能好，运行效率高</td>
+<td>开发&#x2F;维护成本高</td>
+</tr>
+<tr>
+<td>混搭开发</td>
+<td>开发&#x2F;维护成本低，跨平台运行</td>
+<td>性能查，运行速度慢，依赖于webview的运行时版本</td>
+</tr>
+<tr>
+<td>JSNative</td>
+<td>性能适中，开发成本适中</td>
+<td>入门学习成本</td>
+</tr>
+</tbody></table>
+<p>今天的主角是第三种方案，因为其既跨平台的兼容了主要的运行环境，让一份代码运行在不同的设备和容器中；同时还具有媲美native程序的性能。</p>
+<h2 id="初探JSNative"><a href="#初探JSNative" class="headerlink" title="初探JSNative"></a>初探JSNative</h2><h3 id="ReactNative与Weex"><a href="#ReactNative与Weex" class="headerlink" title="ReactNative与Weex"></a>ReactNative与Weex</h3><p>在了解weex之前先说说ReactNative,ReactNative和react一样都是facebook开源的框架，之前简单的了解过RN，也用RN写过简单的Helloworld级别的程序，总体上的感觉是：</p>
 <ol>
-<li>产品设计是一个十分重要的阶段，功能的贯穿和交互流程的形成对整个产品的后续阶段都是很重要的基础，这个阶段可长不可短</li>
-<li>UI设计是一个专业性极强的领域，UI设计师也是产品设计的一部分</li>
-<li>开发阶段是整个产品的最短的一个阶段也是成本最少的一个阶段，开发根本就不是重点（所以这个行业可以外包，也可以无视，所以叫IT民工）</li>
+<li>语法有点奇怪，使用jsx写dom的方式不是习惯做JavaScript开发的前端开发者所能理解得了的</li>
+<li>和前端的开发方式相去甚远，关于样式&#x2F;DOM的概念需要重新的学习和理解</li>
 </ol>
-<p>说道IT民工这个说法，今年认识还是比较深了。这就是一个劳动力密集型的行业，并不是什么白领，这个人力成本虽然略高，但是每个人都是一颗可以被替换的棋子，脑力劳动的成本已经大大降低了。再加上很多的开发流程都已经标准化了，即使换成任何一个人做都不一定会做不好。今年国庆回了一趟家，发现好多同学都成了同行，曾经没有任何关联这个行业的都编程了我的业内人士了，这多少也印证了这个行业的一出率已经十分高了。所以还是要提高自己的核心竞争力。</p>
-<p>再回头说股游记这款游戏，衍生了股游记系列的培训课程，多少也扩大了些知名度。另外最近编程大赛拿了个第三名，多少有了些名堂。</p>
-<p>说道游戏，这几天有个微信小游戏挑一挑简直是把各个渠道的新闻刷个不停，各方惊呼根本停不下来，做游戏能做到这个份上，也是天下无敌了（恰好是今天也看到了游戏抄袭的传闻，不管结果如何，这个游戏设计的思路都是值得学习的）。这个跳一跳本身既简单有有趣，也是游戏开发的出路之一吧！</p>
-<h2 id="牛盾"><a href="#牛盾" class="headerlink" title="牛盾"></a>牛盾</h2><p>最后又不得不说到牛盾，这个延宕了一年有余的区块链项目。从去年完工到到现在都是处理断断续续改进的状态，再加上随处可见的吐槽，成了今年工作的一个最大的背景噪音，有时候真想一次性重写好了，可以终于是没有动手（动手也不知道怎么做），这是我在牛盾身上最大的感触：无能为力！</p>
-<p>为什么是无能为力，我对外宣城是因为区块链本身数据的存取上有加载速度太慢的缺陷交互优化上无法处理。而实际上是我真是不知道怎么做一个APP程序，使用H5套壳的方式开发出来的东西究竟能不能作为一个完整的应用？我在这里只能打一个大大的问号，根本就没法做啊！</p>
-<p>最近牛盾又筹划了一个大的改版，我计划核心功能都使用jsnative技术来实现，不知道最后的效果如何？</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>2017年转眼间就过去了，静下来想想一年的时间忙忙碌碌做了很多事情，做到最后竟然连做了这么多事情的印象都没有了，只剩下几个大事贯穿在了最后。</p>
-<p>2018年要不一样，工作上的事情还是要有点成就出来，要不然不冷不热的整天浑浑噩噩兵来将挡水来土掩也没有意思。</p>
+<p>和RN相比，weex是一个相同问题的第二种解决方案，其中使用了前端都很熟悉的vue框架，使用vue单文件组件作为程序的开发实现方式，学习成本更小，效率更高！但是，本身要开发使用weex技术需要做的功课比较多，步骤也比较复杂，简化来说至少需要一下的几个过程：</p>
+<h3 id="搭建开发环境"><a href="#搭建开发环境" class="headerlink" title="搭建开发环境"></a>搭建开发环境</h3><p>首先要做的就是安装weex的命令行工具，这个命令行工具可以帮助我们对付前端开发的各种事情：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add weex-toolkit --ignore-engines</span><br></pre></td></tr></table></figure>
+
+<p>接下来，需要Android的开发环境，包括AndroidSDK的下载安装以及可以开发Android应用的IDE环境，可用idea来开发。</p>
+<h3 id="集成weex"><a href="#集成weex" class="headerlink" title="集成weex"></a>集成weex</h3><p>首先在dependencies下增加如下的依赖包，</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    <span class="keyword">compile</span> <span class="string">&#x27;com.android.support:recyclerview-v7:25.3.1&#x27;</span></span><br><span class="line">    <span class="keyword">compile</span> <span class="string">&#x27;com.android.support:support-v4:25.3.1&#x27;</span></span><br><span class="line">    <span class="keyword">compile</span> <span class="string">&#x27;com.alibaba:fastjson:1.1.46.android&#x27;</span></span><br><span class="line">    <span class="keyword">compile</span> <span class="string">&#x27;com.taobao.android:weex_sdk:0.5.1@aar&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后开发activity可以了，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">WXSDKInstance</span> <span class="variable">mWXSDKInstance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WXSDKInstance</span>(<span class="built_in">this</span>);</span><br><span class="line">mWXSDKInstance.registerRenderListener(<span class="built_in">this</span>);</span><br><span class="line">mWXSDKInstance.render(<span class="string">&quot;WXSample&quot;</span>, WXFileUtils.loadFileContent(<span class="string">&quot;hello.js&quot;</span>, <span class="built_in">this</span>), <span class="literal">null</span>, <span class="literal">null</span>, -<span class="number">1</span>, -<span class="number">1</span>, WXRenderStrategy.APPEND_ASYNC);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;text style=&quot;font-size:100px;&quot;&gt;Hello World.&lt;/text&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h3><p>开发weex页面需要使用到weex的一个工具<a target="_blank" rel="noopener" href="https://weex.apache.org/cn/playground.html">Weex Playground</a></p>
+<p><img src="/images/DeepinScreenshot_select-area_20170928143205.png"></p>
+<p>使用我们上面安装的weex-toolkit工具，可以创建一个应用工程出来，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ weex init weex-frontend</span><br><span class="line">$ <span class="built_in">cd</span> weex-frontend</span><br><span class="line">$ yarn install --ignore-engines</span><br><span class="line">$ npm run start</span><br></pre></td></tr></table></figure>
+
+<p>经过上面的几个步骤，一个可以被Playground预览扫描的工具就完成了！</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>综合使用下来，觉得weex的初衷是好的，用应用开发都已经熟悉的一套东西做更多的事情，提高程序的开发效率，但是也暴露了这个框架一些不成熟的地方：</p>
+<ol>
+<li>官方的文档更新可能并不及时，demo中使用的api或者文档中介绍的api在实际代码上可能都已经移除了</li>
+<li>RN提供了丰富好用的工具，包括手机端和开发端，尤其是摇一摇自动刷新的功能在开发过程中可以省却不少的问题，但weex本身提供的工具就相对原始一些</li>
+<li>weex的使用门槛还是有点高，需要具备原生应用的开发知识，否则连开发环境都没法搞定</li>
+</ol>
+<p>正是由于weex本身使用的极大的复杂性，<code>light</code>对外提供了一套更加简洁高效的<strong>框架</strong>和<strong>工具</strong>来支持<code>JSNative</code>应用尤其是<code>weex</code>应用的开发！</p>
+<h2 id="lighting辅助JSNative应用"><a href="#lighting辅助JSNative应用" class="headerlink" title="lighting辅助JSNative应用"></a>lighting辅助JSNative应用</h2><p><code>lighting</code>是<code>light</code>平台对外发布<strong>开发构建</strong>工具，<a target="_blank" rel="noopener" href="https://document.lightyy.com/">点我查看详情</a>，以下默认开发者已经安装有最新版本的<code>lighting</code>及其插件！</p>
+<h3 id="在light工程中集成weex"><a href="#在light工程中集成weex" class="headerlink" title="在light工程中集成weex"></a>在light工程中集成weex</h3><p>在正式开发之前需要分别使用以下两个指令检查当前操作系统安装的版本是否支持<code>JSNative</code>项目的开发。如果指令执行后输出的版本号大于以下所示的版本号，那么就可以继续下面的步骤了，否则可以使用<code>npm install -dg lighting</code>来升级<strong>lighting</strong>版本，使用<code>light plugin -a type-vue</code>来升级<strong>type-vue</strong>插件版本，使用<code>light plugin -a native</code>来升级<strong>native</strong>插件版本。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> ~&gt; light -v</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">     _  _         _      _    _               </span><br><span class="line">    | |(_)       | |    | |  (_)              </span><br><span class="line">    | | _   __ _ | |__  | |_  _  _ __    __ _ </span><br><span class="line">    | || | / _` || <span class="string">&#x27;_ \ | __|| || &#x27;</span>_ \  / _` |</span><br><span class="line">    | || || (_| || | | || |_ | || | | || (_| |</span><br><span class="line">    |_||_| \__, ||_| |_| \__||_||_| |_| \__, |</span><br><span class="line">            __/ |                        __/ |</span><br><span class="line">           |___/                        |___/      CLI 1.4.7-201701031</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"> ~&gt; light plugin --list</span><br><span class="line">lighting-plugin-type-vue:1.0.30</span><br><span class="line">lighting-plugin-native:1.0.14</span><br></pre></td></tr></table></figure>
+
+<p>接下来，就可以开发<code>JSNative</code>代码了，可以从我们开源在github上的一份demo起步，体会一下无差别开发app的流畅享受，一份完全相同的代码全面覆盖h5&#x2F;iOS&#x2F;Android三端平台！demo的链接下载地址是：<a target="_blank" rel="noopener" href="https://github.com/HS-Light/light-demo-native">https://github.com/HS-Light/light-demo-native</a></p>
+<h3 id="编译JSNative工程"><a href="#编译JSNative工程" class="headerlink" title="编译JSNative工程"></a>编译JSNative工程</h3><p>对于<code>JSNative</code>工程的编译和普通的<code>h5</code>应用的编译的方式一致，同样是用<code>release</code>命令，其中<code>-w</code>代表开启源代码监听，<code>-b 3001</code>达标打开浏览器并将sever监听在3001端口，<code>--weex</code>代表当前的工程采用JSNative编译的方式在编译<code>h5</code>页面的同时并且输出<code>app.native.js</code>。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"> ~/D/l/l/JSNative&gt; light release -wb 3001 --weex</span><br><span class="line">[2017-11-06 09:29:46][INFO] 清除/tmp/native目录</span><br><span class="line">[2017-11-06 09:29:46][INFO] 拷贝/home/abel/Documents/light/lighting-demo/JSNative到/tmp/native目录</span><br><span class="line">[2017-11-06 09:29:47][INFO] native插件加载成功</span><br><span class="line">[2017-11-06 09:29:47][INFO] 阶段：prepare，调用插件type-vue开始</span><br><span class="line">[2017-11-06 09:29:47][INFO] 阶段：prepare，调用插件native开始</span><br><span class="line">[2017-11-06 09:29:47][INFO] 阶段：prepare，调用插件native成功</span><br><span class="line">[2017-11-06 09:29:47][INFO] 阶段：prepare，调用插件type-vue成功</span><br><span class="line">[2017-11-06 09:29:47][INFO] 处理资源装配：index</span><br><span class="line">[2017-11-06 09:29:47][INFO] 处理脚本资源注入：index</span><br><span class="line">[2017-11-06 09:29:47][INFO] 阶段：build，调用插件type-vue开始</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">  编译中 [====================] 100% (14.8 秒)</span><br><span class="line"></span><br><span class="line">Build completed <span class="keyword">in</span> 2.28s</span><br><span class="line"></span><br><span class="line">[2017-11-06 09:30:03][INFO] 阶段：build，调用插件type-vue成功</span><br><span class="line">[2017-11-06 09:30:04][INFO] 已开启本地资源监听...</span><br><span class="line">[2017-11-06 09:30:04][INFO] 资源编译成功</span><br></pre></td></tr></table></figure>
+
+<p>github上的demo工程打开预览后是这样的效果：</p>
+<p><img src="/images/DeepinScreenshot_select-area_20171106093758.png"></p>
+<p>用浏览器打开<code>http://localhost:3001/app.native.js</code>，可以看到JSNative编译后的内容，此内容可以支持使用weex的playground或者light的<code>lightview</code>来预览查看！在lightview中的预览效果是这样的：</p>
+<p><img src="/images/Screenshot_2017-11-06-09-48-02-137_com.hundsun.light.lightview.appstore.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>lighting</code>开发套件为JSNative应用的开发提供了方便的支持，简化了<code>JSNative</code>应用开发的方法和流程，让开发者可以以最小的成本完成<code>三端统一</code>的应用程序的开发，大大提高了应用的开发效率！</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pself.net/2017/01/01/2017-01-01-work-life-log/" data-id="cmmaaymru0001jfqd606fh00b" data-title="2017前端总结" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://pself.net/2017/02/08/2017-02-08-5-to-jsnative/" data-id="cmmbpa6y20001dlqd3fdx07hr" data-title="5分钟搞定JSNative应用开发" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -146,7 +194,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/20/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/22/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/20/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/19/">19</a><a class="page-number" href="/page/20/">20</a><span class="page-number current">21</span><a class="page-number" href="/page/22/">22</a><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/22/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -157,22 +205,36 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></li></ul>
     </div>
   </div>
 
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">部署</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
     </div>
   </div>
 
@@ -183,6 +245,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/03/03/2026-03-03-hexo-deploy-to-github-pages/">Hexo 博客部署到 GitHub Pages 完整指南</a>
+          </li>
         
           <li>
             <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
@@ -198,10 +264,6 @@
         
           <li>
             <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
-          </li>
-        
-          <li>
-            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
           </li>
         
       </ul>

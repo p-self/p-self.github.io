@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>三山半落1</title>
+  <title>三山半落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
-<meta property="og:title" content="三山半落1">
+<meta property="og:title" content="三山半落">
 <meta property="og:url" content="https://pself.net/page/3/index.html">
-<meta property="og:site_name" content="三山半落1">
+<meta property="og:site_name" content="三山半落">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="abel">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="三山半落" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -43,7 +43,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">三山半落1</a>
+        <a href="/" id="logo">三山半落</a>
       </h1>
       
     </div>
@@ -73,14 +73,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2022-02-09-html-basic4" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2022-03-26-ide" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2022/02/10/2022-02-09-html-basic4/" class="article-date">
-  <time class="dt-published" datetime="2022-02-10T03:34:12.000Z" itemprop="datePublished">2022-02-10</time>
+    <a href="/2022/03/26/2022-03-26-ide/" class="article-date">
+  <time class="dt-published" datetime="2022-03-26T03:34:12.000Z" itemprop="datePublished">2022-03-26</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/dev-html/">dev html</a>
+    <a class="article-category-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a>
   </div>
 
   </div>
@@ -91,7 +91,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2022/02/10/2022-02-09-html-basic4/">一些关于HTML的基础知识（四）</a>
+      <a class="p-name article-title" href="/2022/03/26/2022-03-26-ide/">构建IDE产品的方案和选型</a>
     </h1>
   
 
@@ -99,212 +99,137 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <h2 id="表单元素"><a href="#表单元素" class="headerlink" title="表单元素"></a>表单元素</h2><p><code>&lt;button&gt;</code> 严格意义上来讲是表单元素，在<code>&lt;form&gt;</code>当中使用，<code>&lt;button&gt;</code>可以通过<code>form</code>属性关联一个表单，任意的表单，如果不使用form属性关联，那么<code>&lt;button&gt;</code>会自动关联到最近的祖先表单当中；formaction、formenctype、formmethod、formnovalidate、formtarget可以重写其所关联表单的相关属性；</p>
-<p><code>&lt;button&gt;</code>可以使用<code>type</code>属性，有三个可选值，button、reset、submit。</p>
-<p><code>&lt;button&gt;</code>可以通过name、value来产生form提交的数据，如果点击此按钮来触发提交，那么按钮本身的name、value会作为提交数据传递到后台服务。</p>
-<p><code>&lt;datalist&gt;</code> 可以创造一个下来列表关联到input，在输入的时候作为字典补全项目展示；</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;ice-cream-choice&quot;</span>&gt;</span>Choose a flavor:<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">list</span>=<span class="string">&quot;ice-cream-flavors&quot;</span> <span class="attr">id</span>=<span class="string">&quot;ice-cream-choice&quot;</span> <span class="attr">name</span>=<span class="string">&quot;ice-cream-choice&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">datalist</span> <span class="attr">id</span>=<span class="string">&quot;ice-cream-flavors&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Chocolate&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Coconut&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Mint&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Strawberry&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">option</span> <span class="attr">value</span>=<span class="string">&quot;Vanilla&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">datalist</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        <p><code>IDE</code>即集成开发环境（integrated development environment），在开发者成果输出中扮演这重要而不可或缺的角色，是开发者生产力的辅助性工具，伴随开发者对成果输出的整个过程——原型、编码、调试、测试、集成、交付等。</p>
+<h2 id="序言"><a href="#序言" class="headerlink" title="序言"></a>序言</h2><p>对前端领域而言，最广为人知的<code>IDE</code>工具非<code>vscode</code>莫属了，免费、开源、可扩展是<code>vscode</code>最中重要的三个标签，而且加之<strong>微软</strong>厂牌在开发工具领域独特的优势地位的加持，使得<code>vscode</code>成为前端开发领域的佼佼者，乃至扩展至整个软件研发领域都占有一席之地。</p>
+<h3 id="vscode"><a href="#vscode" class="headerlink" title="vscode"></a>vscode</h3><p><code>vscode</code>从2011年为WebIDE探索以monaca浏览器编辑器起家，在azure云中发展，在微软拥抱开源的政策之后与electron（当时的atom）结合而成为<strong>Visual Studio Code</strong>占领了桌面端，2020年<code>vscode</code>团队重回初心，将<code>vscode</code>的支持从桌面端拉回浏览器，成为一款真正意义的WebIDE。</p>
+<p><code>vscode</code>在2022年的统计数据中，有超过2000万人使用，其插件市场托管了超过34K款能力各异的插件，是当之无愧的IDE界最强生态系统。</p>
+<p><code>vscode</code>的成功引来了众多瞩目的目光，尤其是对于致力于构建<strong>跨平台</strong>研发工具的企业，从<code>vscode</code>的成功中看到了独立构建的曙光，一款高效、快捷、多端、低成本的IDE解决方案也成长起来，其中最受瞩目的莫过于<code>theia</code>。</p>
+<h3 id="theia"><a href="#theia" class="headerlink" title="theia"></a>theia</h3><p><code>theia</code>托管于<code>eclipse</code>基金会，和鼎鼎大名的<code>eclipse</code>是一母之后。发布于2014年的<code>Eclipse Che for java</code>，并经过了多次的重构优化，在2017年开源发布更名为theia，紧接着在2019年发布了稳定的1.0版本；<code>theia</code>的与众不同在于，它并不是一款和<code>vscode</code>直接竞争的IDE工具，而是一套IDE构建的框架和<strong>解决方案</strong>，可以让任何的个人或者企业可以基于theia完成自由开发工具的研发流程，提供满足差异性市场要求的IDE产品。</p>
+<p><code>theia</code>充分借鉴了<code>vscode</code>成功的要素，那就是架构分离：将产品拆分为内核（core）和插件（plug-in），由内核完成对操作系统的隔离，由插件完成对功能的定义。还不仅于此，巧妇难为无米之炊，<code>theia</code>一开始就定位于借助<code>vscode</code>庞大的插件市场生态，使得大量的<code>vscode</code>插件不必任何改动就可以摇身一变成为theia插件，这实在是天大的好处，给IDE开发者打开了一扇“通过拼凑构建IDE的方案”。为达成这一点，<code>theia</code>在内核中支持了LSP（语言服务协议）、DAP（调试适配协议），甚至扩展点的定义和名称都一字不差的照搬了过来。有了这一套东西，基于theia构建IDE工具也就变成不那么天方夜谭的事情。</p>
+<h3 id="opensumi"><a href="#opensumi" class="headerlink" title="opensumi"></a>opensumi</h3><p>相对于国外市场对IDE工具、框架的万众瞩目和异军突起，与theia、vscode成长伴随的同时，国内的厂商也在慢慢的磨砺手中的刀剑，2019年阿里巴巴对发发布了一款名为<code>KAITIAN</code>（开天）的技术，展示了其IDE构建的能力；在支付宝小程序的开发工具上，既是<code>KAITIAN</code>扩展性和定制性能力的投射；<code>KAITIAN</code>的磨砺延宕至2022年，3月不起眼的一天，<code>KAITIAN</code>摇身一变为<code>opensumi</code>对外做了开源发布。</p>
+<p><code>opensumi</code>和<code>theia</code>同属IDE构建框架的阵营，为企业、个人构建定制化研发工具提供了行之有效的解决方案，且都和<code>vscode</code>有着千丝万缕的联系，本文将基于<code>opensumi</code>、<code>theia</code>、<code>vscode</code>的能力范畴，详尽深入的探寻其在IDE构建领域的相似与不同，为IDE解决方案的选型提供一些参考。</p>
+<h2 id="代码工程"><a href="#代码工程" class="headerlink" title="代码工程"></a>代码工程</h2><p>IDE工具的构建是复杂性工程，在编码层面降低架构复杂度，提供可读性和可维护性也就成为了重中之重，对使用typescript语言而不是javascript语言的选择是为了达成这一目标的重要决策，<code>typescript</code>的类型化、静态化的能力使得语言没有失去灵活性的同时提高了健壮性、稳定性和可读性，在<code>vscode</code>的2021年周年总结中，创始人就曾着重的讨论迁移到<code>typescript</code>对vscode的多次重构的变化而起到的重要作用，这也就不难理解<code>opensumi</code>和<code>theia</code>纷纷以<code>typescript</code>为主要编码语言的原因了。</p>
+<h3 id="依赖注入"><a href="#依赖注入" class="headerlink" title="依赖注入"></a>依赖注入</h3><p><code>typescript</code>将面向对象的思维引入了前端编程，继承、多态的存在提高了代码复用的效率，也降低了维护的成本。但也正如其他面向对象语言所面临的情况，在应用中管理大量对象，对工厂模式或者单例模式的使用，其中类型（对象）依赖的管理成为高复杂度的任务，在这一点上，三者有着各自不同的解决方案。</p>
+<p>依赖注入是三者架构实现的核心，使得开发者不再关心那些对象实例化的细节，对象由“<em>容器</em>”实例化，在注册器中进行创建和管理，高效的解藕了对象的定义和使用。</p>
+<p>在<code>opensumi</code>中依赖注入借助于<code>@opensumi/di</code>完成。<code>@opensumi/di</code>是基于 Angular DI 的设计自行实现的一个依赖注入的工具，通过使用<strong>注解</strong>（装饰器）在编译时完成依赖声明的生成，在运行时通过依赖声明来装配。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Dog</span> &#123; <span class="comment">//声明类型：狗</span></span><br><span class="line">  <span class="title function_">bark</span>(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Zoo</span> &#123;</span><br><span class="line">  <span class="meta">@Autowired</span>(<span class="string">&#x27;Animal&#x27;</span>)</span><br><span class="line">  <span class="attr">dog</span>: <span class="title class_">Dog</span> <span class="comment">//注入类型：狗</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">zooTalk</span>(<span class="params"></span>) &#123;</span><br><span class="line">    dog.<span class="title function_">bark</span>(); <span class="comment">// 调用</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><code>&lt;fieldset&gt;</code> 用于产生字段组，用于表单内数据的分类。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">form</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">legend</span>&gt;</span>Choose your favorite monster<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">id</span>=<span class="string">&quot;kraken&quot;</span> <span class="attr">name</span>=<span class="string">&quot;monster&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;kraken&quot;</span>&gt;</span>Kraken<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">id</span>=<span class="string">&quot;sasquatch&quot;</span> <span class="attr">name</span>=<span class="string">&quot;monster&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;sasquatch&quot;</span>&gt;</span>Sasquatch<span class="tag">&lt;/<span class="name">label</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>/&gt;</span></span><br><span class="line"></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;radio&quot;</span> <span class="attr">id</span>=<span class="string">&quot;mothman&quot;</span> <span class="attr">name</span>=<span class="string">&quot;monster&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">&quot;mothman&quot;</span>&gt;</span>Mothman<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">form</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>在运行时，从<em>容器</em>中获取<code>Zoo</code>时，<em>容器</em>会自动将<code>Dog</code>装配到<code>Zoo</code>并返回<code>Zoo</code>的一个可用实例。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">injector.<span class="title function_">addProviders</span>(<span class="title class_">Dog</span>)</span><br><span class="line">injector.<span class="title function_">addProviders</span>(<span class="title class_">Zoo</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> zoo = injector.<span class="title function_">get</span>(<span class="title class_">Zoo</span>);</span><br><span class="line">zoo.<span class="title function_">zooTalk</span>(); </span><br></pre></td></tr></table></figure>
 
-<form>
-  <fieldset>
-    <legend>Choose your favorite monster</legend>
+<p><code>@opensumi/di</code>支持ClassProvider（用于class声明有构造函数的类型） 、TypeProvider（用于注入function时）、ValueProvider（用于注入值类型），FactoryProvider（用于注入工厂函数）。在opensumi的代码当中，随处可见存在大量的依赖注入调用，对于扩展点（Contribution）的实现广泛采用了<code>@Injectable</code>来注解。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Injectable</span>()</span><br><span class="line"><span class="meta">@Domain</span>(<span class="title class_">ClientAppContribution</span>, <span class="title class_">CommandContribution</span>)</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">StatusBarContribution</span> <span class="keyword">extends</span> <span class="title class_ inherited__">WithEventBus</span> <span class="keyword">implements</span> <span class="title class_">ClientAppContribution</span>, <span class="title class_">CommandContribution</span> &#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<pre><code>&lt;input type=&quot;radio&quot; id=&quot;kraken&quot; name=&quot;monster&quot;&gt;
-&lt;label for=&quot;kraken&quot;&gt;Kraken&lt;/label&gt;&lt;br/&gt;
+<p>在<code>theia</code>中依赖注入是通过<code>Inversify.Js</code>来完成的，<code>Inversify.Js</code>是为了因应前端引入面向对象（OO）编程后编程复杂度增加的情况而应运而生，比<code>@opensumi/di</code>更加老牌而稳定。<code>Inversify.Js</code>同样使用typescript注解来完成依赖的定义和注入，只是命名稍有不同。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">interface</span> <span class="title class_">Dog</span> &#123; <span class="comment">//声明类型：狗</span></span><br><span class="line">  <span class="title function_">bark</span>(): <span class="built_in">void</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">@injectable</span>()</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Zoo</span> &#123;</span><br><span class="line">  <span class="meta">@inject</span>(<span class="title class_">Dog</span>)</span><br><span class="line">  <span class="attr">dog</span>: <span class="title class_">Dog</span> <span class="comment">//注入类型：狗</span></span><br><span class="line"></span><br><span class="line">  <span class="title function_">zooTalk</span>(<span class="params"></span>) &#123;</span><br><span class="line">    dog.<span class="title function_">bark</span>(); <span class="comment">// 调用</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-&lt;input type=&quot;radio&quot; id=&quot;sasquatch&quot; name=&quot;monster&quot;&gt;
-&lt;label for=&quot;sasquatch&quot;&gt;Sasquatch&lt;/label&gt;&lt;br/&gt;
+<p>如上的示例和<code>opensumi/di</code>几无不同，最大的区别或许在两者对容器的使用上。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> container = <span class="keyword">new</span> <span class="title class_">Container</span>();</span><br><span class="line">container.<span class="property">bind</span>&lt;<span class="title class_">Dog</span>&gt;(<span class="title class_">Dog</span>).<span class="title function_">to</span>(<span class="title class_">Dog</span>);</span><br><span class="line">container.<span class="property">bind</span>&lt;<span class="title class_">Zoo</span>&gt;(<span class="title class_">Zoo</span>).<span class="title function_">to</span>(<span class="title class_">Zoo</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> zoo = container.<span class="property">get</span>&lt;<span class="title class_">Zoo</span>&gt;(<span class="title class_">Zoo</span>);</span><br><span class="line">zoo.<span class="title function_">zooTalk</span>();</span><br></pre></td></tr></table></figure>
 
-&lt;input type=&quot;radio&quot; id=&quot;mothman&quot; name=&quot;monster&quot;&gt;
-&lt;label for=&quot;mothman&quot;&gt;Mothman&lt;/label&gt;
-</code></pre>
-  </fieldset>
-</form>
+<p><code>theia</code>中整个应用都是由<code>Inversify.Js</code>装配而成的，主体有两个容器（Container），分别是frontend（对应于前端）和backtend（对应与后端），除此之外plug-in进程包含一个<code>Inversify.Js</code>容器。在编译时通过<code>dev-packages/application-manager/src/generator</code>来生成对应的初始化代码。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">Container</span> &#125; = <span class="built_in">require</span>(<span class="string">&#x27;inversify&#x27;</span>);</span><br><span class="line"><span class="comment">// ...</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> container = <span class="keyword">new</span> <span class="title class_">Container</span>();</span><br><span class="line">container.<span class="title function_">load</span>(backendApplicationModule);</span><br><span class="line">container.<span class="title function_">load</span>(messagingBackendModule);</span><br><span class="line">container.<span class="title function_">load</span>(loggerBackendModule);</span><br></pre></td></tr></table></figure>
 
-<p><code>&lt;form&gt;</code> 是表单的容器，可以使用<code>:valid</code> and <code>:invalid</code>伪类来设置两种状态的表单的样式；可以通过<code>enctype</code>来设置表单提交数据的请求头，默认是<code>application/x-www-form-urlencoded</code>，如果表单中包含文件，可以设置为<code>multipart/form-data</code>。</p>
-<p><code>&lt;input&gt;</code> 支持多种type属性配置，button&#x2F;checkbox&#x2F;color&#x2F;date&#x2F;datetime-local&#x2F;email&#x2F;file&#x2F;hidden&#x2F;image&#x2F;month&#x2F;number&#x2F;password&#x2F;radio&#x2F;range&#x2F;reset&#x2F;search&#x2F;submit&#x2F;tel&#x2F;text&#x2F;time&#x2F;url&#x2F;week</p>
-<table>
-<thead>
-<tr>
-<th>属性名称</th>
-<th>适用类型</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-accept">accept</a></td>
-<td>file</td>
-<td>Hint for expected file type in file upload controls</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-alt">alt</a></td>
-<td>image</td>
-<td>alt attribute for the image type. Required for accessibility</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autocomplete">autocomplete</a></td>
-<td>all</td>
-<td>Hint for form autofill feature</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-autofocus">autofocus</a></td>
-<td>all</td>
-<td>Automatically focus the form control when the page is loaded</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-capture">capture</a></td>
-<td>file</td>
-<td>Media capture input method in file upload controls</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-checked">checked</a></td>
-<td>radio, checkbox</td>
-<td>Whether the command or control is checked</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-dirname">dirname</a></td>
-<td>text, search</td>
-<td>Name of form field to use for sending the element’s directionality in form submission</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-disabled">disabled</a></td>
-<td>all</td>
-<td>Whether the form control is disabled</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-form">form</a></td>
-<td>all</td>
-<td>Associates the control with a form element</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formaction">formaction</a></td>
-<td>image, submit</td>
-<td>URL to use for form submission</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formenctype">formenctype</a></td>
-<td>image, submit</td>
-<td>Form data set encoding type to use for form submission</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formmethod">formmethod</a></td>
-<td>image, submit</td>
-<td>HTTP method to use for form submission</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formnovalidate">formnovalidate</a></td>
-<td>image, submit</td>
-<td>Bypass form control validation for form submission</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-formtarget">formtarget</a></td>
-<td>image, submit</td>
-<td>Browsing context for form submission</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-height">height</a></td>
-<td>image</td>
-<td>Same as <code>height</code> attribute for <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"><code>&lt;img&gt;</code></a>; vertical dimension</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-list">list</a></td>
-<td>almost all</td>
-<td>Value of the id attribute of the <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/datalist"><code>&lt;datalist&gt;</code></a> of autocomplete options</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-max">max</a></td>
-<td>numeric types</td>
-<td>Maximum value</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-maxlength">maxlength</a></td>
-<td>password, search, tel, text, url</td>
-<td>Maximum length (number of characters) of <code>value</code></td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-min">min</a></td>
-<td>numeric types</td>
-<td>Minimum value</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-minlength">minlength</a></td>
-<td>password, search, tel, text, url</td>
-<td>Minimum length (number of characters) of <code>value</code></td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-multiple">multiple</a></td>
-<td>email, file</td>
-<td>Boolean. Whether to allow multiple values</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-name">name</a></td>
-<td>all</td>
-<td>Name of the form control. Submitted with the form as part of a name&#x2F;value pair.</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-pattern">pattern</a></td>
-<td>password, text, tel</td>
-<td>Pattern the <code>value</code> must match to be valid</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-placeholder">placeholder</a></td>
-<td>password, search, tel, text, url</td>
-<td>Text that appears in the form control when it has no value set</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-readonly">readonly</a></td>
-<td>almost all</td>
-<td>Boolean. The value is not editable</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-required">required</a></td>
-<td>almost all</td>
-<td>Boolean. A value is required or must be check for the form to be submittable</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-size">size</a></td>
-<td>email, password, tel, text, url</td>
-<td>Size of the control</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-src">src</a></td>
-<td>image</td>
-<td>Same as <code>src</code> attribute for <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"><code>&lt;img&gt;</code></a>; address of image resource</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-step">step</a></td>
-<td>numeric types</td>
-<td>Incremental values that are valid.</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-type">type</a></td>
-<td>all</td>
-<td>Type of form control</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-value">value</a></td>
-<td>all</td>
-<td>The initial value of the control.</td>
-</tr>
-<tr>
-<td><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#attr-width">width</a></td>
-<td>image</td>
-<td>Same as <code>width</code> attribute for <a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img"><code>&lt;img&gt;</code></a></td>
-</tr>
-</tbody></table>
-<p><code>&lt;textarea&gt;</code> 多行输入文本；可以通过<code>wrap</code>属性来配置文本换行，配置为hard时自动加入CR+LF来换行，配置为soft根据用户输入来换行。textarea默认都可以缩放，可以通过样式<code>resize: none;</code>来关闭缩放。</p>
-<p><code>&lt;select&gt;</code> 可以通过<code>multiple</code>来配置多选，当启用multiple时还可以通过size来展示多个条目。可以配合使用<code>&lt;optgroup&gt;</code>来为选项分组。</p>
-<p><code>&lt;progress&gt;</code> 进度条，通过max设置100%的数值，通过value设置进度条所在的位置。</p>
-<p><code>&lt;output&gt;</code> 可以计算多个input的和并且显示。</p>
-<p><code>&lt;meter&gt;</code> 通过指定最大值max和最小值min，来决定显示value的值所在的位置。</p>
+<p>在<code>vscode</code>中，依赖注入未借助与任何三方的方案，而是有核心团队基于ts装饰器（Decorator）做了编码实现，vscode中对每一种服务（Services）都做了装饰器的实现，在编码时可以通过注解使用。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">MyClass</span> &#123;</span><br><span class="line">	<span class="title function_">constructor</span>(<span class="params"></span></span><br><span class="line"><span class="params">		<span class="meta">@IAuthService</span> <span class="keyword">private</span> <span class="keyword">readonly</span> authService: IAuthService,</span></span><br><span class="line"><span class="params">		<span class="meta">@IStorageService</span> <span class="keyword">private</span> <span class="keyword">readonly</span> storageService: IStorageService,</span></span><br><span class="line"><span class="params">	</span>) &#123;</span><br><span class="line">			authService</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>上文中的<code>@IAuthService</code>和<code>@IStorageService</code>两个注解即是使用存储和授权两个服务（Services）的注解用法的示例，<code>MyClass</code>并不用关心<code>authService</code>和<code>storageService</code>的实例化过程，拿来即用即可。</p>
+<p>综上所述，依赖注入是构建IDE工具必不可少的一环，而在三者的解决方案中都提供了对等的实现满足了各自工程研发过程中依赖管理的要求。对于opensumi和theia此方案是近似的，而相较与vscode却有显著的不同。</p>
+<p>一方面，vscode的初衷并不是让开发者去扩展服务，而是使用服务，所以显然缺失了扩展性的考虑，而opensumi和theia则在起始之初就考虑了扩展性的要求，支持开发则任意的插拔和管理依赖，甚至替换官方的实现，而这在vscode中是无法实现的。</p>
+<p>另一方面，vscode对服务的封装也代表了设计良好的分层，开发者对任意功能服务的调用都无法脱离vscode的管控，就变相隔离了运行时和运行容器，开发者通过不可替换、不可变更的接口使用操作系统，对vscode运行时编程大大提高了vscode本本身的移植能力和健壮性。而opensumi和theia则把这些问题丢给IDE的开发者去考虑。</p>
+<h3 id="编辑器"><a href="#编辑器" class="headerlink" title="编辑器"></a>编辑器</h3><p>IDE中最核心的能力非编辑能力莫属，从严格意义上来说，IDE是Editors的增强，不同的IDE只是在Editor和IDE的终极形态之间寻找的平衡。</p>
+<p><img src="/images/2022-03-26-ide/5a3353cf9478d62ef777f86e0611690c.png" alt="5a3353cf9478d62ef777f86e0611690c.png"></p>
+<p><code>monaco</code>是vscode团队在创建指出提供的web端的Editor编辑器库，最早在浏览器中使用了代码的编辑、语法高亮、自动补全、DIff、代码片段补全等IDE中常见的编辑特性，将monaco打造成WebIDE也是vscode团队的初心，所以在设计之处就考虑到了IDE集成的场景和可能性。</p>
+<p><code>monaco</code>也是为opensumi、theia和vscode提供代码编辑功能的主要功臣，虽然三者设计各异、思想不同，但都是借助于monaco并在其上添砖加瓦来构建IDE工具。</p>
+<p>theia通过包<code>@theia/monaco</code>集成了monaco，<code>@theia/monaco</code>将monaco的扩展点包装为service，并交给<code>Inversify.Js</code>容器托管以便于在需要使用的地方由容器注入。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@injectable</span>()</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">MonacoCommandService</span> <span class="keyword">implements</span> <span class="title class_">ICommandService</span>, <span class="title class_">Disposable</span> &#123;</span><br><span class="line">	<span class="comment">//...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>vscode和opensumi都是以类似的方案封装了monaco的使用，就不再赘述；monaco是三者迥异的实现当中为数不多的“常数”，这也表明了monaco以高明的适应性和丰富的功能扩展性，成为主流跨端IDE方案中不变的风景。</p>
+<p><strong>依赖注入和编辑器是IDE构建的核心，依赖注入代表了架构方案、稳定性、扩展性和健壮性，而编辑器则是核心能力。</strong></p>
+<h2 id="插件开发"><a href="#插件开发" class="headerlink" title="插件开发"></a>插件开发</h2><p>vscode、opensumi和theia支持相同而有异的插件扩展体系。作为对核心功能的扩展和补充，插件体系承担着重要的作用。为了最大程度的减小插件加载、运行对IDE窗体的的影响，三者都采用了最早由vscode使用的Extension Host结构：插件运行于独立进程，不会因插件错误、奔溃、挂起而影响主窗体的交互和功能。</p>
+<p><img src="/images/2022-03-26-ide/2f20175d88f379069668fb6a2c3d875c.png" alt="2f20175d88f379069668fb6a2c3d875c.png"></p>
+<h3 id="vscode插件（给既有工具扩展特性）"><a href="#vscode插件（给既有工具扩展特性）" class="headerlink" title="vscode插件（给既有工具扩展特性）"></a>vscode插件（给既有工具扩展特性）</h3><p>由于opensumi和theia对vscode插件的兼容，使得vscode插件开发规范成为三者事实上的统一插件开发规范，对于满足要求的vscode插件将无需适配地应用于opensumi和theia。以下简要的说明vscode插件开发的关键步骤。</p>
+<h4 id="扩展点定义"><a href="#扩展点定义" class="headerlink" title="扩展点定义"></a>扩展点定义</h4><p>插件开发即是对扩展点和运行时开发，vscode支持包括语法（grammars）、指令（command）、配置（configuration）等在内的众多扩展点（contribution-points）。插件对扩展点的扩展声明在插件工程的描述文件-<code>package.json</code>中，并以属性<code>contributes</code>来指定。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;contributes&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;commands&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;command&quot;</span><span class="punctuation">:</span> <span class="string">&quot;extension.sayHello&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;title&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Hello World&quot;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如以上，即是对command指令的扩展，代表在<code>ctrl+shift+p</code>打开的指令面板中可以直接访问使用的指令。</p>
+<h4 id="扩展实现"><a href="#扩展实现" class="headerlink" title="扩展实现"></a>扩展实现</h4><p><code>package.json</code>在声明扩展点的同时，也必须声明扩展点的实现入口，即<code>main</code>属性。在众多的vscode插件开发模板中这一值被设置为<code>./out/extension.js</code>即<code>./src/extension.ts</code>在编译构建后的输出文件。</p>
+<p>在插件声明周期的合适阶段，对扩展点功能编码，即可完成插件功能的实现。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">activate</span>(<span class="params">context: vscode.ExtensionContext</span>) &#123;</span><br><span class="line">	vscode.<span class="property">commands</span>.<span class="title function_">registerCommand</span>(<span class="string">&#x27;extension.helloWorld&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">		<span class="comment">//...</span></span><br><span class="line">	&#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>以上简要概述了vscode插件开发的两个重要的责任，对于简单如”hello,world”或者复杂如“gitlen”的插件而言，其原理是完全相同的，只是所使用的扩展点以及基于扩展点所完成的任务相异。</p>
+<h3 id="theia插件"><a href="#theia插件" class="headerlink" title="theia插件"></a>theia插件</h3><p>theia通过plugin-ext-vscode包支持vscode插件的集成和使用，在运行时上theia和vscode的插件接口是兼容的（并非100%兼容，可以参阅：<a target="_blank" rel="noopener" href="https://eclipse-theia.github.io/vscode-theia-comparator/status.html%EF%BC%89%EF%BC%8C%E8%BF%99%E4%B9%9F%E5%B0%B1%E6%84%8F%E5%91%B3%E7%9D%80%E7%BC%96%E8%AF%91%E4%B8%BAvsix%E6%8F%92%E4%BB%B6%E5%8C%85%E7%9A%84vscode%E6%8F%92%E4%BB%B6%E5%8F%AF%E4%BB%A5%E4%BB%8E%E5%B8%82%E5%9C%BA%E4%B8%8B%E8%BD%BD%E5%90%8E%E5%BA%94%E7%94%A8%E4%BA%8Etheia%EF%BC%8C%E8%80%8C%E5%AE%9E%E9%99%85%E4%B8%8Atheia%E6%9E%84%E5%BB%BA%E4%B9%9F%E6%98%AF%E5%A6%82%E6%AD%A4%E8%BF%9B%E8%A1%8C%E7%9A%84%EF%BC%8Ctheia%E7%BC%96%E8%AF%91%E6%9E%84%E5%BB%BA%E6%9C%9F%E9%97%B4%E4%BC%9A%E8%AF%BB%E5%8F%96package.json%E4%B8%AD%E5%A3%B0%E6%98%8E%E7%9A%84%E6%8F%92%E4%BB%B6%E5%88%97%E8%A1%A8%EF%BC%8C%E7%84%B6%E5%90%8E%E4%BB%8Eopenvsix%E7%AB%99%E7%82%B9%E4%B8%AD%E4%B8%8B%E8%BD%BD%E5%B9%B6%E8%A7%A3%E5%8E%8B%E6%8F%92%E4%BB%B6%E5%8C%85%E3%80%82">https://eclipse-theia.github.io/vscode-theia-comparator/status.html），这也就意味着编译为vsix插件包的vscode插件可以从市场下载后应用于theia，而实际上theia构建也是如此进行的，theia编译构建期间会读取package.json中声明的插件列表，然后从openvsix站点中下载并解压插件包。</a></p>
+<p><img src="/images/2022-03-26-ide/30bb0d00a2712ec190b8b81fbdefec10.png" alt="30bb0d00a2712ec190b8b81fbdefec10.png"></p>
+<p>theia在vscode的插件体系之外，还有两种扩展机制，Theia Plugin 和 Theia Extension。</p>
+<ul>
+<li>vscode插件支持在编译时集成以及在运行时安装，但只能使用vscode提供的扩展点</li>
+<li>Theia Extension只能在编译时集成，是IDE工具的一部分，通过Theia Plugin可以完整访问theia的所有模块</li>
+<li>Theia Plugin 和vscode插件类似，支持在运行时安装，但可以使用专属与theia的接口或者操纵IDE工具的前端界面</li>
+</ul>
+<h4 id="Theia-Extension"><a href="#Theia-Extension" class="headerlink" title="Theia Extension"></a>Theia Extension</h4><p>Theia Extension是IDE的一部分，只能在编译构建时集成，可以完整访问和修改IDE运行时的所有特性。theia中所有模块都是以Theia Extension的形式提供的，比如<code>@theia/navigator</code>、<code>@theia/filesystem</code>等，通过定义良好的依赖注入管理，形成了Theia Extension可插拔的结构，在IDE的构建过程中可以自由的选择或者新增Theia Extension。</p>
+<p>Theia Extension 以theiaExtensions属性定义，在backend和frontend中通过依赖注入扩展IDE的能力。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;theiaExtensions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;backend&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lib/node/plugin-vscode-backend-module&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;frontend&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lib/browser/plugin-vscode-frontend-module&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>对于vscode无法实现的复杂视图，Theia Extension是优势方案。</strong></p>
+<h4 id="Theia-Plugin"><a href="#Theia-Plugin" class="headerlink" title="Theia Plugin"></a>Theia Plugin</h4><p>Theia Plugin是对vscode插件扩展能力不足的补充，Theia Plugin可以在运行时安装。</p>
+<p>Theia Plugin的开发和vscode插件的开发类似，在<code>package.json</code>中通过<code>theiaPlugin</code>属性定义插件实现，既可在插件中调用theia提供的扩展API。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;theiaPlugin&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;backend&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lib/theia-hello-world-plugin-backend-plugin.js&quot;</span> </span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>相对vcode插件的定义和扩展方法，Theia Plugin不需要使用依赖注入，更加简洁；除了支持常见的quickpick、语言、语言、配置等，还支持对UI界面的定制和调整，更加强大。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import * as theia from &#x27;@theia/plugin&#x27;;</span><br><span class="line">export function start() &#123;</span><br><span class="line">    theia.commands.registerCommand //...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="opensumi插件"><a href="#opensumi插件" class="headerlink" title="opensumi插件"></a>opensumi插件</h3><p>opensumi宣称和vscode插件具有100%的兼容性，支持完整的vscode插件API，所有vscode插件都可以分毫不动的情况下在opensumi中安装。</p>
+<p>同时，opensumi也提供了除vscode插件扩展体系之外的扩展方案。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">	<span class="attr">&quot;main&quot;</span><span class="punctuation">:</span><span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">	 <span class="attr">&quot;contributes&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span> <span class="punctuation">&#125;</span></span><br><span class="line">	<span class="attr">&quot;browserMain&quot;</span><span class="punctuation">:</span><span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">	<span class="attr">&quot;workerMain&quot;</span><span class="punctuation">:</span><span class="string">&quot;&quot;</span></span><br><span class="line">	<span class="attr">&quot;sumiContributes&quot;</span><span class="punctuation">:</span><span class="punctuation">&#123;</span><span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>opensumi插件扩展即包含了vscode插件完整的声明和使用方式，如<code>main</code>和<code>contributes</code>的配置；也做了升级和扩展，如<code>main</code>中引入的逻辑可以使用大量<code>sumi</code>包暴露的接口，还新增了<code>browserMain</code>、<code>workerMain</code>和<code>sumiContributes</code>（在opensumi文档中提供了sumiContributes的描述，但是代码中使用的是kaitianContributes）三个扩展属性，以支持对Browser 环境（扩展左、右、底部面板，以及 Toolbar 等位置）、Worker 环境的扩展（扩展轻量级的任务）。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>上文讨论了在opensumi 、vscode、theia三种IDE方案中所提供的扩展能力范围、场景和实现差异，基于这些信息可以得出几个结论：</p>
+<ul>
+<li>vscode插件是事实上的插件扩展规范，vscode插件丰富的生态是构建IDE不得不考虑重要资源</li>
+<li>theia弥补了vscode插件能力上的缺失和不足，支持运行时安装的插件（plug-in）扩展前端表现和交互，同时增加了更多的底层暴露。编译时的theia插件有最高权利。</li>
+<li>opensumi 完全参考了vscode插件的扩展体系，且进行了1:1的实现，增强支持对Browser 环境（前端表现和交互，但范围受限），Worker 环境（只有opensumi有此环境）的扩展。缺失了编译时的插件体系。</li>
+</ul>
+<h2 id="多态运行"><a href="#多态运行" class="headerlink" title="多态运行"></a>多态运行</h2><p><code>vscode</code>作为完整的集成开发环境，适应开发者对多种运行环境的要求的能力也在慢慢的迭代中逐步的提供出来，最早的版本通过electron适配到了mac、windows、linux等三大主流的平台，2020年又将<code>vscode</code>拉回浏览器，通过<code>File System Access API </code>彻底的摆脱了对操作系统的依赖，而成为Web应用；除此之外，vscode的运行时环境还可以运行于vm虚拟机、remote服务器、docker容器、WSL之中，在差异性的环境支持方面做的无所不在。</p>
+<p><img src="/images/2022-03-26-ide/8e788c61c65e4be5db88acc52209634c.png" alt="8e788c61c65e4be5db88acc52209634c.png"></p>
+<p>这一切都得益于vscode设计巧妙的架构，系统接口层、表现层、扩展层等各司其职、互不干扰；通过对接口编程的思维解藕和了操作系统的联系，使得接口在web、nodejs、electron等多种环境中都有了对等实现，让运行于这些千奇百怪的运行时变得易于操作；通过分离表现层和业务层的关系，接口调用、websocket、http(s)、ipc通信都可以是它们沟通的手段，也就可以做到拆分IDE的独立装状态，拆分业务层到remote服务器、docker容器甚至WSL之中。</p>
+<p>站在巨人的肩膀上的opensumi和theia在这一点上有巨大的优势，吸取了vscode多态运行的思路和方案，在设计之初就考虑到了架构的分层和隔离，对运行时环境的解藕也变为了重中之重。</p>
+<p>opensumi和theia步了vscode的后尘，差异性的环境支持方面分毫不差的集成了前辈的衣钵，任何基于opensumi和theia的IDE解决方案也能共享这一果实。</p>
+<h2 id="总结-1"><a href="#总结-1" class="headerlink" title="总结"></a>总结</h2><p>对技术的了解可以辅助选型决策，而选型又不得不回归到场景的描述之中。</p>
+<h3 id="什么时候做插件？"><a href="#什么时候做插件？" class="headerlink" title="什么时候做插件？"></a>什么时候做插件？</h3><p>插件的意义是对即成环境的扩展，插件的限制也是无法打破环境约束。vscode对扩展点的范围有限制，但也可以基本满足常见的对IDE工具扩展的需求。至少有以下的范围之内，毋须多做思考，vscode插件既是最好的选择。</p>
+<ul>
+<li>改变IDE工具的颜色或者主题</li>
+<li>在给定的范围内扩展IDE的工作台，仅限于Title Bar、Activity Bar、Side Bar、Panel、Editor Group、Status Bar</li>
+<li>通过webview加载和渲染自定义的内容</li>
+<li>增加语言支持，如语法高亮补全等，使用LSP</li>
+<li>增加特定平台的调试断点支持等，使用DAP</li>
+</ul>
+<p><img src="/images/2022-03-26-ide/6d9fa57f73549263136062c0a392a3c9.png" alt="6d9fa57f73549263136062c0a392a3c9.png"></p>
+<p>这里要重点说明的是，vscode对扩展IDE的工作台有明确的范围，所有允许调整的部分都如上图所示。如果产品预期对UI的调整超出上图的范围，插件将无法解决产品的问题，需要升级选择去构建IDE！</p>
+<h3 id="什么时候做IDE？"><a href="#什么时候做IDE？" class="headerlink" title="什么时候做IDE？"></a>什么时候做IDE？</h3><p>对产品功能的预期超出了插件所能覆盖的范围，就进入到构建IDE产品的范畴，在这一层面自由度会大大提升，至少在以下的几个方面，IDE的方案会更适合：</p>
+<ul>
+<li>特定的研发场景，比如小程序开发、公司的LDP开发等市面上的开发工具无法涉猎的领域；</li>
+<li>定制的服务整合，比如IDE开发者工具和公司内研发辅助系统如效能、TS、质量卡点的深度整合；</li>
+<li>增强研发体验，比如通过知识智能辅助研发的交互体验，编码质量的统计度量的数据体验；</li>
+</ul>
+<p>vscode在设计之初就严格约束的适用场景，所以在这一领域基于vscode的实现可能会面临较高的成本对其代码定制，而opensumi和theia是此场景下的最优选择：</p>
+<p><img src="/images/2022-03-26-ide/d20657aa53a094ddbac4f80da2a0a33f.png" alt="d20657aa53a094ddbac4f80da2a0a33f.png"></p>
+<p>上图是基于opensumi的淘宝开发者工具。</p>
+<p><img src="/images/2022-03-26-ide/87d90e3d5a7e400baac287dd1aa6b99d.png" alt="87d90e3d5a7e400baac287dd1aa6b99d.png"></p>
+<p>上图是基于theia的coffeeeditor开发者工具。</p>
+<p>opensumi和theia都具有很强的定制能力，适用场景上会有很大的交集。theia在对vscode插件的兼容性上会稍逊与opensumi，但是在开源生态方面比opensumi起步更早，影响力和用户基数更有优势。再加之，在2021年研发中心的LDP产品已经深度使用了theia做IDE底座，使得theia在恒生的领域里更有光彩。</p>
+<h3 id="什么时候做云IDE？"><a href="#什么时候做云IDE？" class="headerlink" title="什么时候做云IDE？"></a>什么时候做云IDE？</h3><p>云IDE是脱离了环境依赖的IDE的最终形态，一个浏览器，即可获取代码、编辑、运行调试程序及访问云端的资源，开发者可以脱离设备的约束，随时随地的获取研发环境。</p>
+<p>云IDE在PAAS厂商如华为云、阿里云中有丰富的应用，可以实现在线一键应用构建，低成本的访问厂商提供的SAAS服务，高效的完成从研发到交付的流程。</p>
+<p>云IDE是开发环境的理想形态，至少在以下几个场景云IDE具有更高的适用性：</p>
+<ul>
+<li>复杂的研发环境。容器化的IDE环境可以在云端一键拉起，对于复杂度高的研发环境搭建成本也几乎为0；研发依赖环境的复杂性也可以同步解决</li>
+<li>配置库安全。IDE所关联的配置库在远端，由网络交付到浏览器端，开发者毋须获取完整的代码即可启动研发，还可以对研发行为实施管控，避免代码外泄</li>
+<li>成本敏感硬件。云IDE将远端的硬件服务化，多开发者可以共享硬件，比如内存、CPU、外接设备等，最大限度提高利用率。</li>
+</ul>
+<p>opensumi和theia甚至vscode都是云IDE的优势方案，架构相似的三者在处理云IDE部署的情况上都能满足要求，具体需求根据定制性的要求来做方案选择。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pself.net/2022/02/10/2022-02-09-html-basic4/" data-id="cmmaaymsa0010jfqd4pgx366m" data-title="一些关于HTML的基础知识（四）" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://pself.net/2022/03/26/2022-03-26-ide/" data-id="cmmbpa6yo001ddlqdami63e3x" data-title="构建IDE产品的方案和选型" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -320,7 +245,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/2/">&laquo; 上一页</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/4/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -331,22 +256,36 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></li></ul>
     </div>
   </div>
 
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">部署</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
     </div>
   </div>
 
@@ -357,6 +296,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/03/03/2026-03-03-hexo-deploy-to-github-pages/">Hexo 博客部署到 GitHub Pages 完整指南</a>
+          </li>
         
           <li>
             <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
@@ -372,10 +315,6 @@
         
           <li>
             <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
-          </li>
-        
-          <li>
-            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
           </li>
         
       </ul>

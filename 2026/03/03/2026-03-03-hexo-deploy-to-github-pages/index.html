@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Hexo 博客部署到 GitHub Pages 完整指南 | 三山半落</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="前言最近在整理博客时，发现博客无法正常部署到 GitHub Pages。经过排查，问题已解决，特此记录完整的部署流程，供有需要的朋友参考。 问题描述博客使用 Hexo 框架搭建，之前一直可以正常访问，但某次部署时发现无法访问。经过检查发现以下问题：  _config.yml 中的 deploy 配置为空 缺少部署依赖包 hexo-deployer-git  解决步骤1. 安装部署依赖首先需要安装">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo 博客部署到 GitHub Pages 完整指南">
+<meta property="og:url" content="https://pself.net/2026/03/03/2026-03-03-hexo-deploy-to-github-pages/index.html">
+<meta property="og:site_name" content="三山半落">
+<meta property="og:description" content="前言最近在整理博客时，发现博客无法正常部署到 GitHub Pages。经过排查，问题已解决，特此记录完整的部署流程，供有需要的朋友参考。 问题描述博客使用 Hexo 框架搭建，之前一直可以正常访问，但某次部署时发现无法访问。经过检查发现以下问题：  _config.yml 中的 deploy 配置为空 缺少部署依赖包 hexo-deployer-git  解决步骤1. 安装部署依赖首先需要安装">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2026-03-03T08:20:00.000Z">
+<meta property="article:modified_time" content="2026-03-03T09:23:20.876Z">
+<meta property="article:author" content="abel">
+<meta property="article:tag" content="Hexo">
+<meta property="article:tag" content="GitHub Pages">
+<meta property="article:tag" content="部署">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="三山半落" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">三山半落</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS 订阅"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="搜索"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://pself.net"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-2026-03-03-hexo-deploy-to-github-pages" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/03/03/2026-03-03-hexo-deploy-to-github-pages/" class="article-date">
+  <time class="dt-published" datetime="2026-03-03T08:20:00.000Z" itemprop="datePublished">2026-03-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Hexo 博客部署到 GitHub Pages 完整指南
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>最近在整理博客时，发现博客无法正常部署到 GitHub Pages。经过排查，问题已解决，特此记录完整的部署流程，供有需要的朋友参考。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>博客使用 Hexo 框架搭建，之前一直可以正常访问，但某次部署时发现无法访问。经过检查发现以下问题：</p>
+<ol>
+<li><code>_config.yml</code> 中的 <code>deploy</code> 配置为空</li>
+<li>缺少部署依赖包 <code>hexo-deployer-git</code></li>
+</ol>
+<h2 id="解决步骤"><a href="#解决步骤" class="headerlink" title="解决步骤"></a>解决步骤</h2><h3 id="1-安装部署依赖"><a href="#1-安装部署依赖" class="headerlink" title="1. 安装部署依赖"></a>1. 安装部署依赖</h3><p>首先需要安装 <code>hexo-deployer-git</code> 插件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-deployer-git --save</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-配置-config-yml"><a href="#2-配置-config-yml" class="headerlink" title="2. 配置 _config.yml"></a>2. 配置 _config.yml</h3><p>在博客根目录的 <code>_config.yml</code> 文件中，修改或添加 deployment 配置：</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="comment">## Docs: https://hexo.io/docs/one-command-deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">git@github.com:p-self/p-self.github.io.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">gh-pages</span></span><br></pre></td></tr></table></figure>
+
+<p>配置说明：</p>
+<ul>
+<li><strong>type</strong>: 部署方式，这里使用 git</li>
+<li><strong>repo</strong>: 仓库地址，注意使用 SSH 格式（<a href="mailto:&#x67;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;">&#x67;&#105;&#116;&#64;&#x67;&#x69;&#x74;&#x68;&#117;&#98;&#46;&#x63;&#x6f;&#x6d;</a>:…）而不是 HTTPS</li>
+<li><strong>branch</strong>: 部署分支，GitHub Pages 默认使用 gh-pages</li>
+</ul>
+<h3 id="3-部署到-GitHub"><a href="#3-部署到-GitHub" class="headerlink" title="3. 部署到 GitHub"></a>3. 部署到 GitHub</h3><p>配置完成后，执行以下命令进行部署：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 清理缓存并生成静态文件</span></span><br><span class="line">hexo clean</span><br><span class="line">hexo generate</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或者直接使用一键部署</span></span><br><span class="line">npm run deploy</span><br></pre></td></tr></table></figure>
+
+<p>部署成功后，会看到类似输出：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">INFO  Deploying: git</span><br><span class="line">INFO  Clearing .deploy_git folder...</span><br><span class="line">INFO  Copying files from public folder...</span><br><span class="line">To github.com:p-self/p-self.github.io.git</span><br><span class="line"> * [new branch]      HEAD -&gt; gh-pages</span><br><span class="line">INFO  Deploy done: git</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-启用-GitHub-Pages"><a href="#4-启用-GitHub-Pages" class="headerlink" title="4. 启用 GitHub Pages"></a>4. 启用 GitHub Pages</h3><p>部署完成后，还需要在 GitHub 仓库设置中启用 GitHub Pages：</p>
+<ol>
+<li>进入仓库页面，点击 <strong>Settings</strong></li>
+<li>在左侧菜单中找到 <strong>Pages</strong></li>
+<li>在 <strong>Build and deployment</strong> 部分：<ul>
+<li>Source 选择 <strong>Deploy from a branch</strong></li>
+<li>Branch 选择 <strong>gh-pages</strong></li>
+<li>点击 Save</li>
+</ul>
+</li>
+</ol>
+<p>等待几分钟后，网站就可以通过自定义域名访问了（本博客使用 pself.net）。</p>
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><h3 id="SSH-vs-HTTPS"><a href="#SSH-vs-HTTPS" class="headerlink" title="SSH vs HTTPS"></a>SSH vs HTTPS</h3><p>配置 repo 时，有两种方式：</p>
+<ul>
+<li>SSH 格式：<code>git@github.com:username/repo.git</code></li>
+<li>HTTPS 格式：<code>https://github.com/username/repo.git</code></li>
+</ul>
+<p>推荐使用 SSH 格式，避免每次部署时输入用户名和密码。但需要确保本地已配置 SSH 公钥。</p>
+<h3 id="部署分支"><a href="#部署分支" class="headerlink" title="部署分支"></a>部署分支</h3><p>GitHub Pages 支持从以下分支部署：</p>
+<ul>
+<li><code>gh-pages</code>：适用于项目仓库</li>
+<li><code>master</code> &#x2F; <code>main</code>：适用于用户或组织页面</li>
+</ul>
+<p>本博客采用 <code>gh-pages</code> 分支进行部署。</p>
+<h3 id="自定义域名"><a href="#自定义域名" class="headerlink" title="自定义域名"></a>自定义域名</h3><p>如果需要使用自定义域名（如 pself.net），需要在仓库根目录添加 CNAME 文件，内容为你的域名。然后在域名提供商处配置 DNS 解析到 GitHub Pages。</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Hexo 部署到 GitHub Pages 的流程相对简单，关键在于正确配置 <code>hexo-deployer-git</code> 插件和仓库信息。部署完成后，GitHub 会自动处理静态页面的托管，配合自定义域名即可实现稳定的博客访问。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://pself.net/2026/03/03/2026-03-03-hexo-deploy-to-github-pages/" data-id="cmmbpa6yr001gdlqdbf941v2y" data-title="Hexo 博客部署到 GitHub Pages 完整指南" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">后一篇</strong>
+      <div class="article-nav-title">基于archlinux构建软路由的方法和过程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">分类</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">部署</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">归档</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/03/03/2026-03-03-hexo-deploy-to-github-pages/">Hexo 博客部署到 GitHub Pages 完整指南</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
+          </li>
+        
+          <li>
+            <a href="/2022/03/26/2022-03-26-ide/">构建IDE产品的方案和选型</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic4/">一些关于HTML的基础知识（四）</a>
+          </li>
+        
+          <li>
+            <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 abel<br>
+      Powered by <a href="https://pself.net/" target="_blank">wang</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+  </div>
+</body>
+</html>

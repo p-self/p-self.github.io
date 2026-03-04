@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>三山半落1</title>
+  <title>三山半落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
-<meta property="og:title" content="三山半落1">
+<meta property="og:title" content="三山半落">
 <meta property="og:url" content="https://pself.net/page/19/index.html">
-<meta property="og:site_name" content="三山半落1">
+<meta property="og:site_name" content="三山半落">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="abel">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="三山半落" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -43,7 +43,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">三山半落1</a>
+        <a href="/" id="logo">三山半落</a>
       </h1>
       
     </div>
@@ -73,14 +73,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2017-04-20 -electron" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2017-05-20-vue-error-v-for" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2017/04/20/2017-04-20%20-electron/" class="article-date">
-  <time class="dt-published" datetime="2017-04-20T06:34:12.000Z" itemprop="datePublished">2017-04-20</time>
+    <a href="/2017/05/20/2017-05-20-vue-error-v-for/" class="article-date">
+  <time class="dt-published" datetime="2017-05-20T06:34:12.000Z" itemprop="datePublished">2017-05-20</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/dev-theia/">dev theia</a>
+    <a class="article-category-link" href="/categories/dev-vue/">dev vue</a>
   </div>
 
   </div>
@@ -91,7 +91,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2017/04/20/2017-04-20%20-electron/">electron集成开发者工具的探索</a>
+      <a class="p-name article-title" href="/2017/05/20/2017-05-20-vue-error-v-for/">vue在v-for遍历的数组中存在重复值情况下执行出错的问题处理</a>
     </h1>
   
 
@@ -99,53 +99,69 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>electron是一款使用浏览器前端技术来开发桌面应用的神奇，<a target="_blank" rel="noopener" href="https://electron.atom.io/">点我跳转</a>electron的官方网址，在其官网可以了解到详细的说明和文档信息。</p>
-<p>electron下载到本地安装成功后，需要将安装目录添加到<code>PATH</code>当中，以便于在<code>CMD</code>中使用<code>electron</code>指令来运行electron程序。</p>
-<p>官网的electron的基本demo的引入和使用如下面所述：</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/electron/electron-quick-start</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Go into the repository</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cd</span> electron-quick-start</span></span><br><span class="line"><span class="meta prompt_"></span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">Install the dependencies and run</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">electron .</span></span><br></pre></td></tr></table></figure>
+        <p>此问题由某部门同事开发中所发现，并提交给了lighting的开发团队跟进处理。</p>
+<h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p>从一个console的截图开始：</p>
+<p><img src="/./Screenshot_2017-05-12_08-43-29.png"></p>
+<p>lighting的开发框架是以<code>vue</code>为模型绑定的核心，根据错误可以进行一个简单的判断：</p>
+<ol>
+<li><code>removeChild</code>操作既然不是发生在开发者显示书写的代码中，就应该是<strong>模型销毁后vue引擎移除dom节点</strong>导致的</li>
+<li>错误栈信息都在框架的代码之内，此操作不可能是有用户代码触发导致的</li>
+</ol>
+<p>开发者某一流程的操作，会100%稳定的触发出这一错误，此错误导致js执行终端，整个程序陷入瘫痪无法工作，开发者的操作流程可以简化为如下的步骤：</p>
+<ol>
+<li>访问视图A</li>
+<li>访问视图B</li>
+<li>回退历史记录到A（<strong>错误发生在这里</strong>）</li>
+</ol>
+<p>以上的跳转关系都是视图跳转，也就是发生在lighting的路由系统之内的路由跳转，按照lighting的路由逻辑，第三步的时候会依次执行视图的声明周期函数，包括：</p>
+<ol>
+<li>B视图的unRender逻辑，包括beforeUnRender和afterUnRender</li>
+<li>A视图的Render，包括beforeRender和afterRender</li>
+</ol>
+<p>开发者只在beforeRender的阶段进行了模型重置的操作，几乎可以确定无疑报错就是由这几行模型重置和赋值的操作引起的。层层排除，我们得到了可以使用简单代码重新此问题的方式。</p>
+<h2 id="重现方式"><a href="#重现方式" class="headerlink" title="重现方式"></a>重现方式</h2><p>准备一个简单的空工程，新建视图<code>test</code>，一下的代码分别为<code>js/view/test.js</code>和<code>html/view/test.html</code>，<code>js/view/test.js</code>中视图对模型的操作可以完整反映重现此问题的流程。</p>
+<p>其中，<code>setTimeout</code>模拟的是<code>ajax</code>操作以让数据在多个<code>tick</code>之后设置到模型以观察vue对dom节点的创建和销毁。</p>
+<p><code>$nextTick</code>之后，将<code>test_arr</code>置空的操作是为了使<code>vue</code>将此数据对应的<code>dom</code>节点销毁，也就是对应与<code>html/view/test.html</code>中<code>&lt;div v-for=&quot;val in test_arr&quot;&gt;&#123;&#123;val&#125;&#125;&lt;/div&gt;</code>这一段代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">;(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  <span class="title class_">Light</span>.<span class="title function_">defineViewModel</span>(<span class="string">&quot;#test&quot;</span>,&#123;</span><br><span class="line">       <span class="attr">data</span>:&#123;</span><br><span class="line">        <span class="attr">test_arr</span>:[<span class="string">&quot;&quot;</span>,<span class="string">&quot;1&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;2&quot;</span>,<span class="string">&quot;3&quot;</span>,<span class="string">&quot;&quot;</span>]</span><br><span class="line">       &#125;</span><br><span class="line">     &#125;,</span><br><span class="line">     <span class="attr">afterRender</span>:<span class="keyword">function</span> (<span class="params">params</span>)&#123;</span><br><span class="line">      <span class="keyword">var</span> that =<span class="variable language_">this</span>;</span><br><span class="line">      <span class="built_in">setTimeout</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">         that.<span class="property">model</span>.<span class="property">test_arr</span> = [<span class="string">&quot;&quot;</span>,<span class="string">&quot;4&quot;</span>,<span class="string">&quot;&quot;</span>,<span class="string">&quot;5&quot;</span>,<span class="string">&quot;6&quot;</span>,<span class="string">&quot;&quot;</span>]</span><br><span class="line">         that.<span class="property">model</span>.$nextTick(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">          that.<span class="property">model</span>.<span class="property">test_arr</span> = <span class="literal">null</span>;</span><br><span class="line">         &#125;)</span><br><span class="line">      &#125;,<span class="number">1000</span>*<span class="number">10</span>)</span><br><span class="line">     &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
 
-<p>通过以上的三个命令可以启动<code>electron-quick-start</code>这个简单的程序。</p>
-<p>下面我们来解决如果在electron下实现开发者工具内嵌页面使用的问题。</p>
-<h2 id="chrome开发者工具"><a href="#chrome开发者工具" class="headerlink" title="chrome开发者工具"></a>chrome开发者工具</h2><pre><code>Chrome 开发者工具是一套内置于Google Chrome中的Web开发和调试工具，可用来对网站进行迭代、调试和分析。
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;val in test_arr&quot;</span>&gt;</span>&#123;&#123;val&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>以上的代码可以稳定重新问题，下面是我们的解题思路。</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>在不求甚解的状态下，这个问题是比较容易解决的，我们想到了几个临时的解决方案。</p>
+<h3 id="方案一"><a href="#方案一" class="headerlink" title="方案一"></a>方案一</h3><p>从报错信息<code>Uncaught TypeError: Cannot read property &#39;removeChild&#39; of null</code>可知，之所以发生这个问题是因为在<code>null</code>的对象上执行了<code>removeChild</code>，那么事情就简单了。</p>
+<p>修改vue框架代码，将这里的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">remove</span>(<span class="params">el</span>) &#123;</span><br><span class="line">   el.<span class="property">parentNode</span>.<span class="title function_">removeChild</span>(el);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p>修改为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">remove</span>(<span class="params">el</span>) &#123;</span><br><span class="line">   <span class="keyword">if</span>(el.<span class="property">parentNode</span>)el.<span class="property">parentNode</span>.<span class="title function_">removeChild</span>(el);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="方案二"><a href="#方案二" class="headerlink" title="方案二"></a>方案二</h3><p>我们深入的分析了一下为什么<code>el.parentNode</code>会是<code>null</code>，通过上面重现的步骤发现，当<code> that.model.test_arr = [&quot;&quot;,&quot;4&quot;,&quot;&quot;,&quot;5&quot;,&quot;6&quot;,&quot;&quot;]</code>这段代码设置发生后，<code>v-for</code>产生的dom节点之后3个，而不是5个，这种情况下<code>el.parentNode</code>就是不存在的，所以产生了第二种解决方案，强制不给空数据的元素生成dom节点。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;val in test_arr&quot;</span> <span class="attr">v-if</span>=<span class="string">&quot;val&quot;</span>&gt;</span>&#123;&#123;val&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="方案三"><a href="#方案三" class="headerlink" title="方案三"></a>方案三</h3><p>问题并不算是圆满解决，正常的情况下框架应该具有鲁棒性，适应不同的使用场景，不应该出现js报错的问题，所以还有深入研究下去的必要！</p>
+<p>在<code>vue</code>中针对<code>v-for</code>指令有一个<code>track-by</code>的可选配置</p>
+<pre><code>无track-by情况：数据修改时，无论值是否被修改，dom都被重新渲染
+有track-by属性：数据修改时，不变数据所在的dom不被重新渲染，已改变的数据所在dom才被重新渲染
 </code></pre>
-<p>chrome开发者工具可以在<a target="_blank" rel="noopener" href="https://developers.google.com/web/tools/chrome-devtools/?hl=zh-cn">这个地址</a>找到详细的说明和使用帮助信息。</p>
-<h2 id="electron对开发者工具的支持"><a href="#electron对开发者工具的支持" class="headerlink" title="electron对开发者工具的支持"></a>electron对开发者工具的支持</h2><p><code>electron</code>可以通过其API打开开发者工具。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> win = <span class="keyword">new</span> remote.<span class="title class_">BrowserWindow</span>(&#123;</span><br><span class="line">	<span class="attr">webPreferences</span>:&#123;<span class="attr">webSecurity</span>:<span class="literal">false</span>&#125;,</span><br><span class="line">	<span class="attr">autoHideMenuBar</span>:<span class="literal">true</span></span><br><span class="line">&#125;);</span><br><span class="line">win.<span class="title function_">loadURL</span>(<span class="string">&quot;http://light.hscloud.cn&quot;</span>);</span><br><span class="line">win.<span class="title function_">openDevTools</span>();</span><br></pre></td></tr></table></figure>
+<p>因为 v-for 默认通过数据对象的特征来决定对已有作用域和 DOM 元素的复用程度，这可能导致重新渲染整个列表。但是，如果每个对象都有一个唯一 ID 的属性，便可以使用 track-by 特性给 Vue 一个提示，Vue因而能尽可能地复用已有实例。所以就有了第三种解决方案。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;test&quot;</span> <span class="attr">style</span>=<span class="string">&quot;display:none;&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;val in test_arr&quot;</span> <span class="attr">track-by</span>=<span class="string">&quot;$index&quot;</span>&gt;</span>&#123;&#123;val&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>另外一种方法可以将开发者工具关联到<code>F12</code>的快捷键，就像我们使用chrome浏览器进行浏览一样。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">	<span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&quot;keydown&quot;</span>, <span class="keyword">function</span> (<span class="params">e</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">		<span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">123</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">			<span class="built_in">require</span>(<span class="string">&#x27;remote&#x27;</span>).<span class="title function_">getCurrentWindow</span>().<span class="title function_">toggleDevTools</span>();</span></span><br><span class="line"><span class="language-javascript">		&#125; <span class="keyword">else</span> <span class="keyword">if</span> (e.<span class="property">which</span> === <span class="number">116</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">			location.<span class="title function_">reload</span>();</span></span><br><span class="line"><span class="language-javascript">		&#125;</span></span><br><span class="line"><span class="language-javascript">	&#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="原因分析"><a href="#原因分析" class="headerlink" title="原因分析"></a>原因分析</h2><p><code>v-for</code>遍历数组中存在空值导致页面报错，主要是遍历条件里对值的判断有问题。vue为了保证对dom节点的复用，内置了一份按照id存取的dom缓存，通过对数据分析出dom_id，然后根据此id从缓存中获取dom节点。由于不同的数据取到了相同的dom_id，所以没有创建dom节点出来。但是，在最终数组置空，模型变更之后dom节点移除的时候却为这些dom节点触发了remove操作，也就是方案一中兼容的那些代码。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">id = <span class="title function_">getTrackByKey</span>(index, key, value, trackByKey);</span><br><span class="line"><span class="keyword">if</span> (!cache[id]) &#123;</span><br><span class="line">	cache[id] = frag;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>但是，遗憾的是，electron并没有提供对<code>开发者工具</code>的API编程接口，所以无法对其进行方便的处理，已将开发者工具集成到实际的桌面工具中。</p>
-<p>但是，我们在微信的小程序的开发者工具中看到了其对开发这个工具的扩展开发和使用，所以也就证明了对开发者工具是可以进行编程化处理的，下面我们就来解决这个问题。</p>
-<h2 id="在electron中启用开发者工具"><a href="#在electron中启用开发者工具" class="headerlink" title="在electron中启用开发者工具"></a>在electron中启用开发者工具</h2><p>搜遍互联网，在electron中没有找到任何解决方案，但是偶然在chrome的api中看到了解决这个问题的希望，可能这才是真正正确的方向，要使用chrome的extention的api需要先创建extention项目，我直接在github上面搜索了一个作为基础的修改起点，这样才能调用extention对应的api吧。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/petethepig/devtools-terminal.git">源代码地址</a></p>
-<p><a target="_blank" rel="noopener" href="https://developer.chrome.com/devtools/docs/integrating">chrome浏览器提供的API</a></p>
-<p>依然没有解决问题！</p>
-<p>搜索stackoverflow发现了以下的问题和答案：</p>
-<pre><code>How to toggle Device Mode on a popup window in Chrome?
-I have a web app with a chat that opens in a new popup window. Normally, in Chrome I can hit F12 and click the icon of a smart phone to toggle it. But in the popup window this icon does not appear. This is important for me since I need to throttle the connection of the popup in order to simulate a user disconnecting from the chat.
-Thanks!
+<p>所以问题必定出现在<code>getTrackByKey</code>这个函数的执行上，以下是<code>getTrackByKey</code>的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getTrackByKey</span>(<span class="params">index, key, value, trackByKey</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> trackByKey ? trackByKey === <span class="string">&#x27;$index&#x27;</span> ? index : trackByKey.<span class="title function_">charAt</span>(<span class="number">0</span>).<span class="title function_">match</span>(<span class="regexp">/\w/</span>) ? <span class="title function_">getPath</span>(value, trackByKey) : value[trackByKey] : key || value;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p><code>return</code>之后的判断条件导致了如果<code>v-for</code>的目标是一个数组，则最终就会按照<code>value</code>来存储你dom节点，<code>value</code>就会作为此dom节点的id标识，那就导致了如果一个<strong>非对象数组</strong>中的值有重复的则必然会发生此问题，我们验证后也确实如此，不仅仅是数组中有空值，数组中有重复值也会报错并中断js的执行。修复此问题可以通过下面的代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">getTrackByKey</span>(<span class="params">index, key, value, trackByKey</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> trackByKey ? trackByKey === <span class="string">&#x27;$index&#x27;</span> ? index : trackByKey.<span class="title function_">charAt</span>(<span class="number">0</span>).<span class="title function_">match</span>(<span class="regexp">/\w/</span>) ? <span class="title function_">getPath</span>(value, trackByKey) : value[trackByKey] : key || (<span class="keyword">typeof</span> value==<span class="string">&quot;object&quot;</span>?<span class="attr">value</span>:index);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-It doesn&#39;t seem to be currently possible. I&#39;ve opened a ticket for you. Meanwhile you have couple of options:
-1. open popup in a regular window (copy paste the url, or modify window.open call to open a new tab instead of a separate window),
-2. create a Chrome extension that uses debugger API to send emulateNetworkConditions message to your popup window
-3. or try hacking DevTools like so:
-open DevTools (A) for your popup
-focus on DevTools window and open another DevTools (B) for that window using a keyboard shortcut (F12/alt+cmd+J)
-in the console of the DevTools B call WebInspector.overridesSupport.setEmulationEnabled(true) (to enable emulation) and then WebInspector.overridesSupport.settings.networkConditions.set(&#123;throughput: 1.5 * 1024, latency: 40&#125;); (to enable network throttling)
-</code></pre>
-<p><code>WebInspector</code>是个什么鬼？浏览器原生支持吗？</p>
-<pre><code>experimental.webInspector.panels API
-The experimental.webInspector.panels API has been renamed to chrome.experimental.devtools.panels. The old namepsace is deprecated and will be removed from future versions of Chrome.
-</code></pre>
-<p>API肯定是调用<code>chrome.experimental</code>，接下来就是要确认怎么样才能调用到这个api</p>
-<p><img src="/./Screenshot_2017-05-11_09-12-35.png"></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p><code>vue</code>中对数据绑定的操作大大提高了开发者应用开发的效率，但与此同时也伴随着一些不易察觉的问题，尤其如本文中问题的重现条件比较复杂的情况下，测试不一定可以覆盖到问题的触发条件，这个时候就需要我们开发人员多一分警惕。</p>
+<p>本文中的修复方法在lighting中已经做了集成，将在下一个版本中包含此补丁。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pself.net/2017/04/20/2017-04-20%20-electron/" data-id="cmmaaymry0004jfqda0r9fmkb" data-title="electron集成开发者工具的探索" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://pself.net/2017/05/20/2017-05-20-vue-error-v-for/" data-id="cmmbpa6y70005dlqd907g5mmi" data-title="vue在v-for遍历的数组中存在重复值情况下执行出错的问题处理" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -161,7 +177,7 @@ The experimental.webInspector.panels API has been renamed to chrome.experimental
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/18/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/20/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/18/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><span class="page-number current">19</span><a class="page-number" href="/page/20/">20</a><a class="page-number" href="/page/21/">21</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/20/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -172,22 +188,36 @@ The experimental.webInspector.panels API has been renamed to chrome.experimental
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></li></ul>
     </div>
   </div>
 
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">部署</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
     </div>
   </div>
 
@@ -198,6 +228,10 @@ The experimental.webInspector.panels API has been renamed to chrome.experimental
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/03/03/2026-03-03-hexo-deploy-to-github-pages/">Hexo 博客部署到 GitHub Pages 完整指南</a>
+          </li>
         
           <li>
             <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
@@ -213,10 +247,6 @@ The experimental.webInspector.panels API has been renamed to chrome.experimental
         
           <li>
             <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
-          </li>
-        
-          <li>
-            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
           </li>
         
       </ul>

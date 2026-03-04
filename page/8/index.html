@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>三山半落1</title>
+  <title>三山半落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
-<meta property="og:title" content="三山半落1">
+<meta property="og:title" content="三山半落">
 <meta property="og:url" content="https://pself.net/page/8/index.html">
-<meta property="og:site_name" content="三山半落1">
+<meta property="og:site_name" content="三山半落">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="abel">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="三山半落" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -43,7 +43,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">三山半落1</a>
+        <a href="/" id="logo">三山半落</a>
       </h1>
       
     </div>
@@ -73,14 +73,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2019-12-08-muti-module" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2020-08-08-theia" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2019/12/08/2019-12-08-muti-module/" class="article-date">
-  <time class="dt-published" datetime="2019-12-08T06:34:12.000Z" itemprop="datePublished">2019-12-08</time>
+    <a href="/2020/08/08/2020-08-08-theia/" class="article-date">
+  <time class="dt-published" datetime="2020-08-08T06:34:12.000Z" itemprop="datePublished">2020-08-08</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/dev-module/">dev module</a>
+    <a class="article-category-link" href="/categories/dev-theia/">dev theia</a>
   </div>
 
   </div>
@@ -91,7 +91,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2019/12/08/2019-12-08-muti-module/">APP开发中的工程多模块组织</a>
+      <a class="p-name article-title" href="/2020/08/08/2020-08-08-theia/">theia插件扩展之左侧边栏容器（left-sidebar-container）</a>
     </h1>
   
 
@@ -99,51 +99,31 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>light使用跨平台的技术解决移动原生应用的开发方案，以平台无关的方式组织PP开发，light可以在同一个工程当中处理APP配置与业务代码的开发，可以在项目期初迅速的完成演示性APP的构建和组织。</p>
-<p>但是，一旦APP中业务实现代码量在需求实现的过程中膨胀，一开始采取的“快速构建”的思路就会碰壁，会出现一些意想不到的问题。随着代码量的扩张，单个项目的视图数量突破100,在现阶段支持的情况来看，部分客户项目的视图数量会超过200。</p>
-<p>由此而来，就带来了工程管理的挑战，如何维护一个视图量超过200的移动端应用项目？</p>
-<h2 id="现阶段APP工程组织的弊端"><a href="#现阶段APP工程组织的弊端" class="headerlink" title="现阶段APP工程组织的弊端"></a>现阶段APP工程组织的弊端</h2><p>成熟的架构都存在有完善一致的模块组织方案，比如java中的<code>jar</code>包，又比如python中的<code>modules</code>。在前端资源管理里面也存在一种松散的包组织方式，npm规范下的<code>NodePackage</code>。</p>
-<p><code>NodePackage</code>适合与对工程依赖的管理，这里的模块实为技术定义的依赖包，而非业务定义的模块包。我们希望提供一种，类maven对于java的工程组织规范，也是一种在APP应用开发中业务模块组织的规范。</p>
-<p>在详细描述此方案之前，需要先描述“完整构建”下的模块组织方案到底有哪些弊端？</p>
-<h3 id="编译耗时"><a href="#编译耗时" class="headerlink" title="编译耗时"></a>编译耗时</h3><p>lighting工程对于前端资源的编译借助于<code>webpack</code>的依赖树的构建和处理，在资源处理的过程中webpack负责梳理以应用入口为编译入口的情况下的资源依赖树，并以此为基础编译处理关联的资源，如less和vue。</p>
-<p>其中主要涉及两个构建流程的耗时，依赖树构建和资源转换。</p>
-<p>依赖树的构建和整个工程中所依赖的资源的数量相关，包括所有的样式&#x2F;模板与脚本，还包括图片和字体。而且当工程内资源数量上升时，依赖树的构建耗时是加速上升的，这就带来了“编译耗时”的问题。</p>
-<p>资源转换中最耗时的部分来自于es6向es5的转换，和实际处理的代码量成正相关。</p>
-<p>总上，工程中代码的数量带来了编译构建的大量的资源消耗并由此导致了“编译耗时”过长的问题。</p>
-<h3 id="代码膨胀"><a href="#代码膨胀" class="headerlink" title="代码膨胀"></a>代码膨胀</h3><p>代码量膨胀是开发人员不得不面对的又一个问题，尤其是团队协作开发的情况下。</p>
-<p>在不做代码隔离的情况下，相当与每个开发人员都在独自面对200+的视图业务逻辑，更有甚者，单个视图的逻辑代码行数达到了1000+，这是一种什么体验？</p>
-<h3 id="需求响应困境"><a href="#需求响应困境" class="headerlink" title="需求响应困境"></a>需求响应困境</h3><p>代码膨胀带来的最直接的影响就是，业务&#x2F;代码关联性被打破了。需求的迭代速度，都是以整个项目业务的迭代速度为衡量的。</p>
-<h3 id="发布部署困境"><a href="#发布部署困境" class="headerlink" title="发布部署困境"></a>发布部署困境</h3><p>移动应用的维护有着复杂的流程，尤其是外部流程依赖的项目比如iOS应用的上架审核。</p>
-<p>单一工程构建带来的问题就是单一工程的发布部署，在重新集成APP的情况下，需要完整经过发布-&gt;上架-&gt;用户安装-&gt;用户反馈的流程，周期比较长。在不需要重新集成APP的情况下（如使用远程资源），单一工程发布会增加用户设备获取完整新版本的难度，至少多余的流量消耗是应该面对的问题。</p>
-<h2 id="模块化组织方式"><a href="#模块化组织方式" class="headerlink" title="模块化组织方式"></a>模块化组织方式</h2><p>移动端应用应该如何组织自己的多业务模块工程？</p>
-<p>light工程的目录规范中增加了<code>modules</code>目录作为子模块存放的路径，此目录下的直接子目录为工程的业务模块，每个业务模块都为独立的light工程，工程的可选类型为H5和JSN两种技术。</p>
-<p><code>modules</code>目录所在的工程应用<code>APP</code>类型的工程，是整个应用的构建入口和组织者，此工程定义了对子模块的依赖，主要体现在<code>native/config.js</code>的配置当中。</p>
-<p>由此，完整的移动端应用的目录规范需要调整为如下图所示：</p>
-<p><img src="/images/lALPDgQ9qdZdbOzNAYvNA0c_839_395.png"></p>
-<p>就开发实现而言，子模块是不应该包含子模块的，也就是说，不允许出现嵌套模块。</p>
-<h2 id="模块化拆分方式"><a href="#模块化拆分方式" class="headerlink" title="模块化拆分方式"></a>模块化拆分方式</h2><h3 id="业务模块划分的依据"><a href="#业务模块划分的依据" class="headerlink" title="业务模块划分的依据"></a>业务模块划分的依据</h3><p>light工程对应用的组织是以视图（<code>view</code>）为单位的，所有的视图都在应用构建之初定义在了工程的入口文件-<code>index.html</code>当中。</p>
-<p>视图是应用中用户可视区域的完整内容，同一个业务流程可能有多个视图的串联完成。同一个视图应该尽量不涉及多条业务流程。</p>
-<p>模块就是指：包含了完成应用关联业务流程的一组视图的前端工程。模块划分的依据也就是：检查同一个模块下的每一个视图，是否都是为同一条业务流程服务的，是则可以联合处理，否则需要剔除。</p>
-<p>模块和父子视图的概念会有重叠的地方，同一个父视图下面大多是同一条业务流程下的环节可以按需拆分为一个子模块或者多个子模块。</p>
-<h3 id="公共依赖的处理方式"><a href="#公共依赖的处理方式" class="headerlink" title="公共依赖的处理方式"></a>公共依赖的处理方式</h3><p>在“完整构建”单个工程的情况下，不存在公共依赖的说法，不同的视图可以复用工程内的所有资源。</p>
-<p>在多模块的场景下，要求每个模块间工程资源相互隔离各自为政是不切实际的，这个时候就需要一种统一的依赖查找的机制方面不同的子模块依赖和使用相同的资源，如UI组件，工具库，接口请求封装等。</p>
-<p>这个时候就应该使用npm包来应对类似的问题。</p>
-<p>各个子模块应该尽量少的依赖外部模块，仅在单个模块中使用的依赖应该隶属与此模块进行管理。当存在多个子模块依赖同一份资源时，应该将被依赖资源发布或者整理为npm包，各模块以使用外部资源的方式使用公共的依赖。</p>
-<h3 id="模块间跳转"><a href="#模块间跳转" class="headerlink" title="模块间跳转"></a>模块间跳转</h3><p>各个子模块之间并不是绝对的相互隔离，可以发生逻辑上的跳转关系和数据传递。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Light</span>.<span class="title function_">navigate</span>(<span class="string">&quot;@module1/index.html#/buy/stock&quot;</span>,&#123;</span><br><span class="line">    <span class="attr">id</span>:<span class="number">1</span></span><br><span class="line">&#125;,&#123;</span><br><span class="line">    <span class="attr">title</span>:<span class="string">&#x27;购买股票&#x27;</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+        <h2 id="从theia的扩展机制讲起"><a href="#从theia的扩展机制讲起" class="headerlink" title="从theia的扩展机制讲起"></a>从theia的扩展机制讲起</h2><p>theia所有插件扩展的方法都是以DI的方式进行管理和扩展，在运行时进行依赖注入的方式，在Javascript代码编码的过程中，主要是以<code>inversifyJS</code>这一扩展库管理依赖；</p>
+<p>theia的扩展开发工程主要分为两类，包含IDE工程和插件工程，插件工程被IDE工程依赖，只要用于定义扩展能力，比如使用theia和vscode的扩展定进行内容功能的定制和定义；而IDE工程主要用于声明被编译的IDE（集成开发环境包含哪些插件以及运行时容器的一些信息的配置）。</p>
+<h3 id="IDE工程的配置方法"><a href="#IDE工程的配置方法" class="headerlink" title="IDE工程的配置方法"></a>IDE工程的配置方法</h3><p>对于一个IDE工程而言，几乎不包含任何的源代码信息，主要是一份基于<code>package.json</code>规范的配置文件定义当前的IDE的元数据信息和所包含的插件。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;private&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@idev/example-browser&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.11.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;theia&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;frontend&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;config&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;applicationName&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Theia IDE Example&quot;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;preferences&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="attr">&quot;files.enableTrash&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">false</span></span></span><br><span class="line">        <span class="punctuation">&#125;</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;@idev/framework&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;prepare&quot;</span><span class="punctuation">:</span> <span class="string">&quot;yarn run clean &amp;&amp; yarn build&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;clean&quot;</span><span class="punctuation">:</span> <span class="string">&quot;theia clean&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;theia build --mode development&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;watch&quot;</span><span class="punctuation">:</span> <span class="string">&quot;yarn build --watch&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;start&quot;</span><span class="punctuation">:</span> <span class="string">&quot;theia start --plugins=local-dir:../../plugins&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;@theia/cli&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.11.0&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
-<p>如图所示的代码可以跳转到<code>module1</code>下的<code>web</code>容器打开的<code>index.html</code>下的<code>buy/stock</code>，并且传递给此视图的<code>id</code>为1的参数。</p>
-<h3 id="模块间数据共享"><a href="#模块间数据共享" class="headerlink" title="模块间数据共享"></a>模块间数据共享</h3><p>运行在同一个APP环境下的数据存储是共享的，包括两种容器类型jsn&#x2F;h5,都是使用了统一分运行时的存储，数据可以方便的在不同的模块，甚至不同类型的模块之前共享数据。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">LightSDK</span>.<span class="property">native</span>.<span class="title function_">readData</span>(<span class="string">&quot;data&quot;</span>,<span class="keyword">function</span>(<span class="params">data</span>) &#123;</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br><span class="line"><span class="title class_">LightSDK</span>.<span class="property">native</span>.<span class="title function_">writeData</span>(<span class="string">&quot;data&quot;</span>,&#123;<span class="attr">hello</span>:<span class="string">&#x27;world&#x27;</span>&#125;,<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<h3 id="编译-构建与集成-打包"><a href="#编译-构建与集成-打包" class="headerlink" title="编译&#x2F;构建与集成&#x2F;打包"></a>编译&#x2F;构建与集成&#x2F;打包</h3><p>模块分割带来的显而易见的好处是，不同的模块可以独立的维护了。任何交付流程的环节都不需要应付完整的APP业务内容了。</p>
-<p>在业务开发阶段，每个开发人员都是看到完整内容的一部分，更加方便聚焦和实现。</p>
-<p>开发完成后，对APP内容进行配置，将子模块配置进应用的菜单并且将子模块编译构建时登记为离线包，就可以获取对单个模块后续更新的能力。</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>本文描述了配合light移动应用离线包机制的前端工程模块化方案，通过对前端资源的拆解分割，可以缩减整个前端流程的开销，提高应用开发交付的效率。</p>
+<p>如上所示的一份配置文件就定义了一个基于默认<code>@idev/framework</code>的IDE工具的配置，其余比如<code>name</code>等的配置方法保持和<code>npm</code>包配置规范相一致。</p>
+<p>这里需要注意的是，对于IDE工具和相关插件的开发都是以yarn作为包管理的工具（由于yarn对workspace的支持，可以在开发阶段完成更加复杂的分模块隔离研发，提高分工协作和研发管理的效率）。</p>
+<h3 id="插件工程的配置方法"><a href="#插件工程的配置方法" class="headerlink" title="插件工程的配置方法"></a>插件工程的配置方法</h3><p>对于插件工程，也是一份标准的<code>npm</code>包，其中比较核心的信息都实在<code>package.json</code>中进行定义，如下展示了一个基本的theia开发工程的配置文件信息。</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;private&quot;</span><span class="punctuation">:</span> <span class="literal"><span class="keyword">true</span></span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;@idev/framework&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;iDev&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;@theia/core&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.11.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;@theia/output&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.11.0&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;@theia/vsx-registry&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.11.0&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;theiaExtensions&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;frontend&quot;</span><span class="punctuation">:</span> <span class="string">&quot;lib/browser/frontend-module&quot;</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;keywords&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;idev-extension&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;files&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="string">&quot;lib&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="string">&quot;src&quot;</span></span><br><span class="line">  <span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;lint&quot;</span><span class="punctuation">:</span> <span class="string">&quot;theiaext lint&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;theiaext build&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;watch&quot;</span><span class="punctuation">:</span> <span class="string">&quot;theiaext watch&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;clean&quot;</span><span class="punctuation">:</span> <span class="string">&quot;theiaext clean&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;@theia/ext-scripts&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.11.0&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>其中<code>lib/browser/frontend-module</code>代表了用于扩展插件能力的源代码的入口（这个入口并不是源代码文件的入口，而是源代码ts编译为js后js文件所在的文件路径）。</p>
+<p>theia里有针对不同场景的扩展点的支持，开发者需要根据自己的研发环境和任务目标选择不同的适合实际研发行为的扩展点进行功能开发。</p>
+<p>对于任一的扩展文件入口，最终<code>export</code>的逻辑都是<code>inversify</code>的<code>ContainerModule</code>。</p>
+<figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">ContainerModule</span>(<span class="function"><span class="params">bind</span> =&gt;</span> &#123;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="左侧边栏容器扩展"><a href="#左侧边栏容器扩展" class="headerlink" title="左侧边栏容器扩展"></a>左侧边栏容器扩展</h2><figure class="highlight typescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> <span class="title class_">ContainerModule</span>(<span class="function"><span class="params">bind</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="title function_">bindViewContribution</span>(bind, <span class="title class_">PluginViewContribution</span>);</span><br><span class="line">  <span class="title function_">bind</span>(<span class="title class_">WidgetFactory</span>).<span class="title function_">toDynamicValue</span>(<span class="function"><span class="params">ctx</span> =&gt;</span> (&#123;</span><br><span class="line">    <span class="attr">id</span>: <span class="title class_">MainViewContainer</span>.<span class="property">ID</span>,</span><br><span class="line">    <span class="attr">createWidget</span>: <span class="keyword">async</span> () =&gt; &#123;</span><br><span class="line">        <span class="keyword">const</span> child = ctx.<span class="property">container</span>.<span class="title function_">createChild</span>();</span><br><span class="line">        child.<span class="title function_">bind</span>(<span class="title class_">ViewContainerIdentifier</span>).<span class="title function_">toConstantValue</span>(&#123;</span><br><span class="line">          <span class="attr">id</span>: <span class="title class_">MainViewContainer</span>.<span class="property">ID</span>,</span><br><span class="line">          <span class="attr">progressLocationId</span>: <span class="string">&#x27;extensions&#x27;</span></span><br><span class="line">      &#125;);</span><br><span class="line">        child.<span class="title function_">bind</span>(<span class="title class_">MainViewContainer</span>).<span class="title function_">toSelf</span>();</span><br><span class="line">        <span class="keyword">const</span> viewContainer = child.<span class="title function_">get</span>(<span class="title class_">MainViewContainer</span>);</span><br><span class="line">        <span class="keyword">return</span> viewContainer;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)).<span class="title function_">inSingletonScope</span>();</span><br><span class="line">  <span class="title function_">bind</span>(<span class="title class_">FrontendApplicationContribution</span>).<span class="title function_">toService</span>(<span class="title class_">PluginViewContribution</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>bindViewContribution</code>是核心框架提供出来的API，用于定义侧边栏扩展，类型<code>PluginViewContributio</code>其实是<code>AbstractViewContribution</code>的子类，是用于侧边栏扩展的一个工具类，可以方便的在任一的侧边栏位置扩展定制；</p>
+<p><code>WidgetFactory</code>是UI类插件的控件工厂，可以以开发者可以控制的方式为插件生产<code>控件</code>，如上案例代码中就是用于生产一个<code>侧边栏内容位置</code>的工厂方法。</p>
+<p><code>FrontendApplicationContribution</code>是插件扩展的核心扩展点，其中包含菜单，命令的扩展方法，以上实例通过依赖注入的方式将<code>PluginViewContribution</code>定义为<code>FrontendApplicationContribution</code>。</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pself.net/2019/12/08/2019-12-08-muti-module/" data-id="cmmaayms6000ojfqdab4uds9t" data-title="APP开发中的工程多模块组织" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://pself.net/2020/08/08/2020-08-08-theia/" data-id="cmmbpa6yk0014dlqd6cd66ejm" data-title="theia插件扩展之左侧边栏容器（left-sidebar-container）" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -159,7 +139,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/7/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/9/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/7/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/9/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -170,22 +150,36 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></li></ul>
     </div>
   </div>
 
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">部署</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
     </div>
   </div>
 
@@ -196,6 +190,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/03/03/2026-03-03-hexo-deploy-to-github-pages/">Hexo 博客部署到 GitHub Pages 完整指南</a>
+          </li>
         
           <li>
             <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
@@ -211,10 +209,6 @@
         
           <li>
             <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
-          </li>
-        
-          <li>
-            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
           </li>
         
       </ul>

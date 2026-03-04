@@ -4,17 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>三山半落1</title>
+  <title>三山半落</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta property="og:type" content="website">
-<meta property="og:title" content="三山半落1">
+<meta property="og:title" content="三山半落">
 <meta property="og:url" content="https://pself.net/page/15/index.html">
-<meta property="og:site_name" content="三山半落1">
+<meta property="og:site_name" content="三山半落">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="abel">
 <meta name="twitter:card" content="summary">
   
-    <link rel="alternate" href="/atom.xml" title="三山半落1" type="application/atom+xml">
+    <link rel="alternate" href="/atom.xml" title="三山半落" type="application/atom+xml">
   
   
     <link rel="shortcut icon" href="/favicon.png">
@@ -43,7 +43,7 @@
   <div id="header-outer" class="outer">
     <div id="header-title" class="inner">
       <h1 id="logo-wrap">
-        <a href="/" id="logo">三山半落1</a>
+        <a href="/" id="logo">三山半落</a>
       </h1>
       
     </div>
@@ -73,14 +73,14 @@
       <div class="outer">
         <section id="main">
   
-    <article id="post-2017-08-24-make-a-interactive-vue-component-alert" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+    <article id="post-2017-09-28-how-to-use-weex-developer-native-app" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2017/08/24/2017-08-24-make-a-interactive-vue-component-alert/" class="article-date">
-  <time class="dt-published" datetime="2017-08-24T00:44:56.000Z" itemprop="datePublished">2017-08-24</time>
+    <a href="/2017/09/28/2017-09-28-how-to-use-weex-developer-native-app/" class="article-date">
+  <time class="dt-published" datetime="2017-09-28T06:34:12.000Z" itemprop="datePublished">2017-09-28</time>
 </a>
     
   <div class="article-category">
-    <a class="article-category-link" href="/categories/dev-vue/">dev vue</a>
+    <a class="article-category-link" href="/categories/dev-module/">dev module</a>
   </div>
 
   </div>
@@ -91,7 +91,7 @@
         
   
     <h1 itemprop="name">
-      <a class="p-name article-title" href="/2017/08/24/2017-08-24-make-a-interactive-vue-component-alert/">一种可交互（JS触发）vue组件的实现方式</a>
+      <a class="p-name article-title" href="/2017/09/28/2017-09-28-how-to-use-weex-developer-native-app/">使用weex开发native应用程序体验</a>
     </h1>
   
 
@@ -99,36 +99,48 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <p>前端组件化的一个重要的问题就是ui状态的产生和复用，vue中提供了讲一个功能&#x2F;模块组件化的高效方案–vue单文件组件；在使用vue作为开发框架的过程当中，使用vue单文件组件作为ui组件的实现方案可以大大提高代码的复用程度。</p>
-<p>但是，vue组件中也面临了一个无法解决和处理的问题：</p>
+        <p>app开发有几种不同的流派，分别为：</p>
 <ol>
-<li>对于有些组件，比如alert等弹出层是通过js代码交互的方式触发和改变组件状态&#x2F;行为的</li>
-<li>如果对于每一个此种组件的使用都需要对应组件标签的书写和声明，这样就导致了页面中大量已声明但是未使用的UI组件</li>
-<li>每一个UI组件的使用都是不复用的（复用有可能造成状态的残留，轻易的导致问题的产生），但是不可能为每一个操作都事先声明一个组件</li>
+<li>原生开发，ios使用ObjectC，Android使用Java来开发应用程序</li>
+<li>混搭开发，使用webview来承载内容，页面使用浏览器引擎来渲染；比较有代表性的是PhoneGap</li>
+<li>jsNative，使用JavaScript作为开发方式，但是程序是原生应用；比较有代表性的是ReactNative</li>
 </ol>
-<p>本文描述的方案就是将，vue单文件组件转化为可以交互控制（JavaScript控制的组件），以下对这一个类型的组件统称为<strong>通用编程式组件</strong>，其中的典型是：弹出层&#x2F;交互式组件！</p>
-<p>以下是关键实现的代码：</p>
+<p>今天的主角是第三种方案，因为其既跨平台的兼容了主要的运行环境，让一份代码运行在不同的设备和容器中；同时还具有媲美native程序的性能，在了解weex之前先说说reactNative。</p>
+<h2 id="ReactNative与Weex"><a href="#ReactNative与Weex" class="headerlink" title="ReactNative与Weex"></a>ReactNative与Weex</h2><p>reactNative和react一样都是facebook开源的框架（使用Facebook私有协议，不过昨天还想听说有计划变更到MIT，这个协议的问题还引发了一场挺大的波澜），之前简单的了解过RN，也用RN写过简单的Helloworld级别的程序，总体上的感觉是：</p>
 <ol>
-<li>声明并实现一个ui组件（通过vue单文件组件）</li>
+<li>语法有点奇怪，jsx的东西不是习惯做JavaScript开发的前端开发者所能理解得了的</li>
+<li>和前端的开发方式相去甚远，关于样式&#x2F;DOM的概念需要重新的学习和理解</li>
 </ol>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;alert&quot;</span>&gt;</span></span><br><span class="line">            &#123;&#123;msg&#125;&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="language-javascript">        <span class="title function_">data</span>(<span class="params"></span>)&#123;</span></span><br><span class="line"><span class="language-javascript">            <span class="keyword">return</span> &#123;</span></span><br><span class="line"><span class="language-javascript">            &#125;;</span></span><br><span class="line"><span class="language-javascript">        &#125;,</span></span><br><span class="line"><span class="language-javascript">        <span class="attr">props</span>:[<span class="string">&#x27;msg&#x27;</span>]</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">style</span> <span class="attr">lang</span>=<span class="string">&quot;less&quot;</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.alert</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">position</span>: fixed;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">width</span>: <span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">top</span>: <span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">left</span>:<span class="number">50%</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">margin-left</span>: -<span class="number">100px</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">z-index</span>: <span class="number">100</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">color</span>:red;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">font-size</span>:<span class="number">30px</span>;</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css">    <span class="selector-class">.alert</span><span class="selector-pseudo">:before</span>&#123;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">content</span>: <span class="string">&#x27; &#x27;</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">display</span>: inline-block;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">position</span>: fixed;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">z-index</span>: <span class="number">99</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">top</span>:<span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">bottom</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">left</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">right</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">        <span class="attribute">background-color</span>: <span class="built_in">rgba</span>(<span class="number">0</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">0.6</span>);</span></span><br><span class="line"><span class="language-css">    &#125;</span></span><br><span class="line"><span class="language-css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>和RN相比，weex是一个相同问题的第二种解决方案，其中使用了前端都很熟悉的vue框架，使用vue单文件组件作为程序的开发实现方式，学习成本更小，效率更高！</p>
+<h2 id="搭建开发环境"><a href="#搭建开发环境" class="headerlink" title="搭建开发环境"></a>搭建开发环境</h2><p>首先要做的就是安装weex的命令行工具，这个命令行工具可以帮助我们对付前端开发的各种事情：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yarn global add weex-toolkit --ignore-engines</span><br></pre></td></tr></table></figure>
 
-<ol start="2">
-<li>将此UI组件包装成为<code>通用编程式组件</code></li>
+<p>接下来，需要Android的开发环境，包括AndroidSDK的下载安装以及可以开发Android应用的IDE环境，可用idea来开发。</p>
+<h2 id="集成weex"><a href="#集成weex" class="headerlink" title="集成weex"></a>集成weex</h2><p>首先在dependencies下增加如下的依赖包，</p>
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">dependencies</span> &#123;</span><br><span class="line">    <span class="keyword">compile</span> <span class="string">&#x27;com.android.support:recyclerview-v7:25.3.1&#x27;</span></span><br><span class="line">    <span class="keyword">compile</span> <span class="string">&#x27;com.android.support:support-v4:25.3.1&#x27;</span></span><br><span class="line">    <span class="keyword">compile</span> <span class="string">&#x27;com.alibaba:fastjson:1.1.46.android&#x27;</span></span><br><span class="line">    <span class="keyword">compile</span> <span class="string">&#x27;com.taobao.android:weex_sdk:0.5.1@aar&#x27;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然后开发activity可以了，</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">WXSDKInstance</span> <span class="variable">mWXSDKInstance</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">WXSDKInstance</span>(<span class="built_in">this</span>);</span><br><span class="line">mWXSDKInstance.registerRenderListener(<span class="built_in">this</span>);</span><br><span class="line">mWXSDKInstance.render(<span class="string">&quot;WXSample&quot;</span>, WXFileUtils.loadFileContent(<span class="string">&quot;hello.js&quot;</span>, <span class="built_in">this</span>), <span class="literal">null</span>, <span class="literal">null</span>, -<span class="number">1</span>, -<span class="number">1</span>, WXRenderStrategy.APPEND_ASYNC);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;text style=&quot;font-size:100px;&quot;&gt;Hello World.&lt;/text&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="开发流程"><a href="#开发流程" class="headerlink" title="开发流程"></a>开发流程</h2><p>开发weex页面需要使用到weex的一个工具<a target="_blank" rel="noopener" href="https://weex.apache.org/cn/playground.html">Weex Playground</a></p>
+<p><img src="/images/DeepinScreenshot_select-area_20170928143205.png"></p>
+<p>使用我们上面安装的weex-toolkit工具，可以创建一个应用工程出来，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ weex init weex-frontend</span><br><span class="line">$ <span class="built_in">cd</span> weex-frontend</span><br><span class="line">$ yarn install --ignore-engines</span><br><span class="line">$ npm run start</span><br></pre></td></tr></table></figure>
+
+<p>经过上面的几个步骤，一个可以被Playground预览扫描的工具就完成了！</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>综合使用下来，觉得weex的初衷是好的，用应用开发都已经熟悉的一套东西做更多的事情，提高程序的开发效率，但是也暴露了这个框架一些不成熟的地方：</p>
+<ol>
+<li>官方的文档更新可能并不及时，demo中使用的api或者文档中介绍的api在实际代码上可能都已经移除了</li>
+<li>RN提供了丰富好用的工具，包括手机端和开发端，尤其是摇一摇自动刷新的功能在开发过程中可以省却不少的问题</li>
+<li>weex的使用门槛还是有点高，需要具备原生应用的开发知识，否则连开发环境都没法搞定</li>
 </ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="property">Alert</span> = &#123;</span><br><span class="line">    <span class="attr">alert</span>:<span class="keyword">function</span> (<span class="params">msg</span>) &#123;</span><br><span class="line">        <span class="keyword">const</span> dom = <span class="string">`</span></span><br><span class="line"><span class="string">            &lt;div&gt;</span></span><br><span class="line"><span class="string">                &lt;vue-alert :msg=&quot;<span class="subst">$&#123;msg&#125;</span>&quot;&gt;&lt;/vue-alert&gt;</span></span><br><span class="line"><span class="string">            &lt;/div&gt;</span></span><br><span class="line"><span class="string">        `</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">const</span> wrap = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&quot;div&quot;</span>);</span><br><span class="line">        wrap.<span class="property">innerHTML</span> = dom;</span><br><span class="line">        <span class="variable language_">document</span>.<span class="property">body</span>.<span class="title function_">appendChild</span>(wrap);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">new</span> <span class="title class_">Light</span>.<span class="title class_">Model</span>(&#123;</span><br><span class="line">            <span class="attr">el</span>:wrap,</span><br><span class="line">            <span class="attr">component</span>:&#123;</span><br><span class="line">                <span class="attr">vueAlert</span>:<span class="built_in">require</span>(<span class="string">&quot;../ui/alert.vue&quot;</span>)<span class="comment">//如果是在lighting&lt;1.4的情况下，由于组件都是全局的，这一句就不需要的，只要组件的目录结构正确就可以了！vue/alert.vue</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ol start="3">
-<li>接下来的步骤，就可以直接使用第二部暴露成功的全局变量来调用和触发alert组件</li>
-</ol>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Alert</span>.<span class="title function_">alert</span>(<span class="string">&quot;hello,world&quot;</span>);</span><br></pre></td></tr></table></figure>
-
-<p>总结，使用vue单文件组件在解决我们代码复用的问题的同时，也改变了之前我们处理问题的方案，因地制宜的选择合适的方法和流程程序的开发和健壮性的达成具有至关重要的作用！</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://pself.net/2017/08/24/2017-08-24-make-a-interactive-vue-component-alert/" data-id="cmmaayms1000bjfqd1miads1f" data-title="一种可交互（JS触发）vue组件的实现方式" class="article-share-link"><span class="fa fa-share">分享</span></a>
+      <a data-url="https://pself.net/2017/09/28/2017-09-28-how-to-use-weex-developer-native-app/" data-id="cmmbpa6yb000cdlqd9wlqh5kh" data-title="使用weex开发native应用程序体验" class="article-share-link"><span class="fa fa-share">分享</span></a>
       
       
       
@@ -144,7 +156,7 @@
 
   <nav id="page-nav">
     
-    <a class="extend prev" rel="prev" href="/page/14/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/16/">下一页 &raquo;</a>
+    <a class="extend prev" rel="prev" href="/page/14/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/16/">下一页 &raquo;</a>
   </nav>
 
 </section>
@@ -155,22 +167,36 @@
   <div class="widget-wrap">
     <h3 class="widget-title">分类</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/archlinux-router-openwrt-iptables/">archlinux router openwrt iptables</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-3d/">dev 3d</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-app/">dev app</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-hsts/">dev hsts</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-html/">dev html</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-ionic/">dev ionic</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-jsnative/">dev jsnative</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-life/">dev life</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-linux/">dev linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-module/">dev module</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-opt/">dev opt</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-theia/">dev theia</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/dev-vue/">dev vue</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/ide-vscode-theia-opensumi/">ide vscode theia opensumi</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%8A%80%E6%9C%AF%E6%95%99%E7%A8%8B/">技术教程</a></li></ul>
     </div>
   </div>
 
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/GitHub-Pages/" rel="tag">GitHub Pages</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hexo/" rel="tag">Hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%83%A8%E7%BD%B2/" rel="tag">部署</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">标签云</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/GitHub-Pages/" style="font-size: 10px;">GitHub Pages</a> <a href="/tags/Hexo/" style="font-size: 10px;">Hexo</a> <a href="/tags/%E9%83%A8%E7%BD%B2/" style="font-size: 10px;">部署</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">归档</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/03/">三月 2026</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/03/">三月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/02/">二月 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/08/">八月 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/10/">十月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">十一月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/04/">四月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/02/">二月 2018</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">九月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">八月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/05/">五月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">二月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">一月 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/11/">十一月 2016</a></li></ul>
     </div>
   </div>
 
@@ -181,6 +207,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/03/03/2026-03-03-hexo-deploy-to-github-pages/">Hexo 博客部署到 GitHub Pages 完整指南</a>
+          </li>
         
           <li>
             <a href="/2022/03/30/2022-03-30-archlinux-linux-openwrt/">基于archlinux构建软路由的方法和过程</a>
@@ -196,10 +226,6 @@
         
           <li>
             <a href="/2022/02/10/2022-02-09-html-basic3/">一些关于HTML的基础知识（三）</a>
-          </li>
-        
-          <li>
-            <a href="/2022/02/09/2022-02-08-html-basic2/">一些关于HTML的基础知识（二）</a>
           </li>
         
       </ul>
